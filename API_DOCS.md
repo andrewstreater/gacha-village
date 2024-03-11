@@ -407,8 +407,8 @@ Creates and returns a new Item.
 
     ```json
         {
-            "id": 1,
-            "ownerId": 1,
+            "id": 2,
+            "ownerId": 2,
             "title": "Hirono",
             "brand": "Pop Mart",
             "series": "Little Mischief Series",
@@ -521,8 +521,8 @@ Updates and returns an existing Item.
 
     ```json
     {
-        "id": 1,
-        "ownerId": 1,
+        "id": 2,
+        "ownerId": 2,
         "title": "Hirono",
         "brand": "Pop Mart",
         "series": "Little Mischief Series",
@@ -601,3 +601,255 @@ Deletes an existing item.
       "message": "Item couldn't be found"
     }
     ```
+## Trades
+
+### Get all Trades of Current User
+
+Returns all the trades of the current user (as offerer or receipient).
+
+* Require Authentication: true
+* Require proper authorization: Trade must belong to the current user (as offerer or receipient)
+* Request
+  * Method: GET
+  * URL: /api/trades/current
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "Trades": [
+        {
+          "id": 1,
+          "buyer_item_id": 1,
+          "seller_item_id": 2,
+          "brand": "Pop Mart",
+          "status": "Open",
+          "createdAt": "2021-11-19 20:39:36",
+          "updatedAt": "2021-11-19 20:39:36",
+          "previewImage": "image url"
+        }
+      ]
+    }
+    ```
+
+### Get details of a Trade by tradeId
+
+* Require Authentication: true
+* Require proper authorization: Trade must belong to the current user (as offerer or receipient)
+
+* Request
+  * Method: GET
+  * URL: /api/trades/:tradeId
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+
+    {
+        "id": 1,
+        "buyer_item_id": 2,
+        "seller_item_id": 1,
+        "status": "Open",
+        "createdAt": "2021-11-19 20:39:36",
+        "updatedAt": "2021-11-19 20:39:36",
+        "Buyer": {
+            "id": 1,
+            "username": "Demo-lition2",
+            "firstName": "Jane",
+            "lastName": "Smith",
+            "profilePic": "image url",
+            "Items": [
+                {
+                    "id": 2,
+                    "ownerId": 2,
+                    "title": "Hirono",
+                    "brand": "Pop Mart",
+                    "series": "Little Mischief Series",
+                    "model": "BIRDMAN",
+                    "releaseDate": "2022-08-19",
+                    "edition": "Standard Edition",
+                    "description": "Hirono in a paper bird costume",
+                    "createdAt": "2021-11-19 20:39:36",
+                    "updatedAt": "2021-11-19 20:39:36",
+                    "previewImage": "image url"
+                }
+            ]
+        },
+        "Seller": {
+            "id": 1,
+            "username": "Demo-lition",
+            "firstName": "John",
+            "lastName": "Smith",
+            "profilePic": "image url",
+            "Items": [
+                {
+                    "id": 1,
+                    "ownerId": 1,
+                    "title": "Hirono",
+                    "brand": "Pop Mart",
+                    "series": "Little Mischief Series",
+                    "model": "ROBOT",
+                    "releaseDate": "2022-08-19",
+                    "edition": "Special Edition",
+                    "description": "Hirono in a robot costume made of cardboard",
+                    "createdAt": "2021-11-19 20:39:36",
+                    "updatedAt": "2021-11-19 20:39:36",
+                    "previewImage": "image url"
+                }
+            ]
+        }
+    }
+    ```
+
+* Error response: Couldn't find a Trade with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Trade couldn't be found"
+    }
+    ```
+
+### Create a Trade
+
+Creates and returns a new Trade.
+
+* Require Authentication: true
+* Request
+  * Method: POST
+  * URL: /api/items
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+        "buyer_item_id": 2,
+        "seller_item_id": 1,
+        "createdAt": "2021-11-19 20:39:36",
+        "updatedAt": "2021-11-19 20:39:36",
+    }
+    ```
+
+* Successful Response
+  * Status Code: 201
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+        {
+            "id": 1,
+            "buyer_item_id": 2,
+            "seller_item_id": 1,
+            "status": "Open",
+            "createdAt": "2021-11-19 20:39:36",
+            "updatedAt": "2021-11-19 20:39:36"
+        }
+    ```
+
+### Edit a Trade
+
+Updates and returns an existing Item.
+
+* Require Authentication: true
+* Require proper authorization: Item must belong to the current user
+* Request
+  * Method: PUT
+  * URL: /api/items/:itemId
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+        "id": 1,
+        "buyer_item_id": 2,
+        "seller_item_id": 3,
+    }
+    ```
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+        "id": 1,
+        "buyer_item_id": 2,
+        "seller_item_id": 3,
+        "status": "Open",
+        "createdAt": "2021-11-19 20:39:36",
+        "updatedAt": "2021-11-19 20:39:36"
+    }
+    ```
+
+* Error response: Couldn't find a Trade with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Trade couldn't be found"
+    }
+    ```
+
+### Delete an Trade
+
+Deletes an existing Trade.
+
+* Require Authentication: true
+* Require proper authorization: Trade must belong to the current user (as a seller)
+* Request
+  * Method: DELETE
+  * URL: /api/items/:itemId
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Successfully deleted"
+    }
+    ```
+
+* Error response: Couldn't find an Item with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Trade couldn't be found"
+    }
+    ```
+
+## Reviews
+
+## Posts
+
+## Comments
+
+## Likes
