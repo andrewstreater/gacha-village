@@ -14,18 +14,14 @@ Table Item {
   id integer [pk, increment]
   owner_id integer [not null]
   title varchar [not null]
-  image_id integer [not null]
   brand varchar [not null]
   series varchar
   model varchar
-  year integer
+  release_date integer
   edition varchar
   description varchar [not null]
-  weight float
-  height integer
-  width integer
-  length integer
   is_tradable boolean
+  image_id integer [not null]
   createdAt timestamp
   updatedAt timestamp
 }
@@ -88,6 +84,7 @@ Table Image {
   id int [pk, increment]
   imageable_type varchar [not null]
   imageable_id integer [not null]
+  preview boolean [not null]
 }
 
 Ref: User.image_id > Image.id

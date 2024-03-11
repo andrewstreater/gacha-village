@@ -1,4 +1,4 @@
-## Welcome to the Gatcha Village wiki!
+## Welcome to the Gacha Village wiki!
 ### Items
 * Users should be able to view all Items.
 * Users should be able to upload Items for trade.
@@ -56,8 +56,8 @@
 * Each item tile should be a clickable link that takes you to the item's display page.
 
 #### Item display page
-* The items display page should show you the item's images, brand, series, model, edtion (if applicable).
-* at the top of the items diaplay page, there should be a "Make an Offer" button, that will open up a modal with a list of the user's items that they have uploaded to the site. There should also be a "Add item to offer" button which takes the user to a "Create an Item" page.
+* The items display page should show you the item's images in a vertical list on the left side of the page, on the right side the item's information will be displayed including, brand, series, model, edtion (if applicable), and description.
+* at the top of the items diaplay page, if the item is not tradable a message will read "This item is not available for trade", if the item is tradable, there should be a "Make an Offer" button, that will open up a modal with a list of the user's items that they have uploaded to the site. There should also be a "Add item to offer" button which takes the user to a "Create an Item" page.
 * The item display page will also show a "Star" button that will allow you to add the item to your wishlist.
 * If I am the owner of the item, i should see a additional "Edit Listing" button on the item page.
 
@@ -66,7 +66,8 @@
 * Once the user presses submit and all form validations pass, the page will redirect to the newly created Listing's page
 * If the form errors, then the page will not redirect but the error messages will populate at under the fields that failed validation
 
-### Wishlists
+### Lists
+* Each new User will have a public Wishlist by default
 * Users should be able to add an item to their wishlist from any item display page for items they do not own.
 Users should also be able to add an item from any item tile view for items they do not own.
 
@@ -104,3 +105,19 @@ Users should also be able to add an item from any item tile view for items they 
 ### Reviews
 * Users should be able to create reviews on the Trades page in their profile. Reviews should only be able to be left on trades that are closed and not older then 60 days.
 * The review form should show a text area for "Review" and a star rating section, and a submit button at the bottom.
+* Reviews received will be displayed as an average on the user's profile page
+
+### Forum/Disscussion Page
+* The main discussion page will show a list of all discussions in a forum style
+* On the left collumn, there will be a green "Create a Post" button
+* In the post detail page, you will see Images the user has uploaded to the post followed by the text body of the post, below that will be a row with a like button, number of likes, a "comments" tag followed by number of comments
+* the comments section will start with a text box for users to leave a comment and will have a "Leave comment" button to submit it.
+* Below the post display section will be a list of the comments. Each comment will Show the username, date the comment was created, comment body, a like button.
+* If the logged-in user is the one who left the comment, they can edit the comment, but an edited tag will be added to the comment.
+
+#### Create a Post form
+* The create a post form will have a title, image, and text area.
+* There will be a submit button on the bottom to submit the post
+
+
+#### Likes
