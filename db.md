@@ -5,6 +5,7 @@ Table User {
   username varchar [not null, unique]
   hashedPassword varchar [not null]
   email varchar [not null, unique]
+  image_id integer
   createdAt timestamp
   updatedAt timestamp
 }
@@ -12,15 +13,56 @@ Table User {
 Table Item {
   id integer [pk, increment]
   owner_id integer [not null]
+  title varchar [not null]
+  image_id integer [not null]
   brand varchar [not null]
   series varchar
   model varchar
   year integer
   edition varchar
-  weight float [not null]
-  dimensions integer [not null]
+  description varchar [not null]
+  weight float
+  height integer
+  width integer
+  length integer
+  is_tradable boolean
   createdAt timestamp
   updatedAt timestamp
+}
+
+Table List {
+  id integer [pk, increment]
+  name varchar [not null]
+  user_id integer [not null]
+  item_id integer
+}
+
+Table Post {
+  id integer [pk, increment]
+  user_id integer [not null]
+  title varchar [not null]
+  body varchar [not null]
+  image_id integer
+  createdAt timestamp
+  updatedAt timestamp
+}
+
+Table Comment {
+  id integer [pk, increment]
+  user_id integer [not null]
+  post_id integer [not null]
+  image_id integer
+  title varchar [not null]
+  body varchar [not null]
+  createdAt timestamp
+  updatedAt timestamp
+}
+
+Table Like {
+  id integer [pk, increment]
+  user_id integer [not null]
+  likable_type varchar [not null]
+  likable_id integer [not null]
 }
 
 Table Trade {
@@ -42,7 +84,28 @@ Table Review {
   updatedAt timestamp
 }
 
+Table Image {
+  id int [pk, increment]
+  imageable_type varchar [not null]
+  imageable_id integer [not null]
+}
+
+Ref: User.image_id > Image.id
 Ref: Item.owner_id > User.id
+Ref: Item.image_id > Image.id
 Ref: Trade.buyer_item_id > Item.id
 Ref: Trade.seller_item_id > Item.id
 Ref: Review.trade_id > Trade.id
+Ref: List.user_id > User.id
+Ref: List.item_id > Item.id
+Ref: Post.user_id > User.id
+Ref: Post.image_id > Image.id
+Ref: Comment.user_id > User.id
+Ref: Comment.image_id > Image.id
+Ref: Like.user_id > User.id
+Ref: Like.likable_id > Comment.id
+Ref: Like.likable_id > Post.id
+Ref: Image.imageable_id > User.id
+Ref: Image.imageable_id > Item.id
+Ref: Image.imageable_id > Post.id
+Ref: Image.imageable_id > Comment.id
