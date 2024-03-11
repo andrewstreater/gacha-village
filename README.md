@@ -104,4 +104,3 @@ Users should also be able to add an item from any item tile view for items they 
 ### Reviews
 * Users should be able to create reviews on the Trades page in their profile. Reviews should only be able to be left on trades that are closed and not older then 60 days.
 * The review form should show a text area for "Review" and a star rating section, and a submit button at the bottom.
-# gotcha-village
