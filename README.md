@@ -1,4 +1,6 @@
 ## Welcome to the Gacha Village wiki!
+Gacha Village is an app made for collectors with a focus around blind boxes (or Gachapon). Blind boxes are figures (or designer toys) that are released in a series of 8-12 individual designs. Collectors will buy one box from a series and will not know which design from the series they're going to get (just like buying packs of trading cards), so they will often get duplicate designs or get a design they do not want. Collectors currently use Reddit, Mercari, eBay, and in-person meetups to trade with each other so they can replace their duplicates and unwanted designs for designs they do want. Gacha Village is the virtual gachapon meetup where users can post their collection and put up items for trade.
+
 ### Items
 * Users should be able to view all Items.
 * Users should be able to upload Items for trade.

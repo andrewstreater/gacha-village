@@ -846,6 +846,8 @@ Deletes an existing Trade.
     }
     ```
 
+## Lists
+
 ## Reviews
 
 ## Posts
