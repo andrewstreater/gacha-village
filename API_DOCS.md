@@ -110,7 +110,8 @@ information.
         "firstName": "John",
         "lastName": "Smith",
         "email": "john.smith@gmail.com",
-        "username": "JohnSmith"
+        "username": "JohnSmith",
+        "profilePhoto": "image url"
       }
     }
     ```
@@ -162,7 +163,8 @@ user's information.
       "lastName": "Smith",
       "email": "john.smith@gmail.com",
       "username": "JohnSmith",
-      "password": "secret password"
+      "password": "secret password",
+      "profilePhoto": "image url"
     }
     ```
 
@@ -179,7 +181,8 @@ user's information.
         "firstName": "John",
         "lastName": "Smith",
         "email": "john.smith@gmail.com",
-        "username": "JohnSmith"
+        "username": "JohnSmith",
+        "profilePhoto": "image url"
       }
     }
     ```
@@ -357,7 +360,8 @@ Returns the details of an Item specified by its id.
         "id": 1,
         "username": "Demo-lition",
         "firstName": "John",
-        "lastName": "Smith"
+        "lastName": "Smith",
+        "profilePhoto": "image url"
         }
     }
     ```
@@ -419,7 +423,6 @@ Creates and returns a new Item.
             "is_tradeable": true,
             "createdAt": "2021-11-19 20:39:36",
             "updatedAt": "2021-11-19 20:39:36",
-            "previewImage": "image url"
         }
     ```
 
@@ -846,9 +849,408 @@ Deletes an existing Trade.
     }
     ```
 
-## Lists
+## Lists (CONTINUE HERE)
 
 ## Reviews
+
+### Get all Reviews left by the Current User
+
+Returns all the reviews written by the current user.
+
+* Require Authentication: true
+* Request
+  * Method: GET
+  * URL: /api/reviews/current
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "Reviews": [
+        {
+          "id": 1,
+          "tradeId": 1,
+          "review": "Great trade!",
+          "stars": 5,
+          "contraUser": {
+            "id": 2,
+            "username": "Demo-lition2",
+            "profilePic": "image url",
+          },
+          "Items": [
+              {
+                  "id": 2,
+                  "ownerId": 2,
+                  "title": "Hirono",
+                  "brand": "Pop Mart",
+                  "series": "Little Mischief Series",
+                  "model": "BIRDMAN",
+                  "edition": "Standard Edition",
+                  "description": "Hirono in a paper bird costume",
+                  "previewImage": "image url"
+              }
+          ],
+          "createdAt": "2021-11-19 20:39:36",
+          "updatedAt": "2021-11-19 20:39:36"
+        }
+      ]
+    }
+    ```
+
+### Get all Reviews of User's trades
+
+Returns all the reviews written by the current user.
+
+* Require Authentication: true
+* Request
+  * Method: GET
+  * URL: /api/reviews/current
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "Reviews": [
+        {
+          "id": 1,
+          "tradeId": 1,
+          "review": "Great trade!",
+          "stars": 5,
+          "createdAt": "2021-11-19 20:39:36",
+          "updatedAt": "2021-11-19 20:39:36",
+          "contraUser": {
+            "id": 2,
+            "username": "Demo-lition2",
+            "profilePic": "imageUrl"
+          },
+          "Items": [
+              {
+                  "id": 1,
+                  "ownerId": 1,
+                  "title": "Hirono",
+                  "brand": "Pop Mart",
+                  "series": "Little Mischief Series",
+                  "model": "ROBOT",
+                  "edition": "Special Edition",
+                  "previewImage": "image url"
+              }
+          ]
+        }
+      ]
+    }
+    ```
+### Get Reviews by TradeId
+
+Returns the reviews that belong to a trade specified by id.
+
+* Require Authentication: false
+* Request
+  * Method: GET
+  * URL: /api/trades/:tradeId/reviews
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "Reviews": {
+        "buyerReview": {
+          "id": 1,
+          "userId": 1,
+          "tradeId": 1,
+          "contraUserId": 2,
+          "review": "Great trade!",
+          "stars": 5,
+          "ReviewImages": [
+            {
+              "id": 1,
+              "url": "image url"
+            }
+          ],
+          "createdAt": "2021-11-19 20:39:36",
+          "updatedAt": "2021-11-19 20:39:36"
+        },
+        "sellerReview": {
+          "id": 2,
+          "userId": 2,
+          "tradeId": 1,
+          "contraUserId": 1,
+          "review": "Would trade again!",
+          "stars": 5,
+          "ReviewImages": [
+            {
+              "id": 1,
+              "url": "image url"
+            }
+          ],
+          "createdAt": "2021-11-19 20:39:36",
+          "updatedAt": "2021-11-19 20:39:36"
+        }
+      }
+    }
+    ```
+
+* Error response: Couldn't find a Trade with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Trade couldn't be found"
+    }
+    ```
+
+### Create a Review for a Trade based on the Trade's id
+
+Create and return a new review for a spot specified by id.
+
+* Require Authentication: true
+* Request
+  * Method: POST
+  * URL: /api/trade/:tradeId/review
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "review": "This was an awesome spot!",
+      "stars": 5,
+    }
+    ```
+
+* Successful Response
+  * Status Code: 201
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "id": 1,
+      "userId": 1,
+      "tradeId": 1,
+      "contraUserId": 2,
+      "review": "Great trade!",
+      "stars": 5,
+      "createdAt": "2021-11-19 20:39:36",
+      "updatedAt": "2021-11-19 20:39:36"
+    }
+    ```
+
+* Error Response: Body validation errors
+  * Status Code: 400
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Bad Request", // (or "Validation error" if generated by Sequelize),
+      "errors": {
+        "review": "Review text is required",
+        "stars": "Stars must be an integer from 1 to 5",
+      }
+    }
+    ```
+
+* Error response: Couldn't find a Trade with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Trade couldn't be found"
+    }
+    ```
+
+* Error response: Review from the current user already exists for the Trade
+  * Status Code: 500
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "User has already reviewed for this trade"
+    }
+    ```
+
+### Add an Image to a Review based on the Review's id
+
+Create and return a new image for a review specified by id.
+
+* Require Authentication: true
+* Require proper authorization: Review must belong to the current user
+* Request
+  * Method: POST
+  * URL: /api/reviews/:reviewId/images
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "url": "image url"
+    }
+    ```
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "id": 1,
+      "url": "image url"
+    }
+    ```
+
+* Error response: Couldn't find a Review with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Review couldn't be found"
+    }
+    ```
+
+* Error response: Cannot add any more images because there is a maximum of 10
+  images per resource
+  * Status Code: 403
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Maximum number of images for this resource was reached"
+    }
+    ```
+
+### Edit a Review
+
+Update and return an existing review.
+
+* Require Authentication: true
+* Require proper authorization: Review must belong to the current user
+* Request
+  * Method: PUT
+  * URL: /api/reviews/:reviewId
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "review": "This was an awesome trade!",
+      "stars": 5,
+    }
+    ```
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "id": 1,
+      "userId": 1,
+      "spotId": 1,
+      "review": "This was an awesome spot!",
+      "stars": 5,
+      "createdAt": "2021-11-19 20:39:36",
+      "updatedAt": "2021-11-20 10:06:40"
+    }
+    ```
+
+* Error Response: Body validation errors
+  * Status Code: 400
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Bad Request", // (or "Validation error" if generated by Sequelize),
+      "errors": {
+        "review": "Review text is required",
+        "stars": "Stars must be an integer from 1 to 5",
+      }
+    }
+    ```
+
+* Error response: Couldn't find a Review with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Review couldn't be found"
+    }
+    ```
+
+### Delete a Review
+
+Delete an existing review.
+
+* Require Authentication: true
+* Require proper authorization: Review must belong to the current user
+* Request
+  * Method: DELETE
+  * URL: /api/reviews/:reviewId
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Successfully deleted"
+    }
+    ```
+
+* Error response: Couldn't find a Review with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Review couldn't be found"
+    }
+    ```
 
 ## Posts
 

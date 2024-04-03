@@ -123,3 +123,20 @@ Users should also be able to add an item from any item tile view for items they 
 
 
 #### Likes
+
+# Features In order of Priority:
+* Items (AWS for photos)
+* Trades
+* Wishlist
+* Review
+* Forum
+* Instant Messaging (Websocket)
+
+
+# Finish CRUD features before adding these:
+* AWS to upload multiple images
+* implement web sockets
+* google login
+* google maps API
+* Does popmart have an API
+* web scraping
