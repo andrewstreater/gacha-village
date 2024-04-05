@@ -1306,7 +1306,7 @@ Create and return a new review for a Trade specified by id.
 
     ```json
     {
-      "review": "This was an awesome spot!",
+      "review": "Great trade!",
       "stars": 5,
     }
     ```
