@@ -21,7 +21,6 @@ Table Item {
   edition varchar
   description varchar [not null]
   is_tradable boolean
-  image_id integer [not null]
   createdAt timestamp
   updatedAt timestamp
 }
@@ -30,7 +29,7 @@ Table List {
   id integer [pk, increment]
   name varchar [not null]
   user_id integer [not null]
-  item_id integer
+  private boolean
 }
 
 Table Post {
@@ -87,22 +86,30 @@ Table Image {
   preview boolean [not null]
 }
 
+Table ListItem {
+  id int [pk, increment]
+  list_id integer [not null]
+  item_id integer [not null]
+}
+
 Ref: User.image_id > Image.id
 Ref: Item.owner_id > User.id
-Ref: Item.image_id > Image.id
 Ref: Trade.buyer_item_id > Item.id
 Ref: Trade.seller_item_id > Item.id
 Ref: Review.trade_id > Trade.id
 Ref: List.user_id > User.id
 Ref: List.item_id > Item.id
-Ref: Post.user_id > User.id
-Ref: Post.image_id > Image.id
-Ref: Comment.user_id > User.id
-Ref: Comment.image_id > Image.id
-Ref: Like.user_id > User.id
-Ref: Like.likable_id > Comment.id
-Ref: Like.likable_id > Post.id
+Ref: ListItem.item_id > Item.id
+Ref: ListItem.list_id > List.id
+// Ref: Post.user_id > User.id
+// Ref: Post.image_id > Image.id
+// Ref: Comment.user_id > User.id
+// Ref: Comment.image_id > Image.id
+// Ref: Like.user_id > User.id
+// Ref: Like.likable_id > Comment.id
+// Ref: Like.likable_id > Post.id
 Ref: Image.imageable_id > User.id
 Ref: Image.imageable_id > Item.id
-Ref: Image.imageable_id > Post.id
-Ref: Image.imageable_id > Comment.id
+Ref: Image.imageable_id > Review.id
+// Ref: Image.imageable_id > Post.id
+// Ref: Image.imageable_id > Comment.id
