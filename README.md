@@ -128,7 +128,7 @@ Users should also be able to add an item from any item tile view for items they 
 * Items (AWS for photos)
 * Trades
 * Wishlist
-* Review
+* Review Trades
 * Forum
 * Instant Messaging (Websocket)
 

@@ -255,24 +255,44 @@ Returns all the Items.
 
     ```json
     {
-      "Items": [
-        {
-          "id": 1,
-          "ownerId": 1,
-          "title": "Hirono",
-          "brand": "Pop Mart",
-          "series": "Little Mischief Series",
-          "model": "ROBOT",
-          "releaseDate": "2022-08-19",
-          "edition": "Special Edition",
-          "description": "Hirono in a robot costume made of cardboard",
-          "is_tradeable": true,
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
+      "items": {
+        "byId": {
+          "item1": {
+            "id": 1,
+            "ownerId": 1,
+            "title": "Hirono",
+            "brand": "Pop Mart",
+            "series": "Little Mischief Series",
+            "model": "ROBOT",
+            "releaseDate": "2022-08-19",
+            "edition": "Special Edition",
+            "description": "Hirono in a robot costume made of cardboard",
+            "is_tradeable": true,
+            "createdAt": "2021-11-19 20:39:36",
+            "updatedAt": "2021-11-19 20:39:36",
+            "previewImage": "image url"
+          },
+          "item2": {
+            "id": 2,
+            "ownerId": 2,
+            "title": "Hirono",
+            "brand": "Pop Mart",
+            "series": "Little Mischief Series",
+            "model": "BIRDMAN",
+            "releaseDate": "2022-08-19",
+            "edition": "Standard Edition",
+            "description": "Hirono in a paper bird costume",
+            "is_tradeable": true,
+            "createdAt": "2021-11-19 20:39:36",
+            "updatedAt": "2021-11-19 20:39:36",
+            "previewImage": "image url"
         }
-      ]
+      },
+      {
+        "allIds": ["item1"]
+      }
     }
+  }
     ```
 
 ### Get all Items owned by the Current User
@@ -293,23 +313,26 @@ Returns all the items owned (created) by the current user.
 
     ```json
     {
-      "Items": [
-        {
-          "id": 1,
-          "ownerId": 1,
-          "title": "Hirono",
-          "brand": "Pop Mart",
-          "series": "Little Mischief Series",
-          "model": "ROBOT",
-          "releaseDate": "2022-08-19",
-          "edition": "Special Edition",
-          "description": "Hirono in a robot costume made of cardboard",
-          "is_tradeable": true,
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
-        }
-      ]
+      "Items": {
+        "byId": {
+          "item1": {
+            "id": 1,
+            "ownerId": 1,
+            "title": "Hirono",
+            "brand": "Pop Mart",
+            "series": "Little Mischief Series",
+            "model": "ROBOT",
+            "releaseDate": "2022-08-19",
+            "edition": "Special Edition",
+            "description": "Hirono in a robot costume made of cardboard",
+            "is_tradeable": true,
+            "createdAt": "2021-11-19 20:39:36",
+            "updatedAt": "2021-11-19 20:39:36",
+            "previewImage": "image url"
+          }
+        },
+        "allIds": ["item1"]
+      }
     }
     ```
 
@@ -625,18 +648,21 @@ Returns all the trades of the current user (as offerer or receipient).
 
     ```json
     {
-      "Trades": [
-        {
-          "id": 1,
-          "buyer_item_id": 1,
-          "seller_item_id": 2,
-          "brand": "Pop Mart",
-          "status": "Open",
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
-        }
-      ]
+      "Trades": {
+        "byId": {
+          "trade1": {
+            "id": 1,
+            "buyer_item_id": 1,
+            "seller_item_id": 2,
+            "brand": "Pop Mart",
+            "status": "Open",
+            "createdAt": "2021-11-19 20:39:36",
+            "updatedAt": "2021-11-19 20:39:36",
+            "previewImage": "image url"
+          }
+        },
+        "allIds": ["trade1"]
+      }
     }
     ```
 
@@ -740,8 +766,8 @@ Creates and returns a new Trade.
 
     ```json
     {
-        "buyer_item_id": 2,
-        "seller_item_id": 1,
+        "buyer_item_id": [2],
+        "seller_item_id": [1],
         "createdAt": "2021-11-19 20:39:36",
         "updatedAt": "2021-11-19 20:39:36",
     }
@@ -756,8 +782,8 @@ Creates and returns a new Trade.
     ```json
         {
             "id": 1,
-            "buyer_item_id": 2,
-            "seller_item_id": 1,
+            "buyer_item_id": [2],
+            "seller_item_id": [1],
             "status": "Open",
             "createdAt": "2021-11-19 20:39:36",
             "updatedAt": "2021-11-19 20:39:36"
@@ -773,6 +799,219 @@ Updates and returns an existing Item.
 * Request
   * Method: PUT
   * URL: /api/items/:itemId
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+        "id": 1,
+        "buyer_item_id": [2],
+        "seller_item_id": [3, 4],
+    }
+    ```
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+        "id": 1,
+        "buyer_item_id": [2],
+        "seller_item_id": [3, 4],
+        "status": "Open",
+        "createdAt": "2021-11-19 20:39:36",
+        "updatedAt": "2021-11-19 20:39:36"
+    }
+    ```
+
+* Error response: Couldn't find a Trade with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Trade couldn't be found"
+    }
+    ```
+
+### Delete an Trade
+
+Deletes an existing Trade.
+Cannot delete trade if the trade was successfully completed
+
+* Require Authentication: true
+* Require proper authorization: Trade must belong to the current user (as a seller)
+* Request
+  * Method: DELETE
+  * URL: /api/items/:itemId
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Successfully deleted"
+    }
+    ```
+
+* Error response: Couldn't find an Item with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Trade couldn't be found"
+    }
+    ```
+
+## Lists (CONTINUE HERE)
+
+### Get all Lists of Current User
+
+Returns all the lists the current user has created.
+
+* Require Authentication: true
+* Require proper authorization: lists must belong to the current user
+* Request
+  * Method: GET
+  * URL: /api/lists/current
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "lists": {
+        "byId": {
+          "list1": {
+            "id": 1,
+            "name": "Grails",
+            "private": false,
+            "createdAt": "2021-11-19 20:39:36",
+            "updatedAt": "2021-11-19 20:39:36",
+            "items": {
+
+            }
+          }
+        },
+        "allIds": ["list1"]
+      }
+    }
+    ```
+
+### Get details of a List by listId
+
+* Require Authentication: true
+* Require proper authorization: List must belong to the current user if the list is set to private
+
+* Request
+  * Method: GET
+  * URL: /api/lists/:tradeId
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+
+    {
+      "ListDetails": {
+        "id": 1,
+        "name": "Grails",
+        "private": false,
+        "createdAt": "2021-11-19 20:39:36",
+        "updatedAt": "2021-11-19 20:39:36",
+        "items": {
+
+        }
+      }
+    }
+    ```
+
+* Error response: Couldn't find a Trade with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "List couldn't be found"
+    }
+    ```
+
+### Create a List
+
+Creates and returns a new List.
+
+* Require Authentication: true
+* Request
+  * Method: POST
+  * URL: /api/lists
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "id": 1,
+      "name": "Grails",
+      "private": false,
+      "createdAt": "2021-11-19 20:39:36",
+      "updatedAt": "2021-11-19 20:39:36",
+      "items": {
+
+      }
+    }
+    ```
+
+* Successful Response
+  * Status Code: 201
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "id": 1,
+      "name": "Grails",
+      "private": false,
+      "createdAt": "2021-11-19 20:39:36",
+      "updatedAt": "2021-11-19 20:39:36",
+      "items": {
+
+      }
+    }
+    ```
+
+### Edit a List
+
+Updates and returns an existing Item.
+
+* Require Authentication: true
+* Require proper authorization: Item must belong to the current user
+* Request
+  * Method: PUT
+  * URL: /api/lists/:listId
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -814,15 +1053,15 @@ Updates and returns an existing Item.
     }
     ```
 
-### Delete an Trade
+### Delete a List
 
 Deletes an existing Trade.
 
 * Require Authentication: true
-* Require proper authorization: Trade must belong to the current user (as a seller)
+* Require proper authorization: List must belong to the current user
 * Request
   * Method: DELETE
-  * URL: /api/items/:itemId
+  * URL: /api/lists/:listId
   * Body: none
 
 * Successful Response
@@ -845,11 +1084,9 @@ Deletes an existing Trade.
 
     ```json
     {
-      "message": "Trade couldn't be found"
+      "message": "List couldn't be found"
     }
     ```
-
-## Lists (CONTINUE HERE)
 
 ## Reviews
 
