@@ -876,7 +876,7 @@ Cannot delete trade if the trade was successfully completed
     }
     ```
 
-## Lists (CONTINUE HERE)
+## Lists
 
 ### Get all Lists of Current User
 
@@ -975,12 +975,7 @@ Creates and returns a new List.
     {
       "id": 1,
       "name": "Grails",
-      "private": false,
-      "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-19 20:39:36",
-      "items": {
-
-      }
+      "private": false
     }
     ```
 
@@ -1003,12 +998,12 @@ Creates and returns a new List.
     }
     ```
 
-### Edit a List
+### Edit List details (CONTINUE HERE)
 
-Updates and returns an existing Item.
+Updates and returns an existing List.
 
 * Require Authentication: true
-* Require proper authorization: Item must belong to the current user
+* Require proper authorization: List must belong to the current user
 * Request
   * Method: PUT
   * URL: /api/lists/:listId
@@ -1018,9 +1013,9 @@ Updates and returns an existing Item.
 
     ```json
     {
-        "id": 1,
-        "buyer_item_id": 2,
-        "seller_item_id": 3,
+      "id": 1,
+      "name": "Pokemon",
+      "private": false,
     }
     ```
 
@@ -1032,16 +1027,18 @@ Updates and returns an existing Item.
 
     ```json
     {
-        "id": 1,
-        "buyer_item_id": 2,
-        "seller_item_id": 3,
-        "status": "Open",
-        "createdAt": "2021-11-19 20:39:36",
-        "updatedAt": "2021-11-19 20:39:36"
+      "id": 1,
+      "name": "Pokemon",
+      "private": false,
+      "createdAt": "2021-11-19 20:39:36",
+      "updatedAt": "2021-11-19 20:39:36",
+      "items": {
+
+      }
     }
     ```
 
-* Error response: Couldn't find a Trade with the specified id
+* Error response: Couldn't find a List with the specified id
   * Status Code: 404
   * Headers:
     * Content-Type: application/json
@@ -1050,6 +1047,50 @@ Updates and returns an existing Item.
     ```json
     {
       "message": "Trade couldn't be found"
+    }
+    ```
+
+### Add Item to a List (CONTINUE HERE)
+
+Adds an item to a list.
+
+* Require Authentication: true
+* Require proper authorization: List must belong to the current user
+* Request
+  * Method: POST
+  * URL: /api/lists/:listId/add/:itemId
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "listId": 1,
+      "itemId": 3
+    }
+    ```
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "You successfully added {item name} to {list name} list"
+    }
+    ```
+
+* Error response: Couldn't find a List with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "List couldn't be found"
     }
     ```
 
