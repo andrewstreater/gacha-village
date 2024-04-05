@@ -631,7 +631,7 @@ Deletes an existing item.
 
 ### Get all Trades of Current User
 
-Returns all the trades of the current user (as offerer or receipient).
+Returns all the trades of the current user (as offerer or recipient).
 
 * Require Authentication: true
 * Require proper authorization: Trade must belong to the current user (as offerer or receipient)
@@ -768,8 +768,6 @@ Creates and returns a new Trade.
     {
         "buyer_item_id": [2],
         "seller_item_id": [1],
-        "createdAt": "2021-11-19 20:39:36",
-        "updatedAt": "2021-11-19 20:39:36",
     }
     ```
 
