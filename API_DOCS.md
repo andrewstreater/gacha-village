@@ -612,7 +612,7 @@ Deletes an existing item.
 
     ```json
     {
-      "message": "Successfully deleted"
+      "message": "Item Successfully deleted"
     }
     ```
 
@@ -796,7 +796,7 @@ Updates and returns an existing Item.
 * Require proper authorization: Item must belong to the current user
 * Request
   * Method: PUT
-  * URL: /api/items/:itemId
+  * URL: /api/trades/:tradeId
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -838,7 +838,7 @@ Updates and returns an existing Item.
     }
     ```
 
-### Delete an Trade
+### Delete a Trade
 
 Deletes an existing Trade.
 Cannot delete trade if the trade was successfully completed
@@ -847,7 +847,7 @@ Cannot delete trade if the trade was successfully completed
 * Require proper authorization: Trade must belong to the current user (as a seller)
 * Request
   * Method: DELETE
-  * URL: /api/items/:itemId
+  * URL: /api/trade/:tradeId
   * Body: none
 
 * Successful Response
@@ -858,11 +858,11 @@ Cannot delete trade if the trade was successfully completed
 
     ```json
     {
-      "message": "Successfully deleted"
+      "message": "Trade Successfully deleted"
     }
     ```
 
-* Error response: Couldn't find an Item with the specified id
+* Error response: Couldn't find a Trade with the specified id
   * Status Code: 404
   * Headers:
     * Content-Type: application/json
@@ -920,7 +920,7 @@ Returns all the lists the current user has created.
 
 * Request
   * Method: GET
-  * URL: /api/lists/:tradeId
+  * URL: /api/lists/:listId
   * Body: none
 
 * Successful Response
@@ -945,7 +945,7 @@ Returns all the lists the current user has created.
     }
     ```
 
-* Error response: Couldn't find a Trade with the specified id
+* Error response: Couldn't find a List with the specified id
   * Status Code: 404
   * Headers:
     * Content-Type: application/json
@@ -996,7 +996,7 @@ Creates and returns a new List.
     }
     ```
 
-### Edit List details (CONTINUE HERE)
+### Edit List details
 
 Updates and returns an existing List.
 
@@ -1044,7 +1044,7 @@ Updates and returns an existing List.
 
     ```json
     {
-      "message": "Trade couldn't be found"
+      "message": "List couldn't be found"
     }
     ```
 
@@ -1094,7 +1094,7 @@ Adds an item to a list.
 
 ### Delete a List
 
-Deletes an existing Trade.
+Deletes an existing List.
 
 * Require Authentication: true
 * Require proper authorization: List must belong to the current user
@@ -1111,11 +1111,11 @@ Deletes an existing Trade.
 
     ```json
     {
-      "message": "Successfully deleted"
+      "message": "List Successfully deleted"
     }
     ```
 
-* Error response: Couldn't find an Item with the specified id
+* Error response: Couldn't find an List with the specified id
   * Status Code: 404
   * Headers:
     * Content-Type: application/json
@@ -1294,12 +1294,12 @@ Returns the reviews that belong to a trade specified by id.
 
 ### Create a Review for a Trade based on the Trade's id
 
-Create and return a new review for a spot specified by id.
+Create and return a new review for a Trade specified by id.
 
 * Require Authentication: true
 * Request
   * Method: POST
-  * URL: /api/trade/:tradeId/review
+  * URL: /api/trades/:tradeId/review
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1457,8 +1457,8 @@ Update and return an existing review.
     {
       "id": 1,
       "userId": 1,
-      "spotId": 1,
-      "review": "This was an awesome spot!",
+      "TradeId": 1,
+      "review": "This was an awesome trade!",
       "stars": 5,
       "createdAt": "2021-11-19 20:39:36",
       "updatedAt": "2021-11-20 10:06:40"
@@ -1512,7 +1512,7 @@ Delete an existing review.
 
     ```json
     {
-      "message": "Successfully deleted"
+      "message": "Review Successfully deleted"
     }
     ```
 
