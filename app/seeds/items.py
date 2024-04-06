@@ -30,7 +30,7 @@ def seed_items():
         )
 
     item3 = Item(
-        owner_id=3,
+        owner_id=1,
         title='HIRONO - Reshape',
         brand='POP MART',
         series='Reshape',
@@ -42,7 +42,7 @@ def seed_items():
         )
 
     item4 = Item(
-        owner_id=1,
+        owner_id=2,
         title='HIRONO - Costume',
         brand='POP MART',
         series='Reshape',
@@ -66,7 +66,7 @@ def seed_items():
         )
 
     item6 = Item(
-        owner_id=1,
+        owner_id=2,
         title='HIRONO - Paradise Lost',
         brand='POP MART',
         series='Reshape',
@@ -90,7 +90,7 @@ def seed_items():
         )
 
     item8 = Item(
-        owner_id=1,
+        owner_id=2,
         title='HIRONO - Burst',
         brand='POP MART',
         series='Reshape',
@@ -102,7 +102,7 @@ def seed_items():
         )
 
     dcItem1 = Item(
-        owner_id=3,
+        owner_id=1,
         title='Batman',
         brand='POP MART',
         series='DC',
@@ -126,7 +126,7 @@ def seed_items():
         )
 
     dcItem3 = Item(
-        owner_id=3,
+        owner_id=1,
         title='Wonder Woman',
         brand='POP MART',
         series='DC',
@@ -150,7 +150,7 @@ def seed_items():
         )
 
     vita1 = Item(
-        owner_id=3,
+        owner_id=1,
         title='VITA - Fried Chicken Day',
         brand='POP MART',
         series='N/A',
@@ -185,7 +185,7 @@ def seed_items():
 # it will reset the primary keys for you as well.
 def undo_items():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.items RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM items"))
 

@@ -84,12 +84,12 @@ Users should also be able to add an item from any item tile view for items they 
     - The receipient of the offer will see the offer on their My Trades page under the Received offers tab, with a tag showing the trade's Openn status
 * Closed Rejected: the recipient of the offer rejects the offer
     - Both sender and receipient will see Closed Rejected offers in their My Trades page under the Closed offers tab, with a tag showing the trade's Rejected status
-* Accpeted: the recipient of the offer accepts the offer
+* Accepted: the recipient of the offer accepts the offer
     - Both sender and receipient will see Accepted offers in their My Trades page under the Accepted offers tab, with a tag showing the trade's Accepted status
 * Pending: one or both members have sent the items, but not both of them have received the items.
     - Both sender and receipient will see Pending offers in their My Trades page under the Accepted offers tab, with a tag showing the trade's Pending status
     - Sub Tiles will show "Shipped" or "Not Shipped" next to the items in the trade as Appropriate
-* Closed: Items within accepted offers have been shipped and received by both parties
+* Closed Accepted: Items within accepted offers have been shipped and received by both parties
     - Both sender and receipient will see Closed offers in their My Trades page under the Trade History tab, with a tag showing the trade's closed status
 
 ### My Trades Page
