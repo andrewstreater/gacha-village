@@ -19,6 +19,7 @@ Table Item {
   model varchar
   release_date integer
   edition varchar
+  condition varchar [not null]
   description varchar [not null]
   is_tradable boolean
   createdAt timestamp
