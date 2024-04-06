@@ -7,9 +7,9 @@ def seed_lists():
     list1 = List(
         name="My First List", user_id=1, private=False)
     list2 = List(
-        name="My Second List", user_id=1, private=False)
+        name="My Empty List", user_id=1, private=False)
     list3 = List(
-        name="My Third List", user_id=3, private=True)
+        name="My Private List", user_id=1, private=True)
     list4 = List(
         name="Hirono", user_id=3, private=False)
     list5 = List(

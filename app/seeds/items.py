@@ -7,7 +7,7 @@ from datetime import date
 def seed_items():
     item1 = Item(
         owner_id=1,
-        title='HIRONO',
+        title='HIRONO - Parasite',
         brand='POP MART',
         series='Reshape',
         model='Parasite',
@@ -79,7 +79,7 @@ def seed_items():
 
     item7 = Item(
         owner_id=1,
-        title='HIRONO',
+        title='HIRONO - Paradise Lost',
         brand='POP MART',
         series='Reshape',
         model='Paradise Lost',
