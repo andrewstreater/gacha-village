@@ -14,12 +14,15 @@ def seed_trades():
         buyer_item_id=8, seller_item_id=7, status='pending')
     trade5 = Trade(
         buyer_item_id=9, seller_item_id=10, status='closed-accepted')
+    trade6 = Trade(
+        buyer_item_id=12, seller_item_id=11, status='closed-accepted')
 
     db.session.add(trade1)
     db.session.add(trade2)
     db.session.add(trade3)
     db.session.add(trade4)
     db.session.add(trade5)
+    db.session.add(trade6)
     db.session.commit()
 
 
