@@ -8,8 +8,8 @@ class Trade(db.Model):
 
     # DEFINE RELATIONSHIPS HERE
     reviews = relationship('Review', back_populates='trades')
-    buyer_item = relationship('Item', back_populates='trade_buyer')
-    seller_item = relationship('Item', back_populates='trade_seller')
+    buyer_item = relationship("Item", foreign_keys="Trade.buyer_item_id", back_populates="buyer_trade")
+    seller_item = relationship("Item", foreign_keys="Trade.seller_item_id", back_populates="seller_trade")
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}

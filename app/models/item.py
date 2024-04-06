@@ -10,8 +10,8 @@ class Item(db.Model):
     # DEFINE RELATIONSHIPS HERE
     owner = relationship("User", back_populates="items")
     lists = relationship('List', secondary=ListItem, back_populates='items')
-    trade_buyer = relationship("Trade", back_populates="buyer_item")
-    trade_seller = relationship("Trade", back_populates="seller_item")
+    buyer_trade = relationship("Trade", foreign_keys="Trade.buyer_item_id", back_populates="buyer_item")
+    seller_trade = relationship("Trade", foreign_keys="Trade.seller_item_id", back_populates="seller_item")
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
