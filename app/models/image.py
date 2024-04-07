@@ -14,6 +14,7 @@ class Image(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     imageable_type = db.Column(db.String(40), nullable=False)
     imageable_id = db.Column(db.Integer, nullable=False)
+    image_url = db.Column(db.String())
     preview = db.Column(db.Boolean, nullable=False, default=False)
 
 
@@ -22,5 +23,6 @@ class Image(db.Model):
             'imageId': self.id,
             'imageableType': self.imageable_type,
             'imageableId': self.imageable_id,
+            'imageUrl': self.image_url,
             'preview': self.preview
         }

@@ -31,7 +31,7 @@ def seed_items():
 
     item3 = Item(
         owner_id=1,
-        title='HIRONO - Reshape',
+        title='HIRONO - Fading',
         brand='POP MART',
         series='Reshape',
         model='Fading',
