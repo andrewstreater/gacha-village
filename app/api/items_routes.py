@@ -120,6 +120,30 @@ def get_items_by_current_user():
 
     return response
 
+@items_routes.route('/user/<int:user_id>')
+@login_required
+def get_items_by_userId(user_id):
+    items = Item.query.filter(Item.owner_id == user_id).all()
+    response = {'Items': {
+        'byId': [],
+        'allItems': []
+    }}
+
+    for item in items:
+        item_data = item.to_dict()
+        itemId = item_data.pop('itemId')
+
+        previewImage = Image.query.filter(Image.imageable_id == itemId).all()
+
+        if previewImage and previewImage[0].to_dict()['preview']:
+            item_data['previewImage'] = previewImage[0].to_dict()
+
+        item_data_at_key = dict({f'item{itemId}': item_data})
+        response['Items']['allItems'].append(item_data_at_key)
+        response['Items']['byId'].append(itemId)
+
+    return response
+
 @items_routes.route('/new', methods=['GET', 'POST'])
 @login_required
 def create_item():
