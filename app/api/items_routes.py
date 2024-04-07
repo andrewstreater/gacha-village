@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, render_template, redirect
 from flask_login import current_user, login_required
 from app.models import Item, User, Image, db
-from ..forms import CreateItemForm
+from ..forms import CreateItemForm, AddImageForm
 
 items_routes = Blueprint('items', __name__)
 
@@ -144,6 +144,48 @@ def get_items_by_userId(user_id):
 
     return response
 
+@items_routes.route('/<int:item_id>/images/new', methods=['GET', 'POST'])
+@login_required
+def add_image_to_item(item_id):
+
+    item = Item.query.get(item_id)
+
+    if not item:
+        response = jsonify({"error": "Item couldn't be found"})
+        response.status_code = 404
+        return response
+
+    if current_user.is_authenticated and item.owner_id == current_user.id:
+        form = AddImageForm()
+
+        form['csrf_token'].data = request.cookies['csrf_token']
+        if form.validate_on_submit():
+            preview = form.preview.data
+            image_url = form.image_url.data
+
+
+        new_image = Image(
+            imageable_id = item.id,
+            imageable_type = "item",
+            preview = preview,
+            image_url = image_url
+            )
+        db.session.add(new_image)
+        db.session.commit()
+        return jsonify({"message": "Image was successfully added to Item."}), 201
+    errors = {}
+    for field, error in form.errors.items():
+        field_obj = getattr(form, field)
+        errors[field_obj.label.text] = error[0]
+    error_response = {
+        "message": "Body validation errors",
+        "error": errors
+    }
+    return jsonify(error_response), 400
+
+    return render_template('add_item.html', form=form)
+
+
 @items_routes.route('/new', methods=['GET', 'POST'])
 @login_required
 def create_item():
@@ -178,7 +220,6 @@ def create_item():
         db.session.add(new_item)
         db.session.commit()
         return jsonify({"message": "Item successfully created."}), 201
-    print("---------LINE 111 FORM ERRORS: ", form.errors)
     errors = {}
     for field, error in form.errors.items():
         field_obj = getattr(form, field)

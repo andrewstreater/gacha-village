@@ -1,0 +1,23 @@
+{% extends "index.html" %}
+
+{% block content %}
+{{ form.csrf_token }}
+<div>
+    <h2>Add Image</h2>
+    <form method="post", enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <!-- title -->
+        <p>{{ form.preview.label }}: {{ form.preview() }}</p>
+        <p>{% for error in form.preview.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}</p>
+        <!-- brand -->
+        <p>{{ form.image_url.label }}: {{ form.image_url() }}</p>
+        <p>{% for error in form.image_url.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}</p>
+        <p>{{ form.submit() }}</p>
+    </form>
+</div>
+
+{% endblock %}

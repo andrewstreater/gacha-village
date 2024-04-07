@@ -17,7 +17,6 @@ EDITIONS = [
     'Limited'
 ]
 
-ALBUM_TYPES = ["Album", "Single"]
 
 class CreateItemForm(FlaskForm):
     title = StringField("Title", validators=[DataRequired()])
