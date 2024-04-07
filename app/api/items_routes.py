@@ -12,8 +12,6 @@ def get_all_items():
         'allItems': []
     }}
 
-    print(items)
-
     for item in items:
         item_data = item.to_dict()
         itemId = item_data.pop('itemId')
@@ -24,14 +22,7 @@ def get_all_items():
             item_data['previewImage'] = previewImage[0].to_dict()
 
         item_data_at_key = dict({f'item{itemId}': item_data})
-
-
-        print("HITT!!!!", previewImage)
-
-        # tracks = Track.query.join(PlaylistsTracks).filter(PlaylistsTracks.columns.playlist_id == playlist_id).all()
-
         response['Items']['allItems'].append(item_data_at_key)
-        # response['Items']['allItems'][f'{itemId}'] = item_data
         response['Items']['byId'].append(itemId)
 
     return response
@@ -61,3 +52,27 @@ def get_item(item_id):
         return {**item.to_dict(), 'itemImages': [image.to_dict() for image in itemImages]}
 
         # return {**album.to_dict(), 'tracks': tracks, 'artist': {**artist.to_dict()}}
+
+@items_routes.route('/current')
+@login_required
+def get_items_by_current_user():
+    items = Item.query.filter(Item.owner_id == current_user.id).all()
+    response = {'Items': {
+        'byId': [],
+        'allItems': []
+    }}
+
+    for item in items:
+        item_data = item.to_dict()
+        itemId = item_data.pop('itemId')
+
+        previewImage = Image.query.filter(Image.imageable_id == itemId).all()
+
+        if previewImage and previewImage[0].to_dict()['preview']:
+            item_data['previewImage'] = previewImage[0].to_dict()
+
+        item_data_at_key = dict({f'item{itemId}': item_data})
+        response['Items']['allItems'].append(item_data_at_key)
+        response['Items']['byId'].append(itemId)
+
+    return response
