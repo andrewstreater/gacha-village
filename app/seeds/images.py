@@ -81,6 +81,17 @@ def seed_images():
     image29 = Image(
         imageable_type="item", imageable_id=12, preview=False, image_url='https://i.imgur.com/Ey4VBk4.jpg')
 
+    image29 = Image(
+        imageable_type="item", imageable_id=13, preview=False, image_url='https://i.imgur.com/XEvShNw.jpg')
+    image29 = Image(
+        imageable_type="item", imageable_id=13, preview=False, image_url='https://i.imgur.com/gZsVuMN.jpg')
+    image29 = Image(
+        imageable_type="item", imageable_id=13, preview=False, image_url='https://i.imgur.com/12c0kFI.jpg')
+    image29 = Image(
+        imageable_type="item", imageable_id=13, preview=False, image_url='https://i.imgur.com/dmeKGBO.jpg')
+    image29 = Image(
+        imageable_type="item", imageable_id=13, preview=False, image_url='https://i.imgur.com/TaNQVNO.jpg')
+
     db.session.add(image14)
     db.session.add(image15)
     db.session.add(image16)
@@ -97,6 +108,12 @@ def seed_images():
     db.session.add(image27)
     db.session.add(image28)
     db.session.add(image29)
+
+    db.session.add(image30)
+    db.session.add(image31)
+    db.session.add(image32)
+    db.session.add(image33)
+    db.session.add(image34)
 
     db.session.commit()
 
