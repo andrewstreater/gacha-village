@@ -19,9 +19,8 @@ def get_all_items():
         itemId = item_data.pop('itemId')
 
         previewImage = Image.query.filter(Image.imageable_id == itemId).all()
-        print('-----------------Line 23: ', previewImage)
 
-        if previewImage:
+        if previewImage and previewImage[0].to_dict()['preview']:
             item_data['previewImage'] = previewImage[0].to_dict()
 
         item_data_at_key = dict({f'item{itemId}': item_data})
@@ -41,6 +40,8 @@ def get_all_items():
 def get_item(item_id):
     item = Item.query.get(item_id)
 
+    print("-----------------line 43", item)
+
     if not item:
         response = jsonify({"error": "Item couldn't be found"})
         response.status_code = 404
@@ -54,3 +55,9 @@ def get_item(item_id):
 
     if request.method == 'GET':
         item_data = item.to_dict()
+
+        itemImages = Image.query.filter(Image.imageable_id == item_data['itemId']).all()
+        # item_data['itemImages'] = image.to_dict() for image in itemImages
+        return {**item.to_dict(), 'itemImages': [image.to_dict() for image in itemImages]}
+
+        # return {**album.to_dict(), 'tracks': tracks, 'artist': {**artist.to_dict()}}

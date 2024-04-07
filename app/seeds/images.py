@@ -81,15 +81,15 @@ def seed_images():
     image29 = Image(
         imageable_type="item", imageable_id=12, preview=False, image_url='https://i.imgur.com/Ey4VBk4.jpg')
 
-    image29 = Image(
+    image30 = Image(
         imageable_type="item", imageable_id=13, preview=False, image_url='https://i.imgur.com/XEvShNw.jpg')
-    image29 = Image(
+    image31 = Image(
         imageable_type="item", imageable_id=13, preview=False, image_url='https://i.imgur.com/gZsVuMN.jpg')
-    image29 = Image(
+    image32 = Image(
         imageable_type="item", imageable_id=13, preview=False, image_url='https://i.imgur.com/12c0kFI.jpg')
-    image29 = Image(
+    image33 = Image(
         imageable_type="item", imageable_id=13, preview=False, image_url='https://i.imgur.com/dmeKGBO.jpg')
-    image29 = Image(
+    image34 = Image(
         imageable_type="item", imageable_id=13, preview=False, image_url='https://i.imgur.com/TaNQVNO.jpg')
 
     db.session.add(image14)
