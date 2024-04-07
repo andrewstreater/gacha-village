@@ -1,0 +1,59 @@
+{% extends "index.html" %}
+
+{% block content %}
+{{ form.csrf_token }}
+<div>
+    <h2>Create a New Item</h2>
+    <form method="post", enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <!-- title -->
+        <p>{{ form.title.label }}: {{ form.title() }}</p>
+        <p>{% for error in form.title.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}</p>
+        <!-- brand -->
+        <p>{{ form.brand.label }}: {{ form.brand() }}</p>
+        <p>{% for error in form.brand.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}</p>
+        <!-- series -->
+        <p>{{ form.series.label }}: {{ form.series() }}</p>
+        <p>{% for error in form.series.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}</p>
+        <!-- model -->
+        <p>{{ form.model.label }}: {{ form.model() }}</p>
+        <p>{% for error in form.model.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}</p>
+        <!-- releaseDate -->
+        <p>{{ form.releaseDate.label }}: {{ form.releaseDate() }}</p>
+        <p>{% for error in form.releaseDate.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}</p>
+        <!-- edition -->
+        <p>{{ form.edition.label }}: {{ form.edition() }}</p>
+        <p>{% for error in form.edition.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}</p>
+        <!-- genre -->
+        <p>{{ form.condition.label }}: {{ form.condition() }}</p>
+        <p>{% for error in form.condition.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}</p>
+        <!-- description -->
+        <p>{{ form.description.label }}: {{ form.description() }}</p>
+        <p>{% for error in form.description.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}</p>
+        <!-- is_tradable -->
+        <p>{{ form.is_tradable.label }}: {{ form.is_tradable() }}</p>
+        <p>{% for error in form.is_tradable.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}</p>
+
+        <p>{{ form.submit() }}</p>
+    </form>
+</div>
+
+{% endblock %}

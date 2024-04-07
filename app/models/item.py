@@ -25,7 +25,7 @@ class Item(db.Model):
     model = db.Column(db.String(40))
     release_date = db.Column(db.Date, nullable=False)
     edition = db.Column(db.String(40))
-    condition = db.Column(db.String(40))
+    condition = db.Column(db.String(40), nullable=False)
     description = db.Column(db.String(500))
     is_tradable = db.Column(db.Boolean, nullable=False, default=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)

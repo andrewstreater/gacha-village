@@ -8,6 +8,7 @@ def seed_items():
     item1 = Item(
         owner_id=1,
         title='HIRONO - Parasite',
+        condition='New',
         brand='POP MART',
         series='Reshape',
         model='Parasite',
@@ -20,6 +21,7 @@ def seed_items():
     item2 = Item(
         owner_id=2,
         title='HIRONO - Voyage',
+        condition='New',
         brand='POP MART',
         series='Reshape',
         model='Voyage',
@@ -32,6 +34,7 @@ def seed_items():
     item3 = Item(
         owner_id=1,
         title='HIRONO - Fading',
+        condition='New',
         brand='POP MART',
         series='Reshape',
         model='Fading',
@@ -44,6 +47,7 @@ def seed_items():
     item4 = Item(
         owner_id=2,
         title='HIRONO - Costume',
+        condition='New',
         brand='POP MART',
         series='Reshape',
         model='Costume',
@@ -56,6 +60,7 @@ def seed_items():
     item5 = Item(
         owner_id=1,
         title='HIRONO - Woodcarving',
+        condition='Open Box',
         brand='POP MART',
         series='Reshape',
         model='Woodcarving',
@@ -68,6 +73,7 @@ def seed_items():
     item6 = Item(
         owner_id=2,
         title='HIRONO - Paradise Lost',
+        condition='Open Box',
         brand='POP MART',
         series='Reshape',
         model='Drowning',
@@ -80,6 +86,7 @@ def seed_items():
     item7 = Item(
         owner_id=1,
         title='HIRONO - Paradise Lost',
+        condition='Open Box',
         brand='POP MART',
         series='Reshape',
         model='Paradise Lost',
@@ -92,6 +99,7 @@ def seed_items():
     item8 = Item(
         owner_id=2,
         title='HIRONO - Burst',
+        condition='Open Box',
         brand='POP MART',
         series='Reshape',
         model='Burst',
@@ -104,6 +112,7 @@ def seed_items():
     dcItem1 = Item(
         owner_id=1,
         title='Batman',
+        condition='New',
         brand='POP MART',
         series='DC',
         model='Batman',
@@ -116,6 +125,7 @@ def seed_items():
     dcItem2 = Item(
         owner_id=3,
         title='Superman',
+        condition='New',
         brand='POP MART',
         series='DC',
         model='Superman',
@@ -128,6 +138,7 @@ def seed_items():
     dcItem3 = Item(
         owner_id=1,
         title='Wonder Woman',
+        condition='New',
         brand='POP MART',
         series='DC',
         model='Wonder Woman',
@@ -140,6 +151,7 @@ def seed_items():
     dcItem4 = Item(
         owner_id=3,
         title='Joker',
+        condition='New',
         brand='POP MART',
         series='DC',
         model='Joker',
@@ -152,6 +164,7 @@ def seed_items():
     vita1 = Item(
         owner_id=1,
         title='VITA - Fried Chicken Day',
+        condition='New',
         brand='POP MART',
         series='N/A',
         model='Fried Chicken Day',
