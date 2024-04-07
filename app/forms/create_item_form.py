@@ -12,8 +12,8 @@ CONDITIONS = [
 ]
 
 EDITIONS = [
-    'Standard'
-    'Special Edition'
+    'Standard',
+    'Special Edition',
     'Limited'
 ]
 
@@ -24,7 +24,7 @@ class CreateItemForm(FlaskForm):
     brand = StringField("Brand", validators=[DataRequired()])
     series = StringField("Series")
     model = StringField("Model")
-    release_ate = DateField("Release Date", validators=[DataRequired()], format="%m/%d/%Y")
+    release_date = DateField("Release Date", validators=[DataRequired()], format="%m/%d/%Y")
     edition = SelectField("Edition", choices=EDITIONS)
     condition = SelectField("Condition", choices=CONDITIONS, validators=[DataRequired()])
     description = StringField("Name", validators=[DataRequired()])

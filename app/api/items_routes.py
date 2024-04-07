@@ -86,7 +86,7 @@ def create_item():
         brand = form.brand.data
         series = form.series.data
         model = form.model.data
-        release_date = form.releaseDate.data
+        release_date = form.release_date.data
         edition = form.edition.data
         condition = form.condition.data
         description = form.description.data
