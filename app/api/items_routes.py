@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, render_template, redirect
 from flask_login import current_user, login_required
 from app.models import Item, User, Image, db
-from .forms import CreateItemForm
+from ..forms import CreateItemForm
 
 items_routes = Blueprint('items', __name__)
 
@@ -86,7 +86,7 @@ def create_item():
         brand = form.brand.data
         series = form.series.data
         model = form.model.data
-        releaseDate = form.releaseDate.data
+        release_date = form.releaseDate.data
         edition = form.edition.data
         condition = form.condition.data
         description = form.description.data
@@ -99,7 +99,7 @@ def create_item():
             brand = brand,
             series = series,
             model = model,
-            release_date = releaseDate,
+            release_date = release_date,
             edition = edition,
             condition = condition,
             description = description,
@@ -108,7 +108,7 @@ def create_item():
         db.session.add(new_item)
         db.session.commit()
         return jsonify({"message": "Item successfully created."}), 201
-    print(form.errors)
+    print("---------LINE 111 FORM ERRORS: ", form.errors)
     errors = {}
     for field, error in form.errors.items():
         field_obj = getattr(form, field)
