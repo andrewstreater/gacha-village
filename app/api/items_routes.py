@@ -28,7 +28,7 @@ def get_all_items():
 
     return response
 
-@items_routes.route('/<int:item_id>', methods=['GET', 'PUT', 'DELETE'])
+@items_routes.route('/<int:item_id>', methods=['GET', 'PUT'])
 def get_item(item_id):
     item = Item.query.get(item_id)
 
@@ -37,7 +37,7 @@ def get_item(item_id):
         response.status_code = 404
         return response
 
-    if request.method in ["PUT", "DELETE"]:
+    if request.method in ["PUT"]:
         if current_user.is_authenticated and item.owner_id == current_user.id:
             pass
         else:
@@ -48,6 +48,52 @@ def get_item(item_id):
 
         itemImages = Image.query.filter(Image.imageable_id == item_data['itemId']).all()
         return {**item.to_dict(), 'itemImages': [image.to_dict() for image in itemImages]}
+
+    if request.method == "PUT":
+        form = CreateItemForm(obj=item)
+
+        form['csrf_token'].data = request.cookies['csrf_token']
+        if form.validate_on_submit():
+            item.title = form.title.data
+            item.brand = form.brand.data
+            item.series = form.series.data
+            item.model = form.model.data
+            item.release_date = form.release_date.data
+            item.edition = form.edition.data
+            item.condition = form.condition.data
+            item.description = form.description.data
+            item.is_tradable = form.is_tradable.data
+
+            db.session.commit()
+            return jsonify({"message": "Item has been updated successfully"}), 201
+        else:
+            error_messages = {}
+            for field, errors in form.errors.items():
+                error_messages[field] = errors[0]
+
+            response = jsonify({
+                "message": "Bad Request",
+                "error": error_messages,
+            })
+            response.status_code = 400
+            return response
+
+
+@items_routes.route('/<int:item_id>', methods=['DELETE'])
+def delete_item(item_id):
+    item = Item.query.get(item_id)
+
+    if not item:
+        response = jsonify({"error": "Item couldn't be found"})
+        response.status_code = 404
+        return response
+
+    if current_user.is_authenticated and item.owner_id == current_user.id:
+        db.session.delete(item)
+        db.session.commit()
+        return jsonify({"message": "Item Successfully Deleted"})
+    else:
+        return jsonify({"error": "Unauthorized access"}), 403
 
 
 @items_routes.route('/current')
