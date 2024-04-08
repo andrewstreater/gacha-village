@@ -9,7 +9,10 @@ trades_routes = Blueprint('trades', __name__)
 @login_required
 def get_all_trades_of_current_user():
     allTrades = Trade.query.all()
-    response = {}
+    response = {
+        'asBuyer': {},
+        'asSeller': {}
+    }
 
     for trade in allTrades:
         trade_data = trade.to_dict()
@@ -17,12 +20,12 @@ def get_all_trades_of_current_user():
         buyerItemId = trade_data['buyerItemId']
         buyerItem = Item.query.get(buyerItemId)
         if (buyerItem.owner_id == current_user.id):
-            response[f'trade{trade.id}'] = trade_data
+            response['asBuyer'][f'trade{trade.id}'] = trade_data
 
         sellerItemId = trade_data['sellerItemId']
         sellerItem = Item.query.get(sellerItemId)
         if (sellerItem.owner_id == current_user.id):
-            response[f'trade{trade.id}'] = trade_data
+            response['asSeller'][f'trade{trade.id}'] = trade_data
 
     return response
 
