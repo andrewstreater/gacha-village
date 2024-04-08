@@ -9,36 +9,20 @@ trades_routes = Blueprint('trades', __name__)
 @login_required
 def get_all_trades_of_current_user():
     allTrades = Trade.query.all()
-    # items = Item.query.filter(Item.owner_id == current_user.id).all()
-    # response = {'Trades': {
-    #     'Open': [],
-    #     'Pending': [],
-    #     'Closed': []
-    # }}
-    response = []
-
-
-
+    response = {}
 
     for trade in allTrades:
         trade_data = trade.to_dict()
+
         buyerItemId = trade_data['buyerItemId']
-        if (buyerId == current_user.id):
-            response.append(trade_data)
+        buyerItem = Item.query.get(buyerItemId)
+        if (buyerItem.owner_id == current_user.id):
+            response[f'trade{trade.id}'] = trade_data
 
         sellerItemId = trade_data['sellerItemId']
-        if (sellerId == current_user.id):
-            response.append(trade_data)
-        # itemId = item_data.pop('itemId')
-
-        # previewImage = Image.query.filter(Image.imageable_id == itemId).all()
-
-        # if previewImage and previewImage[0].to_dict()['preview']:
-        #     item_data['previewImage'] = previewImage[0].to_dict()
-
-        # item_data_at_key = dict({f'item{itemId}': item_data})
-        # response['Items']['allItems'].append(item_data_at_key)
-        # response['Items']['byId'].append(itemId)
+        sellerItem = Item.query.get(sellerItemId)
+        if (sellerItem.owner_id == current_user.id):
+            response[f'trade{trade.id}'] = trade_data
 
     return response
 
