@@ -11,7 +11,8 @@ from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.items_routes import items_routes
 from .api.trades_routes import trades_routes
-
+from .api.reviews_routes import reviews_routes
+from .api.lists_routes import lists_routes
 
 from .seeds import seed_commands
 from .config import Config
@@ -36,6 +37,8 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(items_routes, url_prefix='/api/items')
 app.register_blueprint(trades_routes, url_prefix='/api/trades')
+app.register_blueprint(reviews_routes, url_prefix='/api/reviews')
+app.register_blueprint(lists_routes, url_prefix='/api/lists')
 db.init_app(app)
 Migrate(app, db)
 
