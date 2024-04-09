@@ -30,7 +30,7 @@ def get_all_trades_of_current_user():
     return response
 
 
-@trades_routes.route('/<int:trade_id>', methods=['GET', 'PUT'])
+@trades_routes.route('/<int:trade_id>', methods=['GET'])
 def get_trade(trade_id):
     trade = Trade.query.get(trade_id)
 
@@ -115,6 +115,83 @@ def create_trade():
     db.session.add(new_trade)
     db.session.commit()
     return jsonify({"message": "Trade was successfully created."}), 201
+
+
+@trades_routes.route('/<int:trade_id>', methods=['PUT'])
+def update_trade(trade_id):
+    trade = Trade.query.get(trade_id)
+
+    # Error if Trade not found
+    if not trade:
+        response = jsonify({"error": "Trade couldn't be found"})
+        response.status_code = 404
+        return response
+
+    trade_data = trade.to_dict()
+
+    buyerItemId = trade_data['buyerItemId']
+    buyerItem = Item.query.get(buyerItemId).to_dict()
+
+    sellerItemId = trade_data['sellerItemId']
+    sellerItem = Item.query.get(sellerItemId).to_dict()
+
+    if buyerItem['ownerId'] != current_user.id and sellerItem['ownerId'] != current_user.id:
+        return jsonify({"error": "Unauthorized access"}), 403
+
+    if trade_data['status'] == 'closed-accepted':
+        response = jsonify({"error": "You cannot modify completed trades"})
+        response.status_code = 403
+        return response
+
+    req = request.json
+    print('---------LINE 147: ', req['status'], trade_data['status'])
+
+    # UPDATE TRADE STATUS: accept offers and counter offers
+    if trade_data['status'] != req['status']:
+        if current_user.id == sellerItem['ownerId'] and req['status'] == 'accepted':
+            trade.status = 'accepted'
+            db.session.commit()
+            return jsonify({"message": "Trade has been accepted"}), 201
+        if current_user.id == buyerItem['ownerId'] and req['status'] == 'counter-offer':
+            trade.status = 'accepted'
+            db.session.commit()
+            return jsonify({"message": "Trade has been accepted"}), 201
+
+    # UPDATE ITEMS IN TRADE
+    reqBuyerItemId = request.json['buyerItemId']
+    reqSellerItemId = request.json['sellerItemId']
+
+    reqBuyerItem = Item.query.get(reqBuyerItemId)
+    reqSellerItem = Item.query.get(reqSellerItemId)
+
+    # Error response if new item does not exist
+    if not reqBuyerItem or not reqSellerItem:
+        response = jsonify({"error": "Item couldn't be found"})
+        response.status_code = 404
+        return response
+    if not reqBuyerItem.is_tradable or not reqSellerItem.is_tradable:
+        response = jsonify({"error": "One or more items is not tradeable"})
+        response.status_code = 403
+        return response
+
+    # Error response if identical trade already exists
+    existingTrades = Trade.query.all()
+    for trade in existingTrades:
+        trade_data = trade.to_dict()
+        if trade_data["sellerItemId"] == reqSellerItem and trade_data["buyerItemId"] == reqBuyerItem and not trade_data['status'] == 'closed-rejected':
+            response = jsonify({"error": "This trade already exists"})
+            response.status_code = 403
+            return response
+        if trade_data["sellerItemId"] == reqBuyerItem and trade_data["buyerItemId"] == reqSellerItem and not trade_data['status'] == 'closed-rejected':
+            response = jsonify({"error": "This trade already exists"})
+            response.status_code = 403
+            return response
+    # ----------------------------------------------------------------
+    pass
+
+    # db.session.commit()
+    # return jsonify({"message": "Trade was successfully updated."}), 201
+
 
 
 @trades_routes.route('/<int:trade_id>/delete', methods=['DELETE'])

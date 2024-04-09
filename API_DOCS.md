@@ -810,6 +810,7 @@ Updates and returns an existing Item.
         "id": 1,
         "buyer_item_id": [2],
         "seller_item_id": [3, 4],
+        "status": "accepted"
     }
     ```
 
