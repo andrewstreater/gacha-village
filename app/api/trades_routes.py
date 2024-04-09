@@ -35,15 +35,22 @@ def get_trade(trade_id):
     trade = Trade.query.get(trade_id)
 
     if not trade:
-        response = jsonify({"error": "Item couldn't be found"})
+        response = jsonify({"error": "Trade couldn't be found"})
         response.status_code = 404
         return response
 
-    # if request.method in ["PUT"]:
-    #     if current_user.is_authenticated and item.owner_id == current_user.id:
-    #         pass
-    #     else:
-    #         return jsonify({"error": "Unauthorized access"}), 403
+
+
+    if request.method in ["PUT"]:
+        if current_user.is_authenticated:
+            pass
+        else:
+            return jsonify({"error": "Unauthorized access"}), 403
+        # buyerItemId = request.json['buyerItemId']
+        # sellerItemId = request.json['sellerItemId']
+
+        # buyerItem = Item.query.get(buyerItemId)
+        # sellerItem = Item.query.get(sellerItemId)
 
     if request.method == 'GET':
         trade_data = trade.to_dict()
@@ -68,3 +75,74 @@ def get_trade(trade_id):
         trade_data['Seller'] = {**seller, 'Item': sellerItems}
 
         return trade_data
+
+@trades_routes.route('/new', methods=['POST'])
+@login_required
+def create_trade():
+    buyerItemId = request.json['buyerItemId']
+    sellerItemId = request.json['sellerItemId']
+
+    buyerItem = Item.query.get(buyerItemId)
+    sellerItem = Item.query.get(sellerItemId)
+
+    # Error response if item does not exist
+    if not buyerItem or not sellerItem:
+        response = jsonify({"error": "Item couldn't be found"})
+        response.status_code = 404
+        return response
+    if not buyerItem.is_tradable or not sellerItem.is_tradable:
+        response = jsonify({"error": "One or more items is not tradeable"})
+        response.status_code = 403
+        return response
+
+    # Error response if identical trade already exists
+    existingTrades = Trade.query.all()
+    for trade in existingTrades:
+        trade_data = trade.to_dict()
+        if trade_data["sellerItemId"] == sellerItemId and trade_data["buyerItemId"] == buyerItemId and not trade_data['status'] == 'closed-rejected':
+            response = jsonify({"error": "This trade already exists"})
+            response.status_code = 403
+            return response
+        if trade_data["sellerItemId"] == buyerItemId and trade_data["buyerItemId"] == sellerItemId and not trade_data['status'] == 'closed-rejected':
+            response = jsonify({"error": "This trade already exists"})
+            response.status_code = 403
+            return response
+
+    new_trade = Trade(
+        buyer_item_id = buyerItemId,
+        seller_item_id =  sellerItemId
+    )
+    db.session.add(new_trade)
+    db.session.commit()
+    return jsonify({"message": "Trade was successfully created."}), 201
+
+
+@trades_routes.route('/<int:trade_id>/delete', methods=['DELETE'])
+@login_required
+def delete_trade(trade_id):
+    trade = Trade.query.get(trade_id)
+
+    if not trade:
+        response = jsonify({"error": "Trade couldn't be found"})
+        response.status_code = 404
+        return response
+
+    trade_data = trade.to_dict()
+
+    buyerItemId = trade_data['buyerItemId']
+    buyerItem = Item.query.get(buyerItemId).to_dict()
+
+    sellerItemId = trade_data['sellerItemId']
+    sellerItem = Item.query.get(sellerItemId).to_dict()
+
+    if buyerItem['ownerId'] != current_user.id and sellerItem['ownerId'] != current_user.id:
+        return jsonify({"error": "Unauthorized access"}), 403
+
+    if trade_data['status'] == 'closed-accepted':
+        response = jsonify({"error": "You cannot delete completed trades"})
+        response.status_code = 403
+        return response
+
+    db.session.delete(trade)
+    db.session.commit()
+    return jsonify({"message": "Trade Successfully Deleted"})

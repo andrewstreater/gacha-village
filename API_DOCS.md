@@ -788,6 +788,10 @@ Creates and returns a new Trade.
         }
     ```
 
+create error if an item doesnt exist
+create error if one item is not tradeable
+create error if an open trade already exists for these items
+
 ### Edit a Trade
 
 Updates and returns an existing Item.
