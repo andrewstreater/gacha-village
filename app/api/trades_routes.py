@@ -46,11 +46,6 @@ def get_trade(trade_id):
             pass
         else:
             return jsonify({"error": "Unauthorized access"}), 403
-        # buyerItemId = request.json['buyerItemId']
-        # sellerItemId = request.json['sellerItemId']
-
-        # buyerItem = Item.query.get(buyerItemId)
-        # sellerItem = Item.query.get(sellerItemId)
 
     if request.method == 'GET':
         trade_data = trade.to_dict()
