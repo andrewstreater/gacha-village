@@ -96,6 +96,28 @@ def create_review(tradeId):
     return jsonify({"message": "Review successfully created."}), 201
 
 
+@reviews_routes.route('/<int:review_id>', methods=['GET', 'PUT'])
+@login_required
+def update_review(review_id):
+    review = Review.query.get(review_id)
+
+    if not review:
+        response = jsonify({"error": "Review couldn't be found"})
+        response.status_code = 404
+        return response
+
+    if review.to_dict()['userId'] != current_user.id:
+        response = jsonify({"error": "Unauthorized access"})
+        response.status_code = 403
+        return response
+
+    review.review = request.json['review']
+    review.stars = request.json['stars']
+
+    db.session.commit()
+    return jsonify({"message": "Review successfully updated."}), 200
+
+
 @reviews_routes.route('/<int:review_id>/delete', methods=['DELETE'])
 @login_required
 def delete_review(review_id):
