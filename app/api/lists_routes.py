@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify, render_template, redirect
 from flask_login import current_user, login_required
 from app.models import List, Item, User, Image, db
 from app.models.list_item import ListItem
+from ..forms import CreateListForm
 
 lists_routes = Blueprint('lists', __name__)
 
@@ -62,6 +63,10 @@ def get_details_by_listId(listId):
         response.status_code = 404
         return response
 
+    if lst['private'] and lst['userId'] != current_user.id:
+        return jsonify({"error": "Unauthorized access"}), 403
+
+
     items = Item.query.join(ListItem).filter(ListItem.columns.list_id == listId).all()
     itemsList = []
     for item in items:
@@ -79,7 +84,51 @@ def get_details_by_listId(listId):
         "Items": itemsList
     }}
 
+@lists_routes.route('/new', methods=['GET', 'POST'])
+@login_required
+def create_list():
 
-# @lists_routes.route('/<int:listId>/delete', methods=['DELETE'])
-# @login_required
-# def get_lists_by_userId(userId):
+    form = CreateListForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        name = form.name.data
+        private = form.private.data
+
+        new_list = List(
+            user_id = current_user.id,
+            name = name,
+            private = private,
+            )
+        db.session.add(new_list)
+        db.session.commit()
+        return jsonify({"message": "Item successfully created."}), 201
+
+    errors = {}
+    for field, error in form.errors.items():
+        field_obj = getattr(form, field)
+        errors[field_obj.label.text] = error[0]
+    error_response = {
+        "message": "Body validation errors",
+        "error": errors
+    }
+    return jsonify(error_response), 400
+
+    return render_template('create_list.html', form=form)
+
+@lists_routes.route('/<int:listId>/delete', methods=['DELETE'])
+@login_required
+def delete_list(listId):
+    lst = List.query.get(listId)
+    list_data = lst.to_dict()
+
+    if not lst:
+        response = jsonify({"error": "List couldn't be found"})
+        response.status_code = 404
+        return response
+
+    if list_data['userId'] != current_user.id:
+        return jsonify({"error": "Unauthorized access"}), 403
+
+    db.session.delete(lst)
+    db.session.commit()
+    return jsonify({"message": "List Successfully Deleted"})
