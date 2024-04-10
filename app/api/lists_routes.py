@@ -25,3 +25,26 @@ def get_lists_by_current_user():
         response['Lists']["allLists"].append(list_data)
 
     return response
+
+@lists_routes.route('/user/<int:userId>')
+@login_required
+def get_lists_by_userId(userId):
+    userLists = List.query.filter(List.user_id == userId).all()
+    response = {
+        "Lists": {
+            "byId": [],
+            "allLists": []
+        }
+    }
+    if not userLists:
+        response = jsonify({"error": "This user doesn't have any lists yet"})
+        response.status_code = 404
+        return response
+
+    for lst in userLists:
+        list_data = lst.to_dict()
+        if not list_data['private']:
+            response['Lists']["byId"].append(list_data["listId"])
+            response['Lists']["allLists"].append(list_data)
+
+    return response
