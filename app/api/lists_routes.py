@@ -132,3 +132,8 @@ def delete_list(listId):
     db.session.delete(lst)
     db.session.commit()
     return jsonify({"message": "List Successfully Deleted"})
+
+# TO DO:
+# update list
+# add item to list
+# remove item from list
