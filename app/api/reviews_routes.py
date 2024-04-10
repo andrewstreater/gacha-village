@@ -42,11 +42,12 @@ def get_reviews_of_current_user():
 
     for review in reviews:
         review_data = review.to_dict()
-        buyerItem = Item.query.get(review_data['buyerItemId']).to_dict()
-        sellerItem = Item.query.get(review_data['sellerItemId']).to_dict()
-        # if sellerItem
         trade = Trade.query.get(review_data['tradeId']).to_dict()
-        response['Reviews']['byId'].append(review_data['reviewId'])
-        response['Reviews']['allReviews'].append(review_data)
+        buyerItem = Item.query.get(trade['buyerItemId']).to_dict()
+        sellerItem = Item.query.get(trade['sellerItemId']).to_dict()
+        if buyerItem['ownerId'] == current_user.id or sellerItem['ownerId'] == current_user.id:
+            if review_data['userId'] != current_user.id:
+                response['Reviews']['byId'].append(review_data['reviewId'])
+                response['Reviews']['allReviews'].append(review_data)
 
     return response
