@@ -115,7 +115,7 @@ def create_trade():
 @trades_routes.route('/<int:trade_id>', methods=['PUT'])
 def update_trade(trade_id):
     trade = Trade.query.get(trade_id)
-
+    print('-----------------LINE 118', trade.to_dict())
     # Error if Trade not found
     if not trade:
         response = jsonify({"error": "Trade couldn't be found"})
@@ -123,12 +123,8 @@ def update_trade(trade_id):
         return response
 
     trade_data = trade.to_dict()
-
-    buyerItemId = trade_data['buyerItemId']
-    buyerItem = Item.query.get(buyerItemId).to_dict()
-
-    sellerItemId = trade_data['sellerItemId']
-    sellerItem = Item.query.get(sellerItemId).to_dict()
+    buyerItem = Item.query.get(trade_data['buyerItemId']).to_dict()
+    sellerItem = Item.query.get(trade_data['sellerItemId']).to_dict()
 
     if buyerItem['ownerId'] != current_user.id and sellerItem['ownerId'] != current_user.id:
         return jsonify({"error": "Unauthorized access"}), 403
@@ -139,10 +135,9 @@ def update_trade(trade_id):
         return response
 
     req = request.json
-    print('---------LINE 147: ', req['status'], trade_data['status'])
 
     # UPDATE TRADE STATUS: accept offers and counter offers
-    if trade_data['status'] != req['status']:
+    if trade_data['status'] != req['status'] and req['status'] == 'accepted':
         if current_user.id == sellerItem['ownerId'] and req['status'] == 'accepted':
             trade.status = 'accepted'
             db.session.commit()
@@ -153,15 +148,13 @@ def update_trade(trade_id):
             return jsonify({"message": "Trade has been accepted"}), 201
 
     # UPDATE ITEMS IN TRADE
-    reqBuyerItemId = request.json['buyerItemId']
-    reqSellerItemId = request.json['sellerItemId']
 
-    reqBuyerItem = Item.query.get(reqBuyerItemId)
-    reqSellerItem = Item.query.get(reqSellerItemId)
+    reqBuyerItem = Item.query.get(request.json['buyerItemId'])
+    reqSellerItem = Item.query.get(request.json['sellerItemId'])
 
     # Error response if new item does not exist
     if not reqBuyerItem or not reqSellerItem:
-        response = jsonify({"error": "Item couldn't be found"})
+        response = jsonify({"error": "One or more items couldn't be found"})
         response.status_code = 404
         return response
     if not reqBuyerItem.is_tradable or not reqSellerItem.is_tradable:
@@ -182,10 +175,19 @@ def update_trade(trade_id):
             response.status_code = 403
             return response
     # ----------------------------------------------------------------
-    pass
 
-    # db.session.commit()
-    # return jsonify({"message": "Trade was successfully updated."}), 201
+    if current_user.id == sellerItem['ownerId'] and req['status'] == 'open':
+        trade.buyer_item_id = request.json['buyerItemId']
+        trade.seller_item_id = request.json['sellerItemId']
+        trade.status = 'counter-offer'
+
+    if current_user.id == buyerItem['ownerId'] and req['status'] == 'counter-offer':
+        trade.buyer_item_id = request.json['buyerItemId']
+        trade.seller_item_id = request.json['sellerItemId']
+        trade.status = 'open'
+    db.session.commit()
+    return jsonify({"message": "Trade was successfully updated."}), 201
+    # return jsonify(trade_data)
 
 
 
