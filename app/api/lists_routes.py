@@ -3,6 +3,7 @@ from flask_login import current_user, login_required
 from app.models import List, Item, User, Image, db
 from app.models.list_item import ListItem
 from ..forms import CreateListForm
+from sqlalchemy import delete
 
 lists_routes = Blueprint('lists', __name__)
 
@@ -169,6 +170,49 @@ def delete_list(listId):
     return jsonify({"message": "List Successfully Deleted"})
 
 # TO DO:
-# update list
 # add item to list
 # remove item from list
+
+@lists_routes.route('<int:listId>/items/<int:itemId>', methods=["POST", "DELETE"])
+@login_required
+def add_remove_item_on_list(listId, itemId):
+    """
+    Add a track to an existing playlist
+    """
+    lst = List.query.get(listId)
+    item = Item.query.get(itemId)
+    if not lst:
+        return jsonify({"error": "Playlist not found"}), 404
+
+    if lst.user_id != current_user.id:
+        return jsonify({"error": "Unauthorized access"}), 403
+
+    if not item:
+        return jsonify({"error": "Item not found"}), 404
+
+
+    if request.method == "POST":
+
+        if item in lst.items:
+            return jsonify({"error": "Item is already on this list"}), 400
+
+        add_item_to_list = {"list_id": listId, "item_id": itemId}
+        db.session.execute(ListItem.insert(), add_item_to_list)
+        db.session.commit()
+        message = f'You have successfully added {item.to_dict()["title"]} to {lst.to_dict()["name"]}'
+        return jsonify({"message": message}), 201
+
+    if request.method == "DELETE":
+        remove_item_from_list = delete(ListItem).where(
+            ListItem.c.list_id == listId,
+            ListItem.c.item_id == itemId
+        )
+
+        result = db.session.execute(remove_item_from_list)
+        db.session.commit()
+
+        if result.rowcount > 0:
+            message = f'You have successfully removed {item.to_dict()["title"]} from {lst.to_dict()["name"]}'
+            return jsonify({"message": message}), 200
+        else:
+            return jsonify({"error": "List couldn't be found"}), 404
