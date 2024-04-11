@@ -8,10 +8,9 @@ items_routes = Blueprint('items', __name__)
 @items_routes.route('/')
 def get_all_items():
     items = Item.query.all()
-    response = {'Items': {
-        'byId': [],
-        'allItems': []
-    }}
+    response = {
+        'byId': []
+    }
 
     for item in items:
         item_data = item.to_dict()
@@ -22,9 +21,9 @@ def get_all_items():
         if previewImage and previewImage[0].to_dict()['preview']:
             item_data['previewImage'] = previewImage[0].to_dict()
 
-        item_data_at_key = dict({f'item{itemId}': item_data})
-        response['Items']['allItems'].append(item_data_at_key)
-        response['Items']['byId'].append(itemId)
+        # item_data_at_key = dict({f'item{itemId}': item_data})
+        response[f'item{itemId}'] = item_data
+        response['byId'].append(itemId)
 
     return response
 
