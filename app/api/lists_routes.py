@@ -84,6 +84,41 @@ def get_details_by_listId(listId):
         "Items": itemsList
     }}
 
+
+@lists_routes.route('/<int:listId>/edit', methods=['GET', 'PUT'])
+@login_required
+def update_list(listId):
+
+    lst = List.query.get(listId)
+    if not lst:
+        response = jsonify({"error": "List couldn't be found"})
+        response.status_code = 404
+        return response
+
+    if lst.to_dict()['userId'] != current_user.id:
+        return jsonify({"error": "Unauthorized access"}), 403
+
+    form = CreateListForm(obj=lst)
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        lst.name = form.name.data
+        lst.private = form.private.data
+        db.session.commit()
+        return jsonify({"message": "Item successfully updated."}), 200
+
+    errors = {}
+    for field, error in form.errors.items():
+        field_obj = getattr(form, field)
+        errors[field_obj.label.text] = error[0]
+    error_response = {
+        "message": "Body validation errors",
+        "error": errors
+    }
+    return jsonify(error_response), 400
+
+    return render_template('create_list.html', form=form)
+
+
 @lists_routes.route('/new', methods=['GET', 'POST'])
 @login_required
 def create_list():
