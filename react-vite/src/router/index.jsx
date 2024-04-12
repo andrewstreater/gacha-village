@@ -10,6 +10,7 @@ import TradesCurrentUser from '../components/TradesCurrentUser';
 import TradeDetails from '../components/TradeDetails/TradeDetails';
 import ListsCurrentUser from '../components/ListsCurrentUser';
 import ListDetails from '../components/ListDetails/ListDetails';
+import ListsByUserId from '../components/ListsByUserId';
 
 export const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ export const router = createBrowserRouter([
       {
         path: "lists/:listId",
         element: <ListDetails />,
+      },
+      {
+        path: "lists/user/:userId",
+        element: <ListsByUserId />,
       }
     ],
   },

@@ -1,23 +1,24 @@
-import { fetchGetCurrentUsersLists } from "../../redux/lists"
+import { fetchGetListByUserId } from "../../redux/lists"
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
-import { useNavigate } from "react-router-dom"
-import "./ListsCurrentUser.css"
+import { useNavigate, useParams } from "react-router-dom"
+import "./ListsByUserId.css"
 
-function ListsCurrentUser () {
+function ListsByUserId () {
     const lists = useSelector(state => state.lists.currentUserLists);
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const { userId } = useParams()
 
     useEffect(() => {
-        dispatch(fetchGetCurrentUsersLists())
+        dispatch(fetchGetListByUserId(userId))
     }, [dispatch])
 
     return (
         <>
-        <h1>Current User's Lists</h1>
+        <h1>Lists by userId</h1>
         </>
     )
 }
 
-export default ListsCurrentUser
+export default ListsByUserId
