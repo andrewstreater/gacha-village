@@ -1,0 +1,9 @@
+.item-tile {
+    height: 260px;
+    width: 188px;
+}
+
+.item-tile-image {
+    width: 100%;
+    height: auto;
+}

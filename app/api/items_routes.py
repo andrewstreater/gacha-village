@@ -21,7 +21,7 @@ def get_all_items():
         if previewImage and previewImage[0].to_dict()['preview']:
             item_data['previewImage'] = previewImage[0].to_dict()
 
-        response[f'item{itemId}'] = item_data
+        response[f'{itemId}'] = item_data
         response['byId'].append(itemId)
 
     return response

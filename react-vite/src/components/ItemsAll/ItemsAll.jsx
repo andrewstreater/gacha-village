@@ -10,6 +10,8 @@ function ItemsAll () {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
+    const allItemArray = Object.values(allItems)
+
     useEffect(() => {
         dispatch(fetchGetItems())
     }, [dispatch])
@@ -17,7 +19,7 @@ function ItemsAll () {
     return (
         <>
         <h1>All Items</h1>
-        <ItemTileDisplay items={allItems} />
+        <ItemTileDisplay items={allItemArray} />
         </>
     )
 }
