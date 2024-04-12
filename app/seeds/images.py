@@ -30,7 +30,7 @@ def seed_images():
     image12 = Image(
         imageable_type="item", imageable_id=12, preview=True, image_url='https://i.imgur.com/q7lXXP0.jpg')
     image13 = Image(
-        imageable_type="item", imageable_id=13, preview=True, image_url='')
+        imageable_type="item", imageable_id=13, preview=True, image_url='https://i.imgur.com/XEvShNw.jpg')
 
     db.session.add(image1)
     db.session.add(image2)
@@ -82,14 +82,12 @@ def seed_images():
         imageable_type="item", imageable_id=12, preview=False, image_url='https://i.imgur.com/Ey4VBk4.jpg')
 
     image30 = Image(
-        imageable_type="item", imageable_id=13, preview=False, image_url='https://i.imgur.com/XEvShNw.jpg')
-    image31 = Image(
         imageable_type="item", imageable_id=13, preview=False, image_url='https://i.imgur.com/gZsVuMN.jpg')
-    image32 = Image(
+    image31 = Image(
         imageable_type="item", imageable_id=13, preview=False, image_url='https://i.imgur.com/12c0kFI.jpg')
-    image33 = Image(
+    image32 = Image(
         imageable_type="item", imageable_id=13, preview=False, image_url='https://i.imgur.com/dmeKGBO.jpg')
-    image34 = Image(
+    image33 = Image(
         imageable_type="item", imageable_id=13, preview=False, image_url='https://i.imgur.com/TaNQVNO.jpg')
 
     db.session.add(image14)
@@ -113,7 +111,6 @@ def seed_images():
     db.session.add(image31)
     db.session.add(image32)
     db.session.add(image33)
-    db.session.add(image34)
 
     db.session.commit()
 
