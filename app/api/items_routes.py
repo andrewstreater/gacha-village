@@ -21,7 +21,6 @@ def get_all_items():
         if previewImage and previewImage[0].to_dict()['preview']:
             item_data['previewImage'] = previewImage[0].to_dict()
 
-        # item_data_at_key = dict({f'item{itemId}': item_data})
         response[f'item{itemId}'] = item_data
         response['byId'].append(itemId)
 
@@ -99,10 +98,9 @@ def delete_item(item_id):
 @login_required
 def get_items_by_current_user():
     items = Item.query.filter(Item.owner_id == current_user.id).all()
-    response = {'Items': {
-        'byId': [],
-        'allItems': []
-    }}
+    response = {
+        'byId': []
+    }
 
     for item in items:
         item_data = item.to_dict()
@@ -113,9 +111,8 @@ def get_items_by_current_user():
         if previewImage and previewImage[0].to_dict()['preview']:
             item_data['previewImage'] = previewImage[0].to_dict()
 
-        item_data_at_key = dict({f'item{itemId}': item_data})
-        response['Items']['allItems'].append(item_data_at_key)
-        response['Items']['byId'].append(itemId)
+        response[f'item{itemId}'] = item_data
+        response['byId'].append(itemId)
 
     return response
 
@@ -123,10 +120,9 @@ def get_items_by_current_user():
 @login_required
 def get_items_by_userId(user_id):
     items = Item.query.filter(Item.owner_id == user_id).all()
-    response = {'Items': {
-        'byId': [],
-        'allItems': []
-    }}
+    response = {
+        'byId': []
+    }
 
     for item in items:
         item_data = item.to_dict()
@@ -137,9 +133,8 @@ def get_items_by_userId(user_id):
         if previewImage and previewImage[0].to_dict()['preview']:
             item_data['previewImage'] = previewImage[0].to_dict()
 
-        item_data_at_key = dict({f'item{itemId}': item_data})
-        response['Items']['allItems'].append(item_data_at_key)
-        response['Items']['byId'].append(itemId)
+        response[f'item{itemId}'] = item_data
+        response['byId'].append(itemId)
 
     return response
 
