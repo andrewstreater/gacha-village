@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
-import AllItems from '../components/AllItems/AllItems';
+import ItemsAll from '../components/ItemsAll/ItemsAll';
 import ItemDetails from '../components/ItemDetails/ItemDetails';
 import ItemsByUserId from '../components/ItemsByUserId';
 import ItemsByCurrentUser from '../components/ItemsByCurrentUser';
@@ -30,7 +30,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "items",
-        element: <AllItems />,
+        element: <ItemsAll />,
       },
       {
         path: "items/:itemId",
