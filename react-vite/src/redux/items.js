@@ -2,6 +2,7 @@ const GET_ITEMS = 'items/getItems'
 const GET_ITEM_DETAILS = 'items/getItemDetails'
 const GET_ITEMS_BY_USER_ID = 'items/getItemsByUserId'
 const GET_ITEMS_BY_CURRENT_USER = 'items/getItemsByCurrentUser'
+const CREATE_ITEM = 'items/createItem'
 
 const getItems = (allItems) => {
   return {
@@ -28,6 +29,13 @@ const getItemsByCurrentUser = (currentUserItems) => {
   return{
     type: GET_ITEMS_BY_CURRENT_USER,
     currentUserItems
+  }
+}
+
+const createItem = (newItem) => {
+  return {
+    type: CREATE_ITEM,
+    newItem
   }
 }
 
@@ -80,6 +88,24 @@ export const fetchGetItemsByCurrentUser = () => async (dispatch) => {
     dispatch(getItemsByCurrentUser(data))
     return data
   }  else if (res.status < 500) {
+    const errorMessages = await res.json()
+    return errorMessages
+  } else {
+    return { server: "Something went wrong. Please try again" }
+  }
+}
+
+export const fetchCreateItem = (payload) => async (dispatch) => {
+  const res = await fetch(`/api/items/new`, {
+    method: 'POST',
+    body: payload
+  })
+
+  if (res.ok) {
+    const { resPost } = await res.json()
+    dispatch(createItem(resPost))
+    return resPost
+  } else if (res.status < 500) {
     const errorMessages = await res.json()
     return errorMessages
   } else {

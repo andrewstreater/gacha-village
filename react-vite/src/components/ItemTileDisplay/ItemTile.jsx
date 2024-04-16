@@ -4,11 +4,15 @@
 import "./ItemTile.css"
 
 function ItemTile ({ item }) {
-    console.log("----------------------LINE 7: ", item)
+    // console.log("----------------------LINE 7: ", item)
+    let imageUrl = "No Image"
+    if (item.previewImage && item.previewImage.imageUrl) {
+        imageUrl = item.previewImage.imageUrl
+    }
     return (
         <>
             <div className="item-tile">
-            <img className='item-tile-image'src={item.previewImage.imageUrl}></img>
+            <img className='item-tile-image'src={imageUrl}></img>
             <p>{item.title}</p>
             </div>
         </>

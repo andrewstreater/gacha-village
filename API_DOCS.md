@@ -1217,7 +1217,7 @@ Returns all the reviews written by the current user.
           "Items": [
               {
                   "id": 1,
-                  "ownerId": 1,
+                 "ownerId": 1,
                   "title": "Hirono",
                   "brand": "Pop Mart",
                   "series": "Little Mischief Series",

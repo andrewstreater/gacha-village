@@ -6,11 +6,13 @@ import ItemsAll from '../components/ItemsAll/ItemsAll';
 import ItemDetails from '../components/ItemDetails/ItemDetails';
 import ItemsByUserId from '../components/ItemsByUserId';
 import ItemsByCurrentUser from '../components/ItemsByCurrentUser';
+import CreateItemForm from '../components/CreateItemForm';
 import TradesCurrentUser from '../components/TradesCurrentUser';
 import TradeDetails from '../components/TradeDetails/TradeDetails';
 import ListsCurrentUser from '../components/ListsCurrentUser';
 import ListDetails from '../components/ListDetails/ListDetails';
 import ListsByUserId from '../components/ListsByUserId';
+import CreateListForm from '../components/CreateListForm/CreateListForm';
 
 export const router = createBrowserRouter([
   {
@@ -45,6 +47,10 @@ export const router = createBrowserRouter([
         element: <ItemsByCurrentUser />,
       },
       {
+        path: "items/new",
+        element: <CreateItemForm />,
+      },
+      {
         path: "trades/current",
         element: <TradesCurrentUser />,
       },
@@ -63,6 +69,10 @@ export const router = createBrowserRouter([
       {
         path: "lists/user/:userId",
         element: <ListsByUserId />,
+      },
+      {
+        path: "lists/new",
+        element: <CreateListForm />
       }
     ],
   },

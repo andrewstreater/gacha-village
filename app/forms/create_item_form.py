@@ -5,15 +5,17 @@ from wtforms.validators import DataRequired
 
 CONDITIONS = [
     'New',
-    'Open box',
-    'Very good',
+    'Open Box',
+    'Very Good',
     'Good',
-    'Acceptable'
+    'Acceptable',
+    'Repaired',
+    'For parts or not working'
 ]
 
 EDITIONS = [
     'Standard',
-    'Special Edition',
+    'Special',
     'Limited'
 ]
 

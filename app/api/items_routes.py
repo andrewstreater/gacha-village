@@ -222,6 +222,7 @@ def create_item():
         "message": "Body validation errors",
         "error": errors
     }
+    print('------------------LINE 225', form.errors)
     return jsonify(error_response), 400
 
     return render_template('create_item.html', form=form)
