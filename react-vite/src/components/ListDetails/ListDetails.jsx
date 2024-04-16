@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import "./ListDetails.css"
+import ItemTileDisplay from "../ItemTileDisplay"
 
 function ListDetails() {
     const listDetails = useSelector(state => state.lists.listDetails);
@@ -14,9 +15,13 @@ function ListDetails() {
         dispatch(fetchGetListDetails(listId))
     }, [dispatch, listId])
 
+    const items = listDetails.List.Items
+
     return (
         <>
         <h1>List Details page</h1>
+        {listDetails && listDetails.List.name ? <h2>{listDetails.List.name}</h2> : <></>}
+        <ItemTileDisplay items={items}/>
         </>
     )
 }
