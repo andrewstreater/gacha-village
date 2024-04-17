@@ -2,6 +2,7 @@ const GET_CURRENT_USERS_LISTS = 'lists/getCurrentUsersLists'
 const GET_LIST_DETAILS = 'lists/getListDetails'
 const GET_LISTS_BY_USER_ID = 'lists/getListByUserId'
 const CREATE_LIST = 'lists/createList'
+const UPDATE_LIST = 'lists/updateList'
 
 const getCurrentUserslists = (currentUserLists) => {
   return {
@@ -28,6 +29,13 @@ const createList = (newList) => {
   return{
     type: CREATE_LIST,
     newList
+  }
+}
+
+const updateList = (updatedList) => {
+  return {
+    type: UPDATE_LIST,
+    updatedList
   }
 }
 
@@ -91,6 +99,23 @@ export const fetchCreateList = (payload) => async (dispatch) => {
   }
 }
 
+export const fetchUpdateList = (payload, listId) => async (dispatch) => {
+  const res = await fetch(`/api/lists/${listId}/update`, {
+    method: 'PUT',
+    body: payload
+  })
+
+  if (res.ok) {
+    const { resPost } = await res.json()
+    dispatch(updateList(resPost))
+    return resPost
+  } else if (res.status < 500) {
+    const errorMessages = await res.json()
+    return errorMessages
+  } else {
+    return { server: "Something went wrong. Please try again" }
+  }
+}
 
 const listsReducer = (state = {currentUserLists: {}, byId: {}, userLists: {}}, action) => {
   switch (action.type) {

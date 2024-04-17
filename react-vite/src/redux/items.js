@@ -4,6 +4,7 @@ const GET_ITEMS_BY_USER_ID = 'items/getItemsByUserId'
 const GET_ITEMS_BY_CURRENT_USER = 'items/getItemsByCurrentUser'
 const CREATE_ITEM = 'items/createItem'
 const UPDATE_ITEM = 'items/updateItem'
+const DELETE_ITEM = 'items/deleteItem'
 
 const getItems = (allItems) => {
   return {
@@ -44,6 +45,13 @@ const updateItem = (updatedItem) => {
   return {
     type: UPDATE_ITEM,
     updatedItem
+  }
+}
+
+const deleteItem = (item) => {
+  return {
+    type: DELETE_ITEM,
+    item
   }
 }
 
@@ -131,6 +139,22 @@ export const fetchUpdateItem = (payload, itemId) => async (dispatch) => {
     const { resPost } = await res.json()
     dispatch(updateItem(resPost))
     return resPost
+  } else if (res.status < 500) {
+    const errorMessages = await res.json()
+    return errorMessages
+  } else {
+    return { server: "Something went wrong. Please try again" }
+  }
+}
+
+export const fetchDeleteItem = (itemId) => async (dispatch) => {
+  const res = await fetch(`/api/items/${itemId}`, {
+    method: 'DELETE'
+  })
+
+  if (res.ok) {
+    dispatch(deleteItem())
+    return res
   } else if (res.status < 500) {
     const errorMessages = await res.json()
     return errorMessages

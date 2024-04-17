@@ -81,7 +81,7 @@ def get_details_by_listId(listId):
     }}
 
 
-@lists_routes.route('/<int:listId>/edit', methods=['GET', 'PUT'])
+@lists_routes.route('/<int:listId>/update', methods=['GET', 'PUT'])
 @login_required
 def update_list(listId):
 

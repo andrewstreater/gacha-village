@@ -1,7 +1,8 @@
 import { fetchGetItemsByCurrentUser } from "../../redux/items"
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import ItemTileDisplay from "../ItemTileDisplay"
 import "./ItemsByCurrentUser.css"
 
 function ItemsByCurrentUser () {
@@ -13,9 +14,12 @@ function ItemsByCurrentUser () {
         dispatch(fetchGetItemsByCurrentUser())
     }, [dispatch])
 
+    const allItemArray = Object.values(currentUserItems)
+
     return (
         <>
         <h1>Current User&apos;s Items page</h1>
+        <ItemTileDisplay items={allItemArray} />
         </>
     )
 }

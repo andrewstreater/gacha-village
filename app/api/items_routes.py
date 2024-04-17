@@ -105,7 +105,7 @@ def get_items_by_current_user():
 
     for item in items:
         item_data = item.to_dict()
-        itemId = item_data.pop('itemId')
+        itemId = item_data['itemId']
 
         previewImage = Image.query.filter(Image.imageable_id == itemId).all()
 

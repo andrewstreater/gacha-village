@@ -14,6 +14,7 @@ import ListDetails from '../components/ListDetails/ListDetails';
 import ListsByUserId from '../components/ListsByUserId';
 import CreateListForm from '../components/CreateListForm/CreateListForm';
 import UpdateItemForm from '../components/UpdateItemForm';
+import UpdateListForm from '../components/UpdateListForm';
 
 export const router = createBrowserRouter([
   {
@@ -78,6 +79,10 @@ export const router = createBrowserRouter([
       {
         path: "lists/new",
         element: <CreateListForm />
+      },
+      {
+        path:"lists/:listId/update",
+        element: <UpdateListForm />
       }
     ],
   },
