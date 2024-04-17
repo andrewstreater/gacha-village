@@ -16,7 +16,7 @@ function CreateItemForm () {
   const [edition, setEdition] = useState('Standard')
   const [condition, setCondition] = useState('New')
   const [description, setDescription] = useState('')
-  const [isTradeable, setIsTradeable] = useState('')
+  const [isTradable, setIsTradable] = useState('')
   const [errors, setErrors] = useState({})
 
   if (!sessionUser) return <Navigate to="/" replace={true} />
@@ -120,14 +120,14 @@ function CreateItemForm () {
             <label style={{ background: 'none' }} htmlFor='createItemDescription'>Description</label>
             <input type='textarea' name='createItemDescription' required placeholder='Description' onChange={(e) => setDescription(e.target.value)} />
 
-            {/* isTradeable? */}
-            <label style={{ background: 'none' }} htmlFor='createItemTradeable'>Check the box to post this item for trade</label>
+            {/* isTradable? */}
+            <label style={{ background: 'none' }} htmlFor='createItemTradable'>Check the box to post this item for trade</label>
             <input
             type='checkbox'
-            id='createItemTradeable'
-            name='createItemTradeable'
-            checked={isTradeable}
-            onChange={(e) => setIsTradeable(e.target.checked)}
+            id='createItemTradable'
+            name='createItemTradable'
+            checked={isTradable}
+            onChange={(e) => setIsTradable(e.target.checked)}
             />
 
 

@@ -74,6 +74,7 @@ def get_item(item_id):
                 "error": error_messages,
             })
             response.status_code = 400
+            print("--------LINE 77: ", form.errors)
             return response
 
 

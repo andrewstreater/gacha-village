@@ -3,6 +3,7 @@ const GET_ITEM_DETAILS = 'items/getItemDetails'
 const GET_ITEMS_BY_USER_ID = 'items/getItemsByUserId'
 const GET_ITEMS_BY_CURRENT_USER = 'items/getItemsByCurrentUser'
 const CREATE_ITEM = 'items/createItem'
+const UPDATE_ITEM = 'items/updateItem'
 
 const getItems = (allItems) => {
   return {
@@ -12,21 +13,21 @@ const getItems = (allItems) => {
 }
 
 const getItemDetails = (itemDetails) => {
-  return{
+  return {
       type: GET_ITEM_DETAILS,
       itemDetails
   }
 }
 
 const getItemsByUserId = (userItems) => {
-  return{
+  return {
     type: GET_ITEMS_BY_USER_ID,
     userItems
   }
 }
 
 const getItemsByCurrentUser = (currentUserItems) => {
-  return{
+  return {
     type: GET_ITEMS_BY_CURRENT_USER,
     currentUserItems
   }
@@ -36,6 +37,13 @@ const createItem = (newItem) => {
   return {
     type: CREATE_ITEM,
     newItem
+  }
+}
+
+const updateItem = (updatedItem) => {
+  return {
+    type: UPDATE_ITEM,
+    updatedItem
   }
 }
 
@@ -104,6 +112,24 @@ export const fetchCreateItem = (payload) => async (dispatch) => {
   if (res.ok) {
     const { resPost } = await res.json()
     dispatch(createItem(resPost))
+    return resPost
+  } else if (res.status < 500) {
+    const errorMessages = await res.json()
+    return errorMessages
+  } else {
+    return { server: "Something went wrong. Please try again" }
+  }
+}
+
+export const fetchUpdateItem = (payload, itemId) => async (dispatch) => {
+  const res = await fetch(`/api/items/${itemId}`, {
+    method: 'PUT',
+    body: payload
+  })
+
+  if (res.ok) {
+    const { resPost } = await res.json()
+    dispatch(updateItem(resPost))
     return resPost
   } else if (res.status < 500) {
     const errorMessages = await res.json()
