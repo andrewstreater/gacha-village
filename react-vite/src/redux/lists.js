@@ -3,6 +3,7 @@ const GET_LIST_DETAILS = 'lists/getListDetails'
 const GET_LISTS_BY_USER_ID = 'lists/getListByUserId'
 const CREATE_LIST = 'lists/createList'
 const UPDATE_LIST = 'lists/updateList'
+const DELETE_LIST = 'lists/deleteList'
 
 const getCurrentUserslists = (currentUserLists) => {
   return {
@@ -36,6 +37,13 @@ const updateList = (updatedList) => {
   return {
     type: UPDATE_LIST,
     updatedList
+  }
+}
+
+const deleteList = (list) => {
+  return {
+    type: DELETE_LIST,
+    list
   }
 }
 
@@ -109,6 +117,22 @@ export const fetchUpdateList = (payload, listId) => async (dispatch) => {
     const { resPost } = await res.json()
     dispatch(updateList(resPost))
     return resPost
+  } else if (res.status < 500) {
+    const errorMessages = await res.json()
+    return errorMessages
+  } else {
+    return { server: "Something went wrong. Please try again" }
+  }
+}
+
+export const fetchDeleteList = (listId) => async (dispatch) => {
+  const res = await fetch(`/api/lists/${listId}/delete`, {
+    method: 'DELETE'
+  })
+
+  if (res.ok) {
+    dispatch(deleteList())
+    return res
   } else if (res.status < 500) {
     const errorMessages = await res.json()
     return errorMessages

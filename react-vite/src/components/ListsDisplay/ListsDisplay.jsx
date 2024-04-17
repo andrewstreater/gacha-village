@@ -10,7 +10,7 @@ function ListsDisplay ({lists}) {
     return (
         <div className="">
             {lists.map(list => (
-                <ListTile list={list} key={list.id}/>
+                <ListTile list={list} listId={list.listId} key={list.listId}/>
             ))}
         </div>
     )

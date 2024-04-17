@@ -117,7 +117,7 @@ function UpdateItemForm () {
     if (serverResponse) {
       setErrors(serverResponse)
     } else {
-      navigate('/')
+      navigate('/items/current')
     }
   }
 

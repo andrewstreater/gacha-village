@@ -38,7 +38,7 @@ function UpdateListForm () {
     if (serverResponse) {
       setErrors(serverResponse)
     } else {
-      navigate('/')
+      navigate('/lists/current')
     }
   }
 

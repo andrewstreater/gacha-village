@@ -21,7 +21,7 @@ def get_lists_by_current_user():
 
     for lst in userLists:
         list_data = lst.to_dict()
-        listId = list_data.pop('listId')
+        listId = list_data['listId']
         response[f'item{listId}'] = list_data
         response['byId'].append(listId)
 

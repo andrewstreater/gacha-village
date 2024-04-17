@@ -18,9 +18,7 @@ function ItemTile ({ item, itemId }) {
 
     const handleDelete = async (e) => {
         e.preventDefault()
-        fetchDeleteItem
         await dispatch(fetchDeleteItem(itemId)).then(navigate('/items'))
-
     }
 
     return (
