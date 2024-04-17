@@ -14,7 +14,7 @@ def get_all_items():
 
     for item in items:
         item_data = item.to_dict()
-        itemId = item_data.pop('itemId')
+        itemId = item_data['itemId']
 
         previewImage = Image.query.filter(Image.imageable_id == itemId).all()
 

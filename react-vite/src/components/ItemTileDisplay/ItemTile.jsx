@@ -1,17 +1,18 @@
 // import { useSelector, useDispatch } from "react-redux"
 // import { useEffect } from "react"
-// import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import "./ItemTile.css"
 
-function ItemTile ({ item }) {
-    // console.log("----------------------LINE 7: ", item)
+function ItemTile ({ item, itemId }) {
+    const navigate = useNavigate()
     let imageUrl = "No Image"
     if (item.previewImage && item.previewImage.imageUrl) {
         imageUrl = item.previewImage.imageUrl
     }
+    console.log("---------------LINE 12", itemId)
     return (
         <>
-            <div className="item-tile">
+            <div className="item-tile" onClick={() => navigate(`/items/${itemId}`)}>
             <img className='item-tile-image'src={imageUrl}></img>
             <p>{item.title}</p>
             </div>

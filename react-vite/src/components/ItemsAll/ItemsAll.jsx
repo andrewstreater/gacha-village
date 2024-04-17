@@ -8,7 +8,7 @@ import "./ItemsAll.css"
 function ItemsAll () {
     const allItems = useSelector(state => state.items.allItems);
     const dispatch = useDispatch()
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     const allItemArray = Object.values(allItems)
 
