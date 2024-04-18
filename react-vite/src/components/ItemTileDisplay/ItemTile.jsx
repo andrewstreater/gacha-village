@@ -2,6 +2,9 @@ import { useDispatch } from "react-redux"
 // import { useEffect } from "react"
 import { Navigate, useNavigate } from "react-router-dom"
 import { fetchDeleteItem } from "../../redux/items"
+// import OpenModalMenuItem from "../Navigation/OpenModalMenuItem"
+import OpenModalButton from '../OpenModalButton'
+import AddToListModal from "./AddToListModal"
 import addIcon from '../../../icons/Add_square_light@2x.png'
 import tradeIcon from '../../../icons/Transger_light@2x.png'
 import "./ItemTile.css"
@@ -38,7 +41,12 @@ function ItemTile ({ item, itemId }) {
                     <div className="item-tiles-details">
                         <div className="item-tile-title" onClick={() => navigate(`/items/${itemId}`)}>{item.title}</div>
                         <img className="item-tile-trade-button" src={tradeIcon} alt="Trade" />
-                        <img className="item-tile-add-button" src={addIcon} alt="Add to list"></img>
+                        {/* <img className="item-tile-add-button" src={addIcon} alt="Add to list"></img> */}
+                        <OpenModalButton
+                        imgSrc={addIcon}
+                        srcClass='item-tile-add-button'
+                        modalComponent={<AddToListModal />}
+                        />
                     </div>
                 </>
             )}

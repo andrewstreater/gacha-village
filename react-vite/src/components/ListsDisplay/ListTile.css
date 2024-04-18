@@ -1,5 +1,36 @@
 .list-tile {
-    border: solid;
-    border-color: purple;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
     border-radius: 8px;
+    height: 30px;
+}
+
+.list-tile:hover {
+    background-color: rgb(227, 227, 227);
+    color: white;
+}
+
+.list-tile-title {
+    margin-left: 8px;
+}
+
+.update-delete-list-buttons{
+    display: flex;
+}
+
+.update-list-button{
+    background-color: rgb(0, 96, 128);
+    color: white;
+    border-radius: 8px;
+    margin-left: 4px;
+}
+
+.delete-list-button {
+    background-color: red;
+    color: white;
+    border-radius: 8px;
+    margin-left: 5px;
 }

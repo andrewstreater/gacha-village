@@ -3,3 +3,7 @@
     flex-direction: row;
     flex-wrap: wrap;
 }
+
+.list-dropdown {
+    position: absolute;
+  }

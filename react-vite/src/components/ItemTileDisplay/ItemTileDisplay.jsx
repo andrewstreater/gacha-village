@@ -6,7 +6,6 @@ import "./ItemTileDisplay.css"
 
 function ItemTileDisplay (props) {
     const items = props.items
-    console.log("----------------------LINE 9: ",items)
     return (
         <div className="all-item-tiles-container">
             {items.map(item => (

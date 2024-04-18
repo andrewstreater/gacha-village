@@ -15,7 +15,11 @@ function ListDetails() {
         dispatch(fetchGetListDetails(listId))
     }, [dispatch, listId])
 
-    const items = listDetails.List.Items
+    let items = []
+
+    if (listDetails) {
+        items = listDetails.List.Items
+    }
 
     return (
         <>

@@ -1,14 +1,15 @@
 import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
-import { fetchDeleteList } from "../../redux/lists"
+import { fetchDeleteList, fetchGetListDetails } from "../../redux/lists"
 import "./ListTile.css"
+import { useEffect } from "react"
 
 function ListTile ({ list, listId }) {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const currentUrl = window.location.pathname
     const currentListsPage = currentUrl === "/lists/current"
-    console.log(listId)
+    // console.log(currentUrl)
 
     const handleDelete = async (e) => {
         e.preventDefault()
@@ -17,13 +18,20 @@ function ListTile ({ list, listId }) {
 
     return (
         <>
-            <div className="list-tile">
+            <div className="list-tile" onClick={() => navigate(`/lists/${listId}`)}>
             {/* <img className='list-tile-image'src={imageUrl}></img> */}
-            <p>{list.name}</p>
+            <div className="list-tile-title">{list.name}</div>
+            {/* {listImages.map(image => {
+                return (
+                    <img src={image}></img>
+                )
+            })} */}
             {currentListsPage ? (
                 <>
-                <button onClick={() => navigate(`/lists/${listId}/update`)}> Edit List Details</button>
-                <button onClick={handleDelete}> Delete List</button>
+                <div className="update-delete-list-buttons">
+                <button className="update-list-button" onClick={() => navigate(`/lists/${listId}/update`)}> Edit List Details</button>
+                <button className="delete-list-button" onClick={handleDelete}> Delete List</button>
+                </div>
                 </>
             ): (<></>)}
             </div>

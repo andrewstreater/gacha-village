@@ -16,10 +16,9 @@ function ListsCurrentUser () {
 
     const listArray = Object.values(lists)
 
-    console.log("--------------LINE 18: ", listArray)
     return (
         <>
-        <h1>Current User&apos;s Lists</h1>
+        <h1>My Lists</h1>
         <ListsDisplay lists={listArray}/>
         </>
     )

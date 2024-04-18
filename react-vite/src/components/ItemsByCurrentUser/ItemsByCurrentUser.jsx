@@ -18,7 +18,7 @@ function ItemsByCurrentUser () {
 
     return (
         <>
-        <h1>Current User&apos;s Items page</h1>
+        <h1>My Items</h1>
         <ItemTileDisplay items={allItemArray} />
         </>
     )
