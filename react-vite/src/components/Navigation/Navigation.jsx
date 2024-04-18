@@ -22,7 +22,7 @@ function Navigation() {
         </>):(<>
         </>)}
 
-        <div>
+        <div className="profile-button">
           <ProfileButton />
         </div>
 

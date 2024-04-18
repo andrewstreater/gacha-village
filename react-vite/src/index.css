@@ -1,8 +1,26 @@
 /* TODO: Add sitewide styles */
+
+/* https://fonts.google.com/selection?query=Poppins&stroke=Sans+Serif */
+
 .error {
     color: red
 }
 
 div {
     font-family: "Poppins", sans-serif;
+}
+
+button {
+    font-family: "Poppins", sans-serif;
+}
+
+.bold {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.flex-row{
+    display: flex;
+    flex-direction: row;
 }

@@ -2,6 +2,7 @@ import { fetchCreateItem } from '../../redux/items';
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { Navigate, useNavigate } from 'react-router-dom'
+import rightArrow from '../../../icons/Arrow_right@2x.png'
 import "./CreateItemForm.css"
 
 function CreateItemForm () {
@@ -68,19 +69,19 @@ function CreateItemForm () {
 
   return (
     <>
-      <div>
-        <div className='create-item-form-card'>
+      <div id='create-item-main'>
+        <div id='create-item-form-card'>
           <h1 id='create-item-title'>Tell us about your item.</h1>
           <form id='item-form' onSubmit={handleSubmit} encType='multipart/form-data'>
 
             {errors.length > 0 && errors.map((message) => <p key={message}>{message}</p>)}
 
             {/* Title */}
-            <label style={{ background: 'none' }} htmlFor='createItemTitle'>Title</label>
+            <label style={{ background: 'none' }} htmlFor='createItemTitle'>Title*</label>
             <input type='text' name='createItemTitle' required placeholder='Title' onChange={(e) => setTitle(e.target.value)} />
 
             {/* Brand */}
-            <label style={{ background: 'none' }} htmlFor='createItemBrand'>Brand</label>
+            <label style={{ background: 'none' }} htmlFor='createItemBrand'>Brand*</label>
             <input type='text' name='createItemBrand' required placeholder='Brand' onChange={(e) => setBrand(e.target.value)} />
 
             {/* Series */}
@@ -92,7 +93,7 @@ function CreateItemForm () {
             <input type='text' name='createItemModel' placeholder='Name' onChange={(e) => setModel(e.target.value)} />
 
             {/* Release Date */}
-            <label style={{ background: 'none' }} htmlFor='createReleaseDate'>Release Date</label>
+            <label style={{ background: 'none' }} htmlFor='createReleaseDate'>Release Date*</label>
             <input type='date' id='createReleaseDate' name='createReleaseDate' required placeholder='Release Date' onChange={(e) => setReleaseDate(e.target.value)} />
 
             {/* Edition */}
@@ -104,7 +105,7 @@ function CreateItemForm () {
             </select>
 
             {/* Condition */}
-            <label style={{ background: 'none' }} htmlFor='createItemCondition'>Condition</label>
+            <label style={{ background: 'none' }} htmlFor='createItemCondition'>Condition*</label>
             <select id='createItemCondition' name='createItemCondition' required value={condition} onChange={(e) => setCondition(e.target.value)}>
               <option value='New'>New</option>
               <option value='Open Box'>Open Box</option>
@@ -117,20 +118,23 @@ function CreateItemForm () {
             </select>
 
             {/* Description */}
-            <label style={{ background: 'none' }} htmlFor='createItemDescription'>Description</label>
-            <input type='textarea' name='createItemDescription' required placeholder='Description' onChange={(e) => setDescription(e.target.value)} />
+            <label style={{ background: 'none' }} htmlFor='createItemDescription'>Description*</label>
+            <input className='description-input' type='textarea' name='createItemDescription' required onChange={(e) => setDescription(e.target.value)} />
 
             {/* isTradable? */}
-            <label style={{ background: 'none' }} htmlFor='createItemTradable'>Check the box to post this item for trade</label>
+            <div className='flex-row'>
+            <label className='check-box-msg bold' style={{ background: 'none' }} htmlFor='createItemTradable'>Check the box to list this item for trade </label>
+            <img className="right-arrow" src={rightArrow}></img>
             <input
+            className='item-check-box'
             type='checkbox'
             id='createItemTradable'
             name='createItemTradable'
             checked={isTradable}
             onChange={(e) => setIsTradable(e.target.checked)}
             />
-
-
+            </div>
+            <div className='bold right-align'>*required</div>
             <button id='createItemSubmit' type='submit'>Post Item</button>
           </form>
         </div>

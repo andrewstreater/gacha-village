@@ -1,0 +1,44 @@
+#create-item-main{
+    display: flex;
+    justify-content: center;
+}
+
+#create-item-form-card{
+    padding: 8px;
+}
+
+#item-form{
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    height: 800px;
+    justify-content: space-around;
+}
+
+.description-input{
+    height: 100px;
+}
+
+.check-box-msg{
+    align-self: center;
+}
+
+.right-align{
+    align-self: flex-end;
+}
+
+#createItemSubmit {
+    width: 80px;
+    align-self: center;
+    margin-top: 20px;
+}
+
+.item-check-box{
+    margin-left: 16px;
+}
+
+.right-arrow{
+    height: 20px;
+    width: auto;
+    margin-left: 4px;
+}

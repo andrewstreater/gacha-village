@@ -40,51 +40,53 @@ function SignupFormModal() {
 
   return (
     <>
+    <div className="sign-up-form-modal">
       <h1>Sign Up</h1>
-      {errors.server && <p>{errors.server}</p>}
-      <form onSubmit={handleSubmit}>
+      {errors.server && <div className="error">{errors.server}</div>}
+      <form onSubmit={handleSubmit} className="sign-up-form">
+      <div className="error-spacer">{errors.email && <div className="error">{errors.email}</div>}</div>
         <label>
-          Email
           <input
             type="text"
             value={email}
+            placeholder="email"
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </label>
-        {errors.email && <p>{errors.email}</p>}
+        <div className="error-spacer">{errors.username && <div className="error">{errors.username}</div>}</div>
         <label>
-          Username
           <input
             type="text"
             value={username}
+            placeholder="username"
             onChange={(e) => setUsername(e.target.value)}
             required
           />
         </label>
-        {errors.username && <p>{errors.username}</p>}
+        <div className="error-spacer">{errors.password && <div className="error">{errors.password}</div>}</div>
         <label>
-          Password
           <input
             type="password"
             value={password}
+            placeholder="password"
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </label>
-        {errors.password && <p>{errors.password}</p>}
+        {errors.confirmPassword && <div className="error">{errors.confirmPassword}</div>}
         <label>
-          Confirm Password
           <input
             type="password"
             value={confirmPassword}
+            placeholder="confirm password"
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
         </label>
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit">Sign Up</button>
+        <button className="signup-submit-button" type="submit">Sign Up</button>
       </form>
+      </div>
     </>
   );
 }

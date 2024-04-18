@@ -1,0 +1,32 @@
+#create-list-main{
+    display: flex;
+    justify-content: center;
+}
+
+#create-list-form-card{
+    padding: 8px;
+}
+
+#list-form{
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    height: 160px;
+    justify-content: space-around;
+}
+
+#createListSubmit{
+    width: 100px;
+    align-self: center;
+    margin-top: 20px;
+}
+
+.list-check-box{
+    margin-left: 16px;
+}
+
+.right-arrow{
+    height: 20px;
+    width: auto;
+    margin-left: 4px;
+}

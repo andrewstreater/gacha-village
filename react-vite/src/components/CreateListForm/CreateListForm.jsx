@@ -2,6 +2,7 @@ import { fetchCreateList } from "../../redux/lists";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { Navigate, useNavigate } from 'react-router-dom'
+import rightArrow from '../../../icons/Arrow_right@2x.png'
 import "./CreateListForm.css"
 
 function CreateListForm () {
@@ -33,7 +34,7 @@ function CreateListForm () {
 
   return (
     <>
-      <div>
+      <div id='create-list-main'>
         <div className='create-list-form-card'>
           <h1 id='create-list-title'>Create a new List</h1>
           <form id='list-form' onSubmit={handleSubmit} encType='multipart/form-data'>
@@ -45,16 +46,18 @@ function CreateListForm () {
             <input type='text' name='createListName' required placeholder='Name' onChange={(e) => setName(e.target.value)} />
 
             {/* Private */}
-            <label style={{ background: 'none' }} htmlFor='listIsPrivate'>Check the box to set this list to private</label>
+            <div className="flex-row">
+            <label className='bold' style={{ background: 'none' }} htmlFor='listIsPrivate'>Check the box to set this list to private</label>
+            <img className="right-arrow" src={rightArrow}></img>
             <input
+            className="list-check-box"
             type='checkbox'
             id='listIsPrivate'
             name='listIsPrivate'
             checked={isPrivate}
             onChange={(e) => setIsPrivate(e.target.checked)}
             />
-
-
+            </div>
             <button id='createListSubmit' type='submit'>Create List</button>
           </form>
         </div>

@@ -7,6 +7,8 @@ import OpenModalButton from '../OpenModalButton'
 import AddToListModal from "./AddToListModal"
 import addIcon from '../../../icons/Add_square_light@2x.png'
 import tradeIcon from '../../../icons/Transger_light@2x.png'
+import editIcon from '../../../icons/Edit_light@2x.png'
+import deleteIcon from '../../../icons/Remove_light@2x.png'
 import "./ItemTile.css"
 
 function ItemTile ({ item, itemId }) {
@@ -32,9 +34,11 @@ function ItemTile ({ item, itemId }) {
             <img className="item-tile-image"src={imageUrl} onClick={() => navigate(`/items/${itemId}`)}></img>
             {currentItemsPage ? (
                 <>
-                    <div className="item-tile-title" onClick={() => navigate(`/items/${itemId}`)}>{item.title}</div>
-                    <button onClick={() => navigate(`/items/${itemId}/update`)}> Edit Item</button>
-                    <button onClick={handleDelete}> Delete Item</button>
+                    <div className="item-tiles-details">
+                        <div className="item-tile-title" onClick={() => navigate(`/items/${itemId}`)}>{item.title}</div>
+                        <img className="item-tile-edit-button" src={editIcon} onClick={() => navigate(`/items/${itemId}/update`)}></img>
+                        <img className="item-tile-delete-button" src={deleteIcon} onClick={handleDelete}></img>
+                    </div>
                 </>
             ): (
                 <>

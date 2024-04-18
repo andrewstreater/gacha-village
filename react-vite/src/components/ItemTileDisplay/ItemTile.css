@@ -44,7 +44,7 @@
     font-size: 10pt;
     font-weight: bolder;
     grid-column: 1 / 4;
-    grid-row: 1;
+    grid-row: span 2;
     margin-top: 8px;
 }
 
@@ -73,6 +73,37 @@
 }
 
 .item-tile-add-button:hover {
+    color: #c7c7c7;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: 100ms;
+}
+
+.item-tile-edit-button {
+    grid-column: 4 / 4;
+    grid-row: 1;
+    height: 28px;
+    width: auto;
+    margin-top: 8px;
+    margin-left: 8px;
+}
+
+.item-tile-edit-button:hover {
+    color: #c7c7c7;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: 100ms;
+}
+
+.item-tile-delete-button {
+    grid-column: 4 / 4;
+    grid-row: 2;
+    height: 28px;
+    width: auto;
+    margin-left: 8px;
+}
+
+.item-tile-delete-button:hover {
     color: #c7c7c7;
     text-decoration: underline;
     cursor: pointer;
