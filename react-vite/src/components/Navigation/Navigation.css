@@ -15,9 +15,16 @@
   align-items: center;
 }
 
-.steve {
-  height: 50px;
+.gvwordmark {
+  height: 60px;
   width: auto;
+  margin-top: 8px;
+}
+
+.gvlettermark {
+  height: 48px;
+  width: auto;
+  margin-bottom: 6px;
 }
 
 .nav-button{

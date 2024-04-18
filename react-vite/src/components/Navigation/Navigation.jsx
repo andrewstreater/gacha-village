@@ -2,7 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
-import steve from '../../../icons/steve.jpeg'
+import gvlettermark from '../../../public/favicon.png'
+import gvwordmark from '../../../public/gacha-village-wordmark-white.png'
 
 function Navigation() {
   const navigate = useNavigate()
@@ -12,7 +13,8 @@ function Navigation() {
 
         <div>
           {/* <NavLink to="/">Home</NavLink> */}
-          <img className="steve" src={steve} onClick={() => navigate('/')}></img>
+          <img className="gvlettermark" src={gvlettermark} onClick={() => navigate('/')}></img>
+          <img className="gvwordmark" src={gvwordmark} onClick={() => navigate('/')}></img>
         </div>
         {sessionUser ? (<>
         <button className='nav-button' onClick={() => navigate('/items/current')}>My Items</button>
