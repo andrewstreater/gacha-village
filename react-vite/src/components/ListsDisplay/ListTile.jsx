@@ -1,23 +1,27 @@
 import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
-import { fetchDeleteList, fetchGetListDetails } from "../../redux/lists"
+import { fetchDeleteList, fetchAddToList } from "../../redux/lists"
+import { useModal } from "../../context/Modal";
 import "./ListTile.css"
 import { useEffect } from "react"
 
-function ListTile ({ list, listId }) {
+function ListTile ({ list, listId, itemId }) {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const currentUrl = window.location.pathname
     const currentListsPage = currentUrl === "/lists/current"
     // console.log(currentUrl)
 
+    const { closeModal } = useModal();
+
     const handleDelete = async (e) => {
         e.preventDefault()
+        closeModal()
         await dispatch(fetchDeleteList(listId)).then(navigate('/'))
     }
     const addToList = async (e) => {
         e.preventDefault()
-        await dispatch()
+        await dispatch(fetchAddToList(listId, itemId)).then(navigate(`/lists/${listId}`))
     }
 
     return (
@@ -39,7 +43,7 @@ function ListTile ({ list, listId }) {
                 </>
             ): (
                 <>
-                <button>add to list</button>
+                <button onClick={addToList}>add to list</button>
                 </>
             )}
             </div>

@@ -16,9 +16,11 @@ function ItemsAll () {
 
     return (
         <>
-        <div className="all-items-page">
-            <h1>All Items</h1>
-            <ItemTileDisplay items={allItemArray} />
+        <div className="flex-center-child">
+            <div className="all-items-page">
+                <h1>All Items</h1>
+                <ItemTileDisplay items={allItemArray} />
+            </div>
         </div>
         </>
     )

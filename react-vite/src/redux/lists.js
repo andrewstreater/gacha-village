@@ -4,6 +4,7 @@ const GET_LISTS_BY_USER_ID = 'lists/getListByUserId'
 const CREATE_LIST = 'lists/createList'
 const UPDATE_LIST = 'lists/updateList'
 const DELETE_LIST = 'lists/deleteList'
+const ADD_TO_LIST = 'lists/addToList'
 
 const getCurrentUserslists = (currentUserLists) => {
   return {
@@ -44,6 +45,13 @@ const deleteList = (list) => {
   return {
     type: DELETE_LIST,
     list
+  }
+}
+
+const addToList = (data) => {
+  return {
+    type: ADD_TO_LIST,
+    data
   }
 }
 
@@ -135,6 +143,27 @@ export const fetchDeleteList = (listId) => async (dispatch) => {
     return res
   } else if (res.status < 500) {
     const errorMessages = await res.json()
+    return errorMessages
+  } else {
+    return { server: "Something went wrong. Please try again" }
+  }
+}
+
+export const fetchAddToList = (listId, itemId) => async (dispatch) => {
+  const payload = {}
+  const res = await fetch(`/api/lists/${listId}/items/${itemId}`, {
+    method: 'POST',
+    header: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  })
+
+  if (res.ok) {
+    const data = await res.json()
+    dispatch(addToList(data))
+    return data
+  } else if (res.status < 500) {
+    const errorMessages = await res.json()
+    // console.log("ERROR!!!!!!!!!!!!!!: ",errorMessages)
     return errorMessages
   } else {
     return { server: "Something went wrong. Please try again" }

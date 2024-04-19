@@ -1,0 +1,5 @@
+.list-detail-page{
+    display: flex;
+    flex-direction: column;
+    width: 900px;
+}

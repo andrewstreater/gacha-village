@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 import ListTile from "./ListTile"
 import "./ListsDisplay.css"
 
-function ListsDisplay ({lists}) {
+function ListsDisplay ({lists, itemId}) {
 
     const navigate = useNavigate()
 
@@ -10,7 +10,7 @@ function ListsDisplay ({lists}) {
     return (
         <div className="">
             {lists.map(list => (
-                <ListTile list={list} listId={list.listId} key={list.listId}/>
+                <ListTile list={list} listId={list.listId} key={list.listId} itemId={itemId}/>
             ))}
         </div>
     )

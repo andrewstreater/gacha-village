@@ -49,7 +49,7 @@ function ItemTile ({ item, itemId }) {
                         <OpenModalButton
                         imgSrc={addIcon}
                         srcClass='item-tile-add-button'
-                        modalComponent={<AddToListModal />}
+                        modalComponent={<AddToListModal itemId={itemId}/>}
                         />
                     </div>
                 </>

@@ -19,10 +19,10 @@ function ListsCurrentUser () {
     return (
         <>
         <div className="flex-center-child">
-        <div className="list-current-user-page">
-            <h1>My Lists</h1>
-            <ListsDisplay lists={listArray}/>
-        </div>
+            <div className="list-current-user-page">
+                <h1>My Lists</h1>
+                <ListsDisplay lists={listArray}/>
+            </div>
         </div>
         </>
     )

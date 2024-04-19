@@ -6,7 +6,7 @@ import { useEffect } from "react"
 import ListsDisplay from '../ListsDisplay'
 import "./AddToList.css"
 
-function AddToListModal () {
+function AddToListModal ({ itemId }) {
     const lists = useSelector(state => state.lists.currentUserLists);
     const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch()
@@ -20,29 +20,13 @@ function AddToListModal () {
 
     const { closeModal } = useModal();
 
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-
-      const serverResponse = await dispatch(
-        thunkLogin({
-          email,
-          password,
-        })
-      );
-
-      if (serverResponse) {
-        setErrors(serverResponse);
-      } else {
-        closeModal();
-      }
-    };
 
     // console.log("--------------LINE 18: ", listArray)
     return (
         <>
         <div id='add-to-list-modal'>
           <h1>Add item to list:</h1>
-          <ListsDisplay lists={listArray}/>
+          <ListsDisplay lists={listArray} itemId={itemId}/>
         </div>
         </>
     )

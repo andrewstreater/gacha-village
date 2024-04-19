@@ -25,9 +25,13 @@ function ListDetails() {
 
     return (
         <>
-        {listDetails && listDetails.List.name ? <h1>{listDetails.List.name}</h1> : <></>}
-        <ItemTileDisplay items={items}/>
-        {emptyList ? (<div>There are no items on this list.</div>):(<></>)}
+        <div className="flex-center-child">
+            <div className="list-detail-page">
+                {listDetails && listDetails.List.name ? <h1>{listDetails.List.name}</h1> : <></>}
+                <ItemTileDisplay items={items}/>
+                {emptyList ? (<div>There are no items on this list.</div>):(<></>)}
+            </div>
+        </div>
         </>
     )
 }
