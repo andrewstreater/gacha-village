@@ -13,19 +13,21 @@ function Navigation() {
 
         <div>
           {/* <NavLink to="/">Home</NavLink> */}
-          <img className="gvlettermark" src={gvlettermark} onClick={() => navigate('/')}></img>
-          <img className="gvwordmark" src={gvwordmark} onClick={() => navigate('/')}></img>
+          <img className="gvlettermark navbutton" src={gvlettermark} onClick={() => navigate('/')}></img>
+          <img className="gvwordmark navbutton" src={gvwordmark} onClick={() => navigate('/')}></img>
         </div>
-        {sessionUser ? (<>
-        <button className='nav-button' onClick={() => navigate('/items/current')}>My Items</button>
-        <button className='nav-button' onClick={() => navigate('/lists/current')}>My Lists</button>
-        <button className='nav-button' onClick={() => navigate('/items/new')}>Post an item</button>
-        <button className='nav-button' onClick={() => navigate('/lists/new')}>Create new list</button>
-        </>):(<>
-        </>)}
+        <div className="top-nav-buttons">
+          {sessionUser ? (<>
+          <div className='nav-button' onClick={() => navigate('/items/current')}>My Items</div>
+          <div className='nav-button' onClick={() => navigate('/lists/current')}>My Lists</div>
+          <div className='nav-button' onClick={() => navigate('/items/new')}>Post an item</div>
+          <div className='nav-button' onClick={() => navigate('/lists/new')}>Create new list</div>
+          </>):(<>
+          </>)}
 
-        <div className="profile-button">
-          <ProfileButton />
+          <div className="profile-button navbutton">
+            <ProfileButton />
+          </div>
         </div>
 
     </div>

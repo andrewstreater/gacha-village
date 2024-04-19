@@ -7,10 +7,12 @@ import "./ItemTileDisplay.css"
 function ItemTileDisplay (props) {
     const items = props.items
     return (
-        <div className="all-item-tiles-container">
-            {items.map(item => (
-                <ItemTile item={item} itemId={item.itemId} key={item.itemId}/>
-            ))}
+        <div className="flex-center-child">
+            <div className="all-item-tiles-container">
+                {items.map(item => (
+                    <ItemTile item={item} itemId={item.itemId} key={item.itemId}/>
+                ))}
+            </div>
         </div>
     )
 }

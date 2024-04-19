@@ -40,8 +40,10 @@ function AddToListModal () {
     // console.log("--------------LINE 18: ", listArray)
     return (
         <>
-        <h1>Current User&apos;s Lists</h1>
-        <ListsDisplay lists={listArray}/>
+        <div id='add-to-list-modal'>
+          <h1>Add item to list:</h1>
+          <ListsDisplay lists={listArray}/>
+        </div>
         </>
     )
 }

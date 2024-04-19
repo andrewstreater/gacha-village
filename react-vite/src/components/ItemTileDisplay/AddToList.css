@@ -1,0 +1,7 @@
+#add-to-list-modal{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: fit-content;
+    padding: 28px;
+}

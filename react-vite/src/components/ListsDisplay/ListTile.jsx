@@ -15,6 +15,10 @@ function ListTile ({ list, listId }) {
         e.preventDefault()
         await dispatch(fetchDeleteList(listId)).then(navigate('/'))
     }
+    const addToList = async (e) => {
+        e.preventDefault()
+        await dispatch()
+    }
 
     return (
         <>
@@ -33,7 +37,11 @@ function ListTile ({ list, listId }) {
                 <button className="delete-list-button" onClick={handleDelete}> Delete List</button>
                 </div>
                 </>
-            ): (<></>)}
+            ): (
+                <>
+                <button>add to list</button>
+                </>
+            )}
             </div>
         </>
     )

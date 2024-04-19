@@ -18,8 +18,12 @@ function ListsCurrentUser () {
 
     return (
         <>
-        <h1>My Lists</h1>
-        <ListsDisplay lists={listArray}/>
+        <div className="flex-center-child">
+        <div className="list-current-user-page">
+            <h1>My Lists</h1>
+            <ListsDisplay lists={listArray}/>
+        </div>
+        </div>
         </>
     )
 }

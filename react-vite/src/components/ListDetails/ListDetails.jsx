@@ -21,11 +21,13 @@ function ListDetails() {
         items = listDetails.List.Items
     }
 
+    const emptyList = items.length === 0
+
     return (
         <>
-        <h1>List Details page</h1>
-        {listDetails && listDetails.List.name ? <h2>{listDetails.List.name}</h2> : <></>}
+        {listDetails && listDetails.List.name ? <h1>{listDetails.List.name}</h1> : <></>}
         <ItemTileDisplay items={items}/>
+        {emptyList ? (<div>There are no items on this list.</div>):(<></>)}
         </>
     )
 }

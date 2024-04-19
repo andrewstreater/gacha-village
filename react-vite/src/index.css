@@ -24,3 +24,14 @@ button {
     display: flex;
     flex-direction: row;
 }
+
+.flex-center-child{
+    display: flex;
+    justify-content: center;
+}
+
+@media (min-width: 900px) {
+    .all-item-tiles-container {
+      width: 900px;
+    }
+}

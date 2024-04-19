@@ -1,0 +1,38 @@
+#login-modal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: fit-content;
+    padding: 28px;
+}
+
+#login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-field {
+    margin: 4px;
+}
+
+#login-button{
+    height: 30px;
+    width: auto;
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: #2356c4;
+    height: 28px;
+    border-radius: 8px;
+    color: white;
+}
+
+.login-button:hover{
+    color: #c7c7c7;
+    cursor: pointer;
+    transition: 100ms;
+    background-color: #1b449b;
+  }

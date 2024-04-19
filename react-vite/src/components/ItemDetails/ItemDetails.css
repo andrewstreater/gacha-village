@@ -2,17 +2,22 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 4px;
-    grid-template-rows: repeat(8, 1fr);
+    grid-template-rows: 80px auto auto;
+
     width: auto;
 }
 
 .item-details-title{
     grid-row: 1;
+    grid-column: span 2;
 }
 
 .item-images-container{
-    grid-column: 1;
-    grid-row: 2;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 500px;
+
 }
 
 .item-details-image {
