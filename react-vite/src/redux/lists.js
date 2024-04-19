@@ -5,6 +5,7 @@ const CREATE_LIST = 'lists/createList'
 const UPDATE_LIST = 'lists/updateList'
 const DELETE_LIST = 'lists/deleteList'
 const ADD_TO_LIST = 'lists/addToList'
+const REMOVE_FROM_LIST = 'lists/removeFromList'
 
 const getCurrentUserslists = (currentUserLists) => {
   return {
@@ -51,6 +52,13 @@ const deleteList = (list) => {
 const addToList = (data) => {
   return {
     type: ADD_TO_LIST,
+    data
+  }
+}
+
+const removeFromList = (data) => {
+  return {
+    type: REMOVE_FROM_LIST,
     data
   }
 }
@@ -164,6 +172,22 @@ export const fetchAddToList = (listId, itemId) => async (dispatch) => {
   } else if (res.status < 500) {
     const errorMessages = await res.json()
     // console.log("ERROR!!!!!!!!!!!!!!: ",errorMessages)
+    return errorMessages
+  } else {
+    return { server: "Something went wrong. Please try again" }
+  }
+}
+
+export const fetchRemoveFromList = (listId, itemId) => async (dispatch) => {
+  const res = await fetch(`/api/lists/${listId}/items/${itemId}`, {
+    method: 'DELETE'
+  })
+
+  if (res.ok) {
+    dispatch(removeFromList())
+    return res
+  } else if (res.status < 500) {
+    const errorMessages = await res.json()
     return errorMessages
   } else {
     return { server: "Something went wrong. Please try again" }

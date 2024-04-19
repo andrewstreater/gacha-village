@@ -21,6 +21,7 @@ function ListTile ({ list, listId, itemId }) {
     }
     const addToList = async (e) => {
         e.preventDefault()
+        closeModal()
         await dispatch(fetchAddToList(listId, itemId)).then(navigate(`/lists/${listId}`))
     }
 

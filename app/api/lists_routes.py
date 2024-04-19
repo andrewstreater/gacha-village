@@ -164,10 +164,6 @@ def delete_list(listId):
     db.session.commit()
     return jsonify({"message": "List Successfully Deleted"})
 
-# TO DO:
-# add item to list
-# remove item from list
-
 @lists_routes.route('<int:listId>/items/<int:itemId>', methods=["POST", "DELETE"])
 @login_required
 def add_remove_item_on_list(listId, itemId):
