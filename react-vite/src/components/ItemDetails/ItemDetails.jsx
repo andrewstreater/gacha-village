@@ -37,7 +37,12 @@ function ItemDetails () {
                 {/* Item Details */}
                 <div className="item-details-page-details">
                 {itemDetailEntries && itemDetailEntries.map(detail => {
-                    if (detail[0] == "itemImages" || detail[0] == "is_tradable" || detail[0] == "ownerId" || detail[0] == "itemId") {
+                    if (detail[0] == "itemImages"
+                    || detail[0] == "is_tradable"
+                    || detail[0] == "ownerId"
+                    || detail[0] == "itemId"
+                    || detail[0] == "title"
+                    ) {
                         return (<></>)
                     }
                     if (detail[0] == "release_date") {

@@ -20,7 +20,8 @@
 }
 
 .signup-submit-button {
-    background-color: aqua;
+    background-color: #2356c4;
+    color: white;
     margin-top: 8px;
     border-radius: 8px;
 }
