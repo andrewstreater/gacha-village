@@ -1,7 +1,8 @@
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 // import { useEffect } from "react"
-import { Navigate, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { fetchDeleteItem } from "../../redux/items"
+import { fetchRemoveFromList } from "../../redux/lists"
 // import OpenModalMenuItem from "../Navigation/OpenModalMenuItem"
 import OpenModalButton from '../OpenModalButton'
 import AddToListModal from "./AddToListModal"
@@ -11,21 +12,29 @@ import editIcon from '../../../icons/Edit_light@2x.png'
 import deleteIcon from '../../../icons/Remove_light@2x.png'
 import "./ItemTile.css"
 
-function ItemTile ({ item, itemId }) {
+function ItemTile ({ item, itemId, listId, listOwnerId }) {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const sessionUser = useSelector((store) => store.session.user);
     const currentUrl = window.location.pathname
     const currentItemsPage = currentUrl === "/items/current"
+    const currentUserListPage = currentUrl.startsWith("/lists/") && (sessionUser.id === listOwnerId)
 
+    console.log("-------------item tile line 21: ", currentUserListPage)
     let imageUrl = "No Image"
 
-    if (item.previewImage && item.previewImage.imageUrl) {
+    if (item.previewImage && item.previewImage.imageUrl.length) {
         imageUrl = item.previewImage.imageUrl
     }
 
     const handleDelete = async (e) => {
         e.preventDefault()
         await dispatch(fetchDeleteItem(itemId)).then(navigate('/items'))
+    }
+
+    const removeFromList = async (e) => {
+        e.preventDefault()
+        await dispatch(fetchRemoveFromList(listId, itemId)).then(navigate('/items'))
     }
 
     return (
@@ -40,7 +49,15 @@ function ItemTile ({ item, itemId }) {
                         <img className="item-tile-delete-button" src={deleteIcon} onClick={handleDelete}></img>
                     </div>
                 </>
-            ): (
+            ) : currentUserListPage ? (
+                <>
+                    <div className="item-tiles-details">
+                        <div className="item-tile-title" onClick={() => navigate(`/items/${itemId}`)}>{item.title}</div>
+                        <img className="item-tile-trade-button" src={tradeIcon} alt="Trade" />
+                        <img className="item-tile-delete-button" src={deleteIcon} onClick={removeFromList}></img>
+                    </div>
+                </>
+            ) : (
                 <>
                     <div className="item-tiles-details">
                         <div className="item-tile-title" onClick={() => navigate(`/items/${itemId}`)}>{item.title}</div>

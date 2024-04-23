@@ -4,13 +4,13 @@
 import ItemTile from "./ItemTile"
 import "./ItemTileDisplay.css"
 
-function ItemTileDisplay (props) {
-    const items = props.items
+function ItemTileDisplay ({items, listId, listOwnerId }) {
+
     return (
         <div className="flex-center-child">
             <div className="all-item-tiles-container">
                 {items.map(item => (
-                    <ItemTile item={item} itemId={item.itemId} key={item.itemId}/>
+                    <ItemTile item={item} itemId={item.itemId} key={item.itemId} listId={listId} listOwnerId={listOwnerId}/>
                 ))}
             </div>
         </div>

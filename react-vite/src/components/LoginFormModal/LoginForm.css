@@ -22,9 +22,11 @@
 #login-button{
     height: 30px;
     width: auto;
+    margin-top: 4px;
     margin-left: 5px;
     margin-right: 5px;
     background-color: #2356c4;
+    border: none;
     height: 28px;
     border-radius: 8px;
     color: white;
@@ -35,4 +37,11 @@
     cursor: pointer;
     transition: 100ms;
     background-color: #1b449b;
+    border: none;
   }
+
+#demo-login-button {
+    margin-top: 8px;
+    border-radius: 8px;
+    border: none;
+}

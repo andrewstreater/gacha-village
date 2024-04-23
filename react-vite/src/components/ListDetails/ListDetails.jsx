@@ -16,9 +16,11 @@ function ListDetails() {
     }, [dispatch, listId])
 
     let items = []
+    let listOwnerId = ''
 
     if (listDetails) {
         items = listDetails.List.Items
+        listOwnerId = listDetails.List.userId
     }
 
     const emptyList = items.length === 0
@@ -28,7 +30,7 @@ function ListDetails() {
         <div className="flex-center-child">
             <div className="list-detail-page">
                 {listDetails && listDetails.List.name ? <h1>{listDetails.List.name}</h1> : <></>}
-                <ItemTileDisplay items={items}/>
+                <ItemTileDisplay items={items} listId={listId} listOwnerId={listOwnerId}/>
                 {emptyList ? (<div>There are no items on this list.</div>):(<></>)}
             </div>
         </div>

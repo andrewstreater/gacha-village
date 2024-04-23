@@ -28,6 +28,22 @@ function LoginFormModal() {
     }
   };
 
+  const loginDemoUser = async (e) => {
+    e.preventDefault();
+
+    const serverResponse = await dispatch(
+        thunkLogin({
+            email: 'demo@gmail.com',
+            password: 'password'
+        })
+    )
+    if (serverResponse) {
+      setErrors(serverResponse);
+    } else {
+      closeModal();
+    }
+  }
+
   return (
     <>
       <div id="login-modal">
@@ -56,6 +72,7 @@ function LoginFormModal() {
           </label>
           {errors.password && <p>{errors.password}</p>}
           <button id='login-button' type="submit">Log In</button>
+          <button id='demo-login-button' onClick={loginDemoUser}>Log In as Demo User</button>
         </form>
       </div>
     </>
