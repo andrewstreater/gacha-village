@@ -15,7 +15,7 @@ function TradesCurrentUser () {
 
     return (
         <>
-        <h1>Current User's Trades</h1>
+        <h1>Current User&apos;s Trades</h1>
         </>
     )
 }
