@@ -124,123 +124,124 @@ function UpdateItemForm () {
   return (
     <>
       <div>
-        <div className='create-item-form-card'>
-          <h1 id='create-item-title'>Update your item.</h1>
-          <form id='item-form' onSubmit={handleSubmit} encType='multipart/form-data'>
+        <div id='update-item-main'></div>
+          <div className='create-item-form-card'>
+            <h1 id='create-item-title'>Update your item.</h1>
+            <form id='item-form' onSubmit={handleSubmit} encType='multipart/form-data'>
 
-            {errors.length > 0 && errors.map((message) => <p key={message}>{message}</p>)}
+              {errors.length > 0 && errors.map((message) => <p key={message}>{message}</p>)}
 
-            {/* Title */}
-            <label style={{ background: 'none' }} htmlFor='createItemTitle'>Title</label>
-            <input
-                type='text'
-                name='createItemTitle'
-                required
-                placeholder='Title'
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-            />
+              {/* Title */}
+              <label style={{ background: 'none' }} htmlFor='createItemTitle'>Title</label>
+              <input
+                  type='text'
+                  name='createItemTitle'
+                  required
+                  placeholder='Title'
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+              />
 
-            {/* Brand */}
-            <label style={{ background: 'none' }} htmlFor='createItemBrand'>Brand</label>
-            <input
-                type='text'
-                name='createItemBrand'
-                required
-                placeholder='Brand'
-                value={brand}
-                onChange={(e) => setBrand(e.target.value)}
-            />
+              {/* Brand */}
+              <label style={{ background: 'none' }} htmlFor='createItemBrand'>Brand</label>
+              <input
+                  type='text'
+                  name='createItemBrand'
+                  required
+                  placeholder='Brand'
+                  value={brand}
+                  onChange={(e) => setBrand(e.target.value)}
+              />
 
-            {/* Series */}
-            <label style={{ background: 'none' }} htmlFor='createItemSeries'>Series</label>
-            <input
-                type='text'
-                name='createItemSeries'
-                placeholder='Series'
-                value={series}
-                onChange={(e) => setSeries(e.target.value)}
-            />
+              {/* Series */}
+              <label style={{ background: 'none' }} htmlFor='createItemSeries'>Series</label>
+              <input
+                  type='text'
+                  name='createItemSeries'
+                  placeholder='Series'
+                  value={series}
+                  onChange={(e) => setSeries(e.target.value)}
+              />
 
-            {/* Model */}
-            <label style={{ background: 'none' }} htmlFor='createItemModel'>Model</label>
-            <input type='text'
-            name='createItemModel'
-            placeholder='Name'
-            value={model}
-            onChange={(e) => setModel(e.target.value)} />
+              {/* Model */}
+              <label style={{ background: 'none' }} htmlFor='createItemModel'>Model</label>
+              <input type='text'
+              name='createItemModel'
+              placeholder='Name'
+              value={model}
+              onChange={(e) => setModel(e.target.value)} />
 
-            {/* Release Date */}
-            <label style={{ background: 'none' }} htmlFor='createReleaseDate'>Release Date</label>
-            <div>Existing Release Date: {releaseDate}</div>
-            <input
-                type='date'
-                id='createReleaseDate'
-                name='createReleaseDate'
-                required
-                placeholder='Release Date'
-                value={releaseDate}
-                onChange={(e) => setReleaseDate(e.target.value)}
-            />
+              {/* Release Date */}
+              <label style={{ background: 'none' }} htmlFor='createReleaseDate'>Release Date</label>
+              <div>Existing Release Date: {releaseDate}</div>
+              <input
+                  type='date'
+                  id='createReleaseDate'
+                  name='createReleaseDate'
+                  required
+                  placeholder='Release Date'
+                  value={releaseDate}
+                  onChange={(e) => setReleaseDate(e.target.value)}
+              />
 
-            {/* Edition */}
+              {/* Edition */}
 
-            <label style={{ background: 'none' }} htmlFor='createItemEdition'>Edition</label>
-            <select
-                id='createItemEdition'
-                name='createItemEdition'
-                required
-                value={edition}
-                onChange={(e) => setEdition(e.target.value)}
-            >
-                <option value='Standard'>Standard</option>
-                <option value='Special'>Special</option>
-                <option value='Limited'>Limited</option>
-            </select>
+              <label style={{ background: 'none' }} htmlFor='createItemEdition'>Edition</label>
+              <select
+                  id='createItemEdition'
+                  name='createItemEdition'
+                  required
+                  value={edition}
+                  onChange={(e) => setEdition(e.target.value)}
+              >
+                  <option value='Standard'>Standard</option>
+                  <option value='Special'>Special</option>
+                  <option value='Limited'>Limited</option>
+              </select>
 
-            {/* Condition */}
-            <label style={{ background: 'none' }} htmlFor='createItemCondition'>Condition</label>
-            <select
-            id='createItemCondition'
-            name='createItemCondition'
-            required
-            value={condition}
-            onChange={(e) => setCondition(e.target.value)}
-            >
-              <option value='New'>New</option>
-              <option value='Open Box'>Open Box</option>
-              <option value='Like New'>Like New</option>
-              <option value='Very Good'>Very Good</option>
-              <option value='Good'>Good</option>
-              <option value='Acceptable'>Acceptable</option>
-              <option value='Repaired'>Repaired</option>
-              <option value='For parts or not working'>For parts or not working</option>
-            </select>
+              {/* Condition */}
+              <label style={{ background: 'none' }} htmlFor='createItemCondition'>Condition</label>
+              <select
+              id='createItemCondition'
+              name='createItemCondition'
+              required
+              value={condition}
+              onChange={(e) => setCondition(e.target.value)}
+              >
+                <option value='New'>New</option>
+                <option value='Open Box'>Open Box</option>
+                <option value='Like New'>Like New</option>
+                <option value='Very Good'>Very Good</option>
+                <option value='Good'>Good</option>
+                <option value='Acceptable'>Acceptable</option>
+                <option value='Repaired'>Repaired</option>
+                <option value='For parts or not working'>For parts or not working</option>
+              </select>
 
-            {/* Description */}
-            <label style={{ background: 'none' }} htmlFor='createItemDescription'>Description</label>
-            <input
-                type='textarea'
-                name='createItemDescription'
-                required
-                placeholder='Description'
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-            />
+              {/* Description */}
+              <label style={{ background: 'none' }} htmlFor='createItemDescription'>Description</label>
+              <input
+                  type='textarea'
+                  name='createItemDescription'
+                  required
+                  placeholder='Description'
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+              />
 
-            {/* isTradable? */}
-            <label style={{ background: 'none' }} htmlFor='createItemTradable'>Check the box to post this item for trade</label>
-            <input
-            type='checkbox'
-            id='createItemTradable'
-            name='createItemTradable'
-            checked={isTradable}
-            onChange={(e) => setIsTradable(e.target.checked)}
-            />
+              {/* isTradable? */}
+              <label style={{ background: 'none' }} htmlFor='createItemTradable'>Check the box to post this item for trade</label>
+              <input
+              type='checkbox'
+              id='createItemTradable'
+              name='createItemTradable'
+              checked={isTradable}
+              onChange={(e) => setIsTradable(e.target.checked)}
+              />
 
 
-            <button id='createItemSubmit' type='submit'>Update Item</button>
-          </form>
+              <button id='updateItemSubmit' type='submit'>Update Item</button>
+            </form>
         </div>
       </div>
     </>

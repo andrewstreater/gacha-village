@@ -12,6 +12,7 @@ class Item(db.Model):
     lists = relationship('List', secondary=ListItem, back_populates='items')
     buyer_trade = relationship("Trade", foreign_keys="Trade.buyer_item_id", back_populates="buyer_item")
     seller_trade = relationship("Trade", foreign_keys="Trade.seller_item_id", back_populates="seller_item")
+    images = relationship("Image", back_populates="item", cascade="all, delete" )
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}

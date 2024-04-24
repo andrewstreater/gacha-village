@@ -38,13 +38,8 @@ function CreateItemForm () {
         day = '0' + (date.getDate() + 1)
     } else {
         day = (date.getMonth())
-        console.log('------------LINE 39: ', day)
     }
     let fReleaseDate = (month + '/' + day + '/' + date.getFullYear());
-    // let fReleaseDate = (date.getFullYear() + '-' + month + '-' + day);
-
-    console.log('------------LINE 44: ', fReleaseDate)
-    console.log('------------LINE 44: ', releaseDate)
 
     const formData = new FormData()
     formData.append("title", title)
@@ -60,10 +55,11 @@ function CreateItemForm () {
     const serverResponse = await dispatch(
         fetchCreateItem(formData)
     )
-    if (serverResponse) {
-      setErrors(serverResponse)
+
+    if (serverResponse.error) {
+      setErrors(serverResponse.error)
     } else {
-      navigate('/')
+      navigate(`/items/${serverResponse.item_id}/images`)
     }
   }
 

@@ -7,6 +7,7 @@ import ItemDetails from '../components/ItemDetails/ItemDetails';
 import ItemsByUserId from '../components/ItemsByUserId';
 import ItemsByCurrentUser from '../components/ItemsByCurrentUser';
 import CreateItemForm from '../components/CreateItemForm';
+import ManageItemImages from '../components/ManageItemImages';
 import TradesCurrentUser from '../components/TradesCurrentUser';
 import TradeDetails from '../components/TradeDetails/TradeDetails';
 import ListsCurrentUser from '../components/ListsCurrentUser';
@@ -51,6 +52,10 @@ export const router = createBrowserRouter([
       {
         path: "items/new",
         element: <CreateItemForm />,
+      },
+      {
+        path: "items/:itemId/images",
+        element: <ManageItemImages />,
       },
       {
         path: "items/:itemId/update",

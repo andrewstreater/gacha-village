@@ -214,7 +214,7 @@ def create_item():
             )
         db.session.add(new_item)
         db.session.commit()
-        return jsonify({"message": "Item successfully created."}), 201
+        return jsonify({"message": "Item successfully created.", "item_id": f"{new_item.id}"}), 201
     errors = {}
     for field, error in form.errors.items():
         field_obj = getattr(form, field)
@@ -223,7 +223,7 @@ def create_item():
         "message": "Body validation errors",
         "error": errors
     }
-    print('------------------LINE 225', form.errors)
+    # print('------------------LINE 225', form.errors)
     return jsonify(error_response), 400
 
     return render_template('create_item.html', form=form)
