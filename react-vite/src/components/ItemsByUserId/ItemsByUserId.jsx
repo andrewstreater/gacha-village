@@ -1,7 +1,7 @@
 import { fetchGetItemsByUserId } from "../../redux/items"
 import { useDispatch } from "react-redux"
 import { useEffect } from "react"
-// import { useNavigate, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import "./ItemsByUserId.css"
 
 function ItemsByUserId () {
