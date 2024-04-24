@@ -1,18 +1,18 @@
 import { fetchGetItemsByUserId } from "../../redux/items"
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch } from "react-redux"
 import { useEffect } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+// import { useNavigate, useParams } from "react-router-dom"
 import "./ItemsByUserId.css"
 
 function ItemsByUserId () {
-    const userItems = useSelector(state => state.items.userItems);
+    // const userItems = useSelector(state => state.items.userItems);
     const dispatch = useDispatch()
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const { userId } = useParams()
 
     useEffect(() => {
         dispatch(fetchGetItemsByUserId(userId))
-    }, [dispatch])
+    }, [dispatch, userId])
 
     return (
         <>

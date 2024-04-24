@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux"
 import { fetchDeleteList, fetchAddToList } from "../../redux/lists"
 import { useModal } from "../../context/Modal";
 import "./ListTile.css"
-import { useEffect } from "react"
 
 function ListTile ({ list, listId, itemId }) {
     const dispatch = useDispatch()

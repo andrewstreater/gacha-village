@@ -1,11 +1,7 @@
-import { useNavigate } from "react-router-dom"
 import ListTile from "./ListTile"
 import "./ListsDisplay.css"
 
 function ListsDisplay ({lists, itemId}) {
-
-    const navigate = useNavigate()
-
 
     return (
         <div className="">
