@@ -1,14 +1,11 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useState } from "react";
-import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 import "./ManageItemImages.css"
 
 function ManageItemImages () {
-  // const navigate = useNavigate()
-  // const dispatch = useDispatch()
   const sessionUser = useSelector((state) => state.session.user)
   const [itemImages, setItemImages] = useState(['','','','','','','',''])
-  // const [errors, setErrors] = useState({})
   const [imageError, setImageError] = useState('')
   const { itemId } = useParams()
 
