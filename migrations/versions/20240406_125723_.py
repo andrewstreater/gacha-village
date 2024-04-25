@@ -36,7 +36,7 @@ def upgrade():
     sa.Column('edition', sa.String(length=40), nullable=True),
     sa.Column('condition', sa.String(length=40), nullable=True),
     sa.Column('description', sa.String(length=500), nullable=True),
-    sa.Column('condition', sa.String(length=40), nullable=False)
+    sa.Column('condition', sa.String(length=40), nullable=False),
     sa.Column('is_tradable', sa.Boolean(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
