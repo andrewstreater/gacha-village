@@ -16,10 +16,11 @@ def get_all_items():
         item_data = item.to_dict()
         itemId = item_data['itemId']
 
-        previewImage = Image.query.filter(Image.imageable_id == itemId).all()
+        itemImages = Image.query.filter(Image.imageable_id == itemId).all()
 
-        if previewImage and previewImage[0].to_dict()['preview']:
-            item_data['previewImage'] = previewImage[0].to_dict()
+        for image in itemImages:
+            if image.to_dict()['preview']:
+                item_data['previewImage'] = image.to_dict()
 
         response[f'{itemId}'] = item_data
         response['byId'].append(itemId)
@@ -107,10 +108,11 @@ def get_items_by_current_user():
         item_data = item.to_dict()
         itemId = item_data['itemId']
 
-        previewImage = Image.query.filter(Image.imageable_id == itemId).all()
+        itemImages = Image.query.filter(Image.imageable_id == itemId).all()
 
-        if previewImage and previewImage[0].to_dict()['preview']:
-            item_data['previewImage'] = previewImage[0].to_dict()
+        for image in itemImages:
+            if image.to_dict()['preview']:
+                item_data['previewImage'] = image.to_dict()
 
         response[f'item{itemId}'] = item_data
         response['byId'].append(itemId)
