@@ -23,60 +23,60 @@ function UpdateItemForm () {
   if (!sessionUser) return <Navigate to="/" replace={true} />
 
   useEffect(() => {
-    if (itemId){
-        dispatch(fetchGetItemDetails(itemId)).then(item => {
-            // console.log('--------LINE 28: ', item.release_date)
-            setTitle(item.title)
-            setBrand(item.brand)
-            setSeries(item.series)
-            setModel(item.model)
-            let itemYear = item.release_date.slice(12, 16)
-            let itemDay = item.release_date.slice(5, 7)
-            let itemMonth = ''
-            if (item.release_date.slice(8, 11) == "Jan") {
-                itemMonth = '01'
-            }
-            if (item.release_date.slice(8, 11) == "Feb") {
-                itemMonth = '02'
-            }
-            if (item.release_date.slice(8, 11) == "Mar") {
-                itemMonth = '03'
-            }
-            if (item.release_date.slice(8, 11) == "Apr") {
-                itemMonth = '04'
-            }
-            if (item.release_date.slice(8, 11) == "May") {
-                itemMonth = '05'
-            }
-            if (item.release_date.slice(8, 11) == "Jun") {
-                itemMonth = '06'
-            }
-            if (item.release_date.slice(8, 11) == "Jul") {
-                itemMonth = '07'
-            }
-            if (item.release_date.slice(8, 11) == "Aug") {
-                itemMonth = '08'
-            }
-            if (item.release_date.slice(8, 11) == "Sep") {
-                itemMonth = '09'
-            }
-            if (item.release_date.slice(8, 11) == "Oct") {
-                itemMonth = '10'
-            }
-            if (item.release_date.slice(8, 11) == "Nov") {
-                itemMonth = '11'
-            }
-            if (item.release_date.slice(8, 11) == "Dec") {
-                itemMonth = '12'
-            }
-            console.log(itemMonth+'/'+itemDay+'/'+itemYear)
-            setReleaseDate(itemMonth+'/'+itemDay+'/'+itemYear)
-            setEdition(item.edition)
-            setCondition(item.condition)
-            setDescription(item.description)
-            setIsTradable(item.is_tradable)
-        })
-    }
+
+    dispatch(fetchGetItemDetails(itemId)).then(item => {
+        // console.log('--------LINE 28: ', item.release_date)
+        setTitle(item.title)
+        setBrand(item.brand)
+        setSeries(item.series)
+        setModel(item.model)
+        let itemYear = item.release_date.slice(12, 16)
+        let itemDay = item.release_date.slice(5, 7)
+        let itemMonth = ''
+        if (item.release_date.slice(8, 11) == "Jan") {
+            itemMonth = '01'
+        }
+        if (item.release_date.slice(8, 11) == "Feb") {
+            itemMonth = '02'
+        }
+        if (item.release_date.slice(8, 11) == "Mar") {
+            itemMonth = '03'
+        }
+        if (item.release_date.slice(8, 11) == "Apr") {
+            itemMonth = '04'
+        }
+        if (item.release_date.slice(8, 11) == "May") {
+            itemMonth = '05'
+        }
+        if (item.release_date.slice(8, 11) == "Jun") {
+            itemMonth = '06'
+        }
+        if (item.release_date.slice(8, 11) == "Jul") {
+            itemMonth = '07'
+        }
+        if (item.release_date.slice(8, 11) == "Aug") {
+            itemMonth = '08'
+        }
+        if (item.release_date.slice(8, 11) == "Sep") {
+            itemMonth = '09'
+        }
+        if (item.release_date.slice(8, 11) == "Oct") {
+            itemMonth = '10'
+        }
+        if (item.release_date.slice(8, 11) == "Nov") {
+            itemMonth = '11'
+        }
+        if (item.release_date.slice(8, 11) == "Dec") {
+            itemMonth = '12'
+        }
+        console.log(itemMonth+'/'+itemDay+'/'+itemYear)
+        setReleaseDate(itemMonth+'/'+itemDay+'/'+itemYear)
+        setEdition(item.edition)
+        setCondition(item.condition)
+        setDescription(item.description)
+        setIsTradable(item.is_tradable)
+    })
+
   }, [dispatch, itemId])
 
 
