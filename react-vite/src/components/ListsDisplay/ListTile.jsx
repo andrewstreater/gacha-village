@@ -23,6 +23,10 @@ function ListTile ({ list, listId, itemId }) {
         closeModal()
         await dispatch(fetchAddToList(listId, itemId)).then(navigate(`/lists/${listId}`))
     }
+    const handleEditList = async (e) => {
+        e.stopPropagation()
+        navigate(`/lists/${listId}/update`)
+    }
 
     return (
         <>
@@ -37,7 +41,7 @@ function ListTile ({ list, listId, itemId }) {
             {currentListsPage ? (
                 <>
                 <div className="update-delete-list-buttons">
-                <button className="update-list-button" onClick={() => navigate(`/lists/${listId}/update`)}> Edit List Details</button>
+                <button className="update-list-button" onClick={handleEditList}> Edit List Details</button>
                 <button className="delete-list-button" onClick={handleDelete}> Delete List</button>
                 </div>
                 </>
