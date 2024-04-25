@@ -6,7 +6,7 @@ import "./ManageItemImages.css"
 function ManageItemImages () {
   const sessionUser = useSelector((state) => state.session.user)
   const [itemImages, setItemImages] = useState(['','','','','','','',''])
-  const [imageError, setImageError] = useState('')
+  // const [imageError, setImageError] = useState('')
   const { itemId } = useParams()
 
   if (!sessionUser) return <Navigate to="/" replace={true} />
@@ -95,7 +95,7 @@ function ManageItemImages () {
                         }}
                       />
                       <div className='spacer-15px'>
-                        {imageError && <div className='error'>{imageError}</div>}
+                        {/* {imageError && <div className='error'>{imageError}</div>} */}
                       </div>
                     </label>
                   )

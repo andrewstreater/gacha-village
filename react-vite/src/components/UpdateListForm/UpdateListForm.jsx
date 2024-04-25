@@ -16,12 +16,10 @@ function UpdateListForm () {
   if (!sessionUser) return <Navigate to="/" replace={true} />
 
   useEffect(() => {
-    if (listId) {
-        dispatch(fetchGetListDetails(listId)).then(list => {
-            setName(list.List.name)
-            setIsPrivate(list.List.private)
-        })
-    }
+    dispatch(fetchGetListDetails(listId)).then(list => {
+        setName(list.List.name)
+        setIsPrivate(list.List.private)
+    })
   }, [dispatch, listId])
 
 
