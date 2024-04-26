@@ -79,7 +79,7 @@ function CreateItemForm () {
     )
 
     if (serverResponse.error) {
-
+      return
     } else {
       navigate(`/items/${serverResponse.item_id}/images`)
     }

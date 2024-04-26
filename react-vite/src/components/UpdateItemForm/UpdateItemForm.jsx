@@ -135,7 +135,7 @@ function UpdateItemForm () {
         fetchUpdateItem(formData, itemId)
     )
     if (serverResponse) {
-
+      return
     } else {
       navigate('/items/current')
     }
