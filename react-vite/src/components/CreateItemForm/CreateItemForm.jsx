@@ -1,9 +1,11 @@
 import { fetchCreateItem } from '../../redux/items';
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Navigate, useNavigate } from 'react-router-dom'
 import rightArrow from '../../../icons/Arrow_right@2x.png'
 import "./CreateItemForm.css"
+
+
 
 function CreateItemForm () {
   const navigate = useNavigate()
@@ -18,12 +20,32 @@ function CreateItemForm () {
   const [condition, setCondition] = useState('New')
   const [description, setDescription] = useState('')
   const [isTradable, setIsTradable] = useState('')
+  const [hasSubmitted, setHasSubmitted] = useState(false)
   const [errors, setErrors] = useState({})
 
-  if (!sessionUser) return <Navigate to="/" replace={true} />
+  useEffect(() => {
+    const error = {}
+    if (!title) {
+      error.title = "Title is required"
+    }
+    if (!brand) {
+      error.brand = "Brand is required"
+    }
+    if (!description) {
+      error.description = "Description is required"
+    }
+    if (!condition) {
+      error.condition = "Condition is required"
+    }
+    if (!releaseDate) {
+      error.releaseDate = "Release Date is required"
+    }
+    setErrors(error)
+  }, [title, brand, description, condition, releaseDate])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setHasSubmitted(true)
     let date = new Date(releaseDate)
 
     let month = ''
@@ -57,11 +79,13 @@ function CreateItemForm () {
     )
 
     if (serverResponse.error) {
-      setErrors(serverResponse.error)
+
     } else {
       navigate(`/items/${serverResponse.item_id}/images`)
     }
   }
+
+  if (!sessionUser) return <Navigate to="/" replace={true} />
 
   return (
     <>
@@ -74,11 +98,13 @@ function CreateItemForm () {
 
             {/* Title */}
             <label style={{ background: 'none' }} htmlFor='createItemTitle'>Title*</label>
-            <input type='text' name='createItemTitle' required placeholder='Title' onChange={(e) => setTitle(e.target.value)} />
+            {hasSubmitted && errors.title && <p className="error">{errors.title}</p>}
+            <input type='text' name='createItemTitle' placeholder='Title' onChange={(e) => setTitle(e.target.value)} />
 
             {/* Brand */}
             <label style={{ background: 'none' }} htmlFor='createItemBrand'>Brand*</label>
-            <input type='text' name='createItemBrand' required placeholder='Brand' onChange={(e) => setBrand(e.target.value)} />
+            {hasSubmitted && errors.brand && <p className="error">{errors.brand}</p>}
+            <input type='text' name='createItemBrand' placeholder='Brand' onChange={(e) => setBrand(e.target.value)} />
 
             {/* Series */}
             <label style={{ background: 'none' }} htmlFor='createItemSeries'>Series</label>
@@ -90,7 +116,8 @@ function CreateItemForm () {
 
             {/* Release Date */}
             <label style={{ background: 'none' }} htmlFor='createReleaseDate'>Release Date*</label>
-            <input type='date' id='createReleaseDate' name='createReleaseDate' required placeholder='Release Date' onChange={(e) => setReleaseDate(e.target.value)} />
+            {hasSubmitted && errors.releaseDate && <p className="error">{errors.releaseDate}</p>}
+            <input type='date' id='createReleaseDate' name='createReleaseDate' placeholder='Release Date' onChange={(e) => setReleaseDate(e.target.value)} />
 
             {/* Edition */}
             <label style={{ background: 'none' }} htmlFor='createItemEdition'>Edition</label>
@@ -102,7 +129,8 @@ function CreateItemForm () {
 
             {/* Condition */}
             <label style={{ background: 'none' }} htmlFor='createItemCondition'>Condition*</label>
-            <select id='createItemCondition' name='createItemCondition' required value={condition} onChange={(e) => setCondition(e.target.value)}>
+            {hasSubmitted && errors.condition && <p className="error">{errors.condition}</p>}
+            <select id='createItemCondition' name='createItemCondition' value={condition} onChange={(e) => setCondition(e.target.value)}>
               <option value='New'>New</option>
               <option value='Open Box'>Open Box</option>
               <option value='Like New'>Like New</option>
@@ -115,7 +143,8 @@ function CreateItemForm () {
 
             {/* Description */}
             <label style={{ background: 'none' }} htmlFor='createItemDescription'>Description*</label>
-            <input className='description-input' type='textarea' name='createItemDescription' required onChange={(e) => setDescription(e.target.value)} />
+            {hasSubmitted && errors.description && <p className="error">{errors.description}</p>}
+            <input className='description-input' type='textarea' name='createItemDescription' onChange={(e) => setDescription(e.target.value)} />
 
             {/* isTradable? */}
             <div className='flex-row'>

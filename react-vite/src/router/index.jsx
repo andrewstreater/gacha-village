@@ -26,14 +26,6 @@ export const router = createBrowserRouter([
         element: <ItemsAll />,
       },
       {
-        path: "login",
-        element: <LoginFormPage />,
-      },
-      {
-        path: "signup",
-        element: <SignupFormPage />,
-      },
-      {
         path: "items",
         element: <ItemsAll />,
       },
@@ -91,4 +83,12 @@ export const router = createBrowserRouter([
       }
     ],
   },
+  {
+    path: "login",
+    element: <LoginFormPage />,
+  },
+  {
+    path: "signup",
+    element: <SignupFormPage />,
+  }
 ]);

@@ -13,8 +13,6 @@ function CreateListForm () {
   const [isPrivate, setIsPrivate] = useState('')
   const [errors, setErrors] = useState({})
 
-  if (!sessionUser) return <Navigate to="/" replace={true} />
-
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -23,7 +21,7 @@ function CreateListForm () {
     formData.append("private", isPrivate)
 
     const serverResponse = await dispatch(
-        fetchCreateList(formData)
+      fetchCreateList(formData)
     )
     if (serverResponse) {
       setErrors(serverResponse)
@@ -31,6 +29,8 @@ function CreateListForm () {
       navigate('/')
     }
   }
+
+  if (!sessionUser) return <Navigate to="/" replace={true} />
 
   return (
     <>

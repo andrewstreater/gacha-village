@@ -1,11 +1,13 @@
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import { Navigate, useParams } from 'react-router-dom'
+import { Navigate, useParams, useNavigate } from 'react-router-dom'
 import "./ManageItemImages.css"
 
 function ManageItemImages () {
   const sessionUser = useSelector((state) => state.session.user)
+  const navigate = useNavigate()
   const [itemImages, setItemImages] = useState(['','','','','','','',''])
+
   // const [imageError, setImageError] = useState('')
   const { itemId } = useParams()
 
@@ -67,7 +69,7 @@ function ManageItemImages () {
     // if (serverResponse) {
     //   setErrors(serverResponse)
     // } else {
-    //   navigate('/')
+    navigate(`/items/${itemId}`)
     // }
   }
 
