@@ -1,7 +1,7 @@
 import { fetchGetListDetails } from "../../redux/lists"
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { Navigate, useParams } from "react-router-dom"
 import "./ListDetails.css"
 import ItemTileDisplay from "../ItemTileDisplay"
 

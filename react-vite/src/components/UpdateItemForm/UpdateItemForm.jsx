@@ -18,9 +18,28 @@ function UpdateItemForm () {
   const [condition, setCondition] = useState('New')
   const [description, setDescription] = useState('')
   const [isTradable, setIsTradable] = useState('')
+  const [hasSubmitted, setHasSubmitted] = useState(false)
   const [errors, setErrors] = useState({})
 
-  if (!sessionUser) return <Navigate to="/" replace={true} />
+  useEffect(() => {
+    const error = {}
+    if (!title) {
+      error.title = "Title is required"
+    }
+    if (!brand) {
+      error.brand = "Brand is required"
+    }
+    if (!description) {
+      error.description = "Description is required"
+    }
+    if (!condition) {
+      error.condition = "Condition is required"
+    }
+    if (!releaseDate) {
+      error.releaseDate = "Release Date is required"
+    }
+    setErrors(error)
+  }, [title, brand, description, condition, releaseDate])
 
   useEffect(() => {
 
@@ -83,6 +102,7 @@ function UpdateItemForm () {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setHasSubmitted(true)
     let date = new Date(releaseDate)
 
     let month = ''
@@ -115,11 +135,13 @@ function UpdateItemForm () {
         fetchUpdateItem(formData, itemId)
     )
     if (serverResponse) {
-      setErrors(serverResponse)
+
     } else {
       navigate('/items/current')
     }
   }
+
+  if (!sessionUser) return <Navigate to="/" replace={true} />
 
   return (
     <>
@@ -133,10 +155,10 @@ function UpdateItemForm () {
 
               {/* Title */}
               <label style={{ background: 'none' }} htmlFor='createItemTitle'>Title</label>
+              {hasSubmitted && errors.title && <p className="error">{errors.title}</p>}
               <input
                   type='text'
                   name='createItemTitle'
-                  required
                   placeholder='Title'
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
@@ -144,10 +166,10 @@ function UpdateItemForm () {
 
               {/* Brand */}
               <label style={{ background: 'none' }} htmlFor='createItemBrand'>Brand</label>
+              {hasSubmitted && errors.brand && <p className="error">{errors.brand}</p>}
               <input
                   type='text'
                   name='createItemBrand'
-                  required
                   placeholder='Brand'
                   value={brand}
                   onChange={(e) => setBrand(e.target.value)}
@@ -173,12 +195,12 @@ function UpdateItemForm () {
 
               {/* Release Date */}
               <label style={{ background: 'none' }} htmlFor='createReleaseDate'>Release Date</label>
+              {hasSubmitted && errors.releaseDate && <p className="error">{errors.releaseDate}</p>}
               <div>Existing Release Date: {releaseDate}</div>
               <input
                   type='date'
                   id='createReleaseDate'
                   name='createReleaseDate'
-                  required
                   placeholder='Release Date'
                   value={releaseDate}
                   onChange={(e) => setReleaseDate(e.target.value)}
@@ -190,7 +212,6 @@ function UpdateItemForm () {
               <select
                   id='createItemEdition'
                   name='createItemEdition'
-                  required
                   value={edition}
                   onChange={(e) => setEdition(e.target.value)}
               >
@@ -201,10 +222,10 @@ function UpdateItemForm () {
 
               {/* Condition */}
               <label style={{ background: 'none' }} htmlFor='createItemCondition'>Condition</label>
+              {hasSubmitted && errors.condition && <p className="error">{errors.condition}</p>}
               <select
               id='createItemCondition'
               name='createItemCondition'
-              required
               value={condition}
               onChange={(e) => setCondition(e.target.value)}
               >
@@ -220,10 +241,10 @@ function UpdateItemForm () {
 
               {/* Description */}
               <label style={{ background: 'none' }} htmlFor='createItemDescription'>Description</label>
+              {hasSubmitted && errors.description && <p className="error">{errors.description}</p>}
               <input
                   type='textarea'
                   name='createItemDescription'
-                  required
                   placeholder='Description'
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}

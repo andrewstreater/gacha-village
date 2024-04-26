@@ -69,7 +69,7 @@ function ManageItemImages () {
     // if (serverResponse) {
     //   setErrors(serverResponse)
     // } else {
-    navigate('/items/current')
+    navigate(`/items/${itemId}`)
     // }
   }
 

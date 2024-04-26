@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
@@ -8,6 +8,9 @@ import gvwordmark from '../../../public/gacha-village-wordmark-white.png'
 function Navigation() {
   const navigate = useNavigate()
   const sessionUser = useSelector((store) => store.session.user);
+
+  if (!sessionUser) return <Navigate to='/login' replace={true} />;
+
   return (
     <div className="navigation-bar">
 

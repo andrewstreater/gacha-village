@@ -31,34 +31,55 @@ function LoginFormPage() {
     }
   };
 
+  const loginDemoUser = async (e) => {
+    e.preventDefault();
+
+    const serverResponse = await dispatch(
+        thunkLogin({
+            email: 'demo@gmail.com',
+            password: 'password'
+        })
+    )
+    if (serverResponse) {
+      setErrors(serverResponse);
+    } else {
+      navigate("/");
+    }
+  }
+
   return (
     <>
-      <h1>Log In</h1>
-      {errors.length > 0 &&
-        errors.map((message) => <p key={message}>{message}</p>)}
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        {errors.email && <p>{errors.email}</p>}
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        {errors.password && <p>{errors.password}</p>}
-        <button type="submit">Log In</button>
-      </form>
+      <div id="login-form-page">
+        <h1>Log In</h1>
+        {errors.length > 0 &&
+          errors.map((message) => <p key={message}>{message}</p>)}
+        <form id='login-form' onSubmit={handleSubmit}>
+          <label>
+            <input
+              type="text"
+              placeholder="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </label>
+          {errors.email && <p>{errors.email}</p>}
+          <label>
+            <input
+              type="password"
+              placeholder="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </label>
+          {errors.password && <p>{errors.password}</p>}
+          <button type="submit">Log In</button>
+          <button id='demo-login-button' onClick={loginDemoUser}>Log In as Demo User</button>
+          <div>Don&apos;t have an account?</div>
+          <button onClick={() => navigate('/signup')}>Sign up</button>
+        </form>
+      </div>
     </>
   );
 }

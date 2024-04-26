@@ -20,7 +20,7 @@ function ItemTile ({ item, itemId, listId, listOwnerId }) {
     const currentItemsPage = currentUrl === "/items/current"
     const currentUserListPage = currentUrl.startsWith("/lists/") && (sessionUser.id === listOwnerId)
 
-    console.log("-------------item tile line 21: ", currentUserListPage)
+    // console.log("-------------item tile line 21: ", currentUserListPage)
     let imageUrl = "No Image"
 
     if (item.previewImage && item.previewImage.imageUrl.length) {
@@ -36,6 +36,11 @@ function ItemTile ({ item, itemId, listId, listOwnerId }) {
         e.preventDefault()
         await dispatch(fetchRemoveFromList(listId, itemId)).then(navigate('/items'))
     }
+
+    const handleTrade = (e) => {
+        e.preventDefault()
+        alert('Trade feature coming soon!');
+    };
 
     return (
         <>
@@ -61,7 +66,7 @@ function ItemTile ({ item, itemId, listId, listOwnerId }) {
                 <>
                     <div className="item-tiles-details">
                         <div className="item-tile-title" onClick={() => navigate(`/items/${itemId}`)}>{item.title}</div>
-                        <img className="item-tile-trade-button" src={tradeIcon} alt="Trade" />
+                        <img className="item-tile-trade-button" onClick={handleTrade} src={tradeIcon} alt="Trade" />
                         {/* <img className="item-tile-add-button" src={addIcon} alt="Add to list"></img> */}
                         <OpenModalButton
                         imgSrc={addIcon}
