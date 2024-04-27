@@ -14,6 +14,10 @@ function ItemDetails () {
         dispatch(fetchGetItemDetails(itemId))
     }, [dispatch, itemId])
 
+    const handleTrade = (e) => {
+        e.preventDefault()
+        alert('Trade feature coming soon!');
+    };
 
     let itemDetailEntries = []
     if (item) {
@@ -42,19 +46,20 @@ function ItemDetails () {
                     || detail[0] == "ownerId"
                     || detail[0] == "itemId"
                     || detail[0] == "title"
+                    || detail[0] == "release_date"
                     ) {
                         return (<></>)
                     }
-                    if (detail[0] == "release_date") {
-                        return (
-                            <>
-                            <div key={detail[0]}>
-                                <div className="item-detail-key">release date :</div>
-                                <div className="item-detail-value">{detail[1].slice(5, 16)}</div>
-                            </div>
-                            </>
-                        )
-                    }
+                    // if (detail[0] == "release_date") {
+                    //     return (
+                    //         <>
+                    //         <div key={detail[0]}>
+                    //             <div className="item-detail-key">release date :</div>
+                    //             <div className="item-detail-value">{detail[1].slice(5, 16)}</div>
+                    //         </div>
+                    //         </>
+                    //     )
+                    // }
                     return (
                         <>
                             <div key={detail[0]}>
@@ -66,7 +71,7 @@ function ItemDetails () {
                 })}
                 <div className="item-details-trade-button">
                 {item && item.is_tradable ? (
-                    <button onClick={() => navigate('/')}>Trade</button>
+                    <button onClick={handleTrade}>Trade</button>
                 ) : (
                     <div>*this item is not available for trade</div>
                 )}

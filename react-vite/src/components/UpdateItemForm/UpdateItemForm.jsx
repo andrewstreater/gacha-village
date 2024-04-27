@@ -49,47 +49,48 @@ function UpdateItemForm () {
         setBrand(item.brand)
         setSeries(item.series)
         setModel(item.model)
-        let itemYear = item.release_date.slice(12, 16)
-        let itemDay = item.release_date.slice(5, 7)
-        let itemMonth = ''
-        if (item.release_date.slice(8, 11) == "Jan") {
-            itemMonth = '01'
-        }
-        if (item.release_date.slice(8, 11) == "Feb") {
-            itemMonth = '02'
-        }
-        if (item.release_date.slice(8, 11) == "Mar") {
-            itemMonth = '03'
-        }
-        if (item.release_date.slice(8, 11) == "Apr") {
-            itemMonth = '04'
-        }
-        if (item.release_date.slice(8, 11) == "May") {
-            itemMonth = '05'
-        }
-        if (item.release_date.slice(8, 11) == "Jun") {
-            itemMonth = '06'
-        }
-        if (item.release_date.slice(8, 11) == "Jul") {
-            itemMonth = '07'
-        }
-        if (item.release_date.slice(8, 11) == "Aug") {
-            itemMonth = '08'
-        }
-        if (item.release_date.slice(8, 11) == "Sep") {
-            itemMonth = '09'
-        }
-        if (item.release_date.slice(8, 11) == "Oct") {
-            itemMonth = '10'
-        }
-        if (item.release_date.slice(8, 11) == "Nov") {
-            itemMonth = '11'
-        }
-        if (item.release_date.slice(8, 11) == "Dec") {
-            itemMonth = '12'
-        }
-        console.log(itemMonth+'/'+itemDay+'/'+itemYear)
-        setReleaseDate(itemMonth+'/'+itemDay+'/'+itemYear)
+        // let itemYear = item.release_date.slice(12, 16)
+        // let itemDay = item.release_date.slice(5, 7)
+        // let itemMonth = ''
+        // if (item.release_date.slice(8, 11) == "Jan") {
+        //     itemMonth = '01'
+        // }
+        // if (item.release_date.slice(8, 11) == "Feb") {
+        //     itemMonth = '02'
+        // }
+        // if (item.release_date.slice(8, 11) == "Mar") {
+        //     itemMonth = '03'
+        // }
+        // if (item.release_date.slice(8, 11) == "Apr") {
+        //     itemMonth = '04'
+        // }
+        // if (item.release_date.slice(8, 11) == "May") {
+        //     itemMonth = '05'
+        // }
+        // if (item.release_date.slice(8, 11) == "Jun") {
+        //     itemMonth = '06'
+        // }
+        // if (item.release_date.slice(8, 11) == "Jul") {
+        //     itemMonth = '07'
+        // }
+        // if (item.release_date.slice(8, 11) == "Aug") {
+        //     itemMonth = '08'
+        // }
+        // if (item.release_date.slice(8, 11) == "Sep") {
+        //     itemMonth = '09'
+        // }
+        // if (item.release_date.slice(8, 11) == "Oct") {
+        //     itemMonth = '10'
+        // }
+        // if (item.release_date.slice(8, 11) == "Nov") {
+        //     itemMonth = '11'
+        // }
+        // if (item.release_date.slice(8, 11) == "Dec") {
+        //     itemMonth = '12'
+        // }
+        // console.log(itemMonth+'/'+itemDay+'/'+itemYear)
+        // setReleaseDate(itemMonth+'/'+itemDay+'/'+itemYear)
+        setReleaseDate('01/01/2024')
         setEdition(item.edition)
         setCondition(item.condition)
         setDescription(item.description)
@@ -103,29 +104,30 @@ function UpdateItemForm () {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setHasSubmitted(true)
-    let date = new Date(releaseDate)
+    // let date = new Date(releaseDate)
 
-    let month = ''
-    if (date.getMonth() < 9) {
-      month = '0' + (date.getMonth() + 1)
-    } else {
-      month = (date.getMonth() + 1)
-    }
+    // let month = ''
+    // if (date.getMonth() < 9) {
+    //   month = '0' + (date.getMonth() + 1)
+    // } else {
+    //   month = (date.getMonth() + 1)
+    // }
 
-    let day = ''
-    if (date.getDate() < 9) {
-        day = '0' + (date.getDate() + 1)
-    } else {
-        day = (date.getMonth())
-    }
-    let fReleaseDate = (month + '/' + day + '/' + date.getFullYear());
+    // let day = ''
+    // if (date.getDate() < 9) {
+    //     day = '0' + (date.getDate() + 1)
+    // } else {
+    //     day = (date.getMonth())
+    // }
+    // let fReleaseDate = (month + '/' + day + '/' + date.getFullYear());
 
     const formData = new FormData()
     formData.append("title", title)
     formData.append("brand", brand)
     formData.append("series", series)
     formData.append("model", model)
-    formData.append("release_date", fReleaseDate)
+    // formData.append("release_date", fReleaseDate)
+    formData.append("release_date", '01/01/2024')
     formData.append("edition", edition)
     formData.append("condition", condition)
     formData.append("description", description)
@@ -194,7 +196,7 @@ function UpdateItemForm () {
               onChange={(e) => setModel(e.target.value)} />
 
               {/* Release Date */}
-              <label style={{ background: 'none' }} htmlFor='createReleaseDate'>Release Date</label>
+              {/* <label style={{ background: 'none' }} htmlFor='createReleaseDate'>Release Date</label>
               {hasSubmitted && errors.releaseDate && <p className="error">{errors.releaseDate}</p>}
               <div>Existing Release Date: {releaseDate}</div>
               <input
@@ -204,7 +206,7 @@ function UpdateItemForm () {
                   placeholder='Release Date'
                   value={releaseDate}
                   onChange={(e) => setReleaseDate(e.target.value)}
-              />
+              /> */}
 
               {/* Edition */}
 

@@ -1,10 +1,13 @@
-// import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 // import { useEffect } from "react"
-// import { useNavigate } from "react-router-dom"
+import { Navigate } from "react-router-dom"
 import ItemTile from "./ItemTile"
 import "./ItemTileDisplay.css"
 
 function ItemTileDisplay ({items, listId, listOwnerId }) {
+    const sessionUser = useSelector((state) => state.session.user)
+
+    if (!sessionUser) return <Navigate to="/login" replace={true} />
 
     return (
         <div className="flex-center-child">
