@@ -10,18 +10,10 @@ function Navigation() {
   const navigate = useNavigate()
   const sessionUser = useSelector((store) => store.session.user);
 
-  useEffect(() => {
-    if (!sessionUser) {
-      navigate('/')
-      // <Navigate to="/" replace={true} />
-    }
-  }, [sessionUser])
-
   return (
     <div className="navigation-bar">
 
         <div>
-          {/* <NavLink to="/">Home</NavLink> */}
           <img className="gvlettermark navbutton" src={gvlettermark} onClick={() => navigate('/')}></img>
           <img className="gvwordmark navbutton" src={gvwordmark} onClick={() => navigate('/')}></img>
         </div>
