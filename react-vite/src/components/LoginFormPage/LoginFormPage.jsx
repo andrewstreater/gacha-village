@@ -65,6 +65,7 @@ function LoginFormPage() {
               <input
                 type="text"
                 placeholder="email"
+                className="margin-4px"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -75,16 +76,17 @@ function LoginFormPage() {
               <input
                 type="password"
                 placeholder="password"
+                className="margin-4px"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </label>
             {errors.password && <p className="error" >{errors.password}</p>}
-            <button type="submit">Log In</button>
-            <button id='demo-login-button' onClick={loginDemoUser}>Log In as Demo User</button>
-            <div>Don&apos;t have an account?</div>
-            <button onClick={() => navigate('/signup')}>Sign up</button>
+            <button className="margin-4px login-signup-buttons" type="submit">Log In</button>
+            <button className="margin-4px login-signup-buttons" onClick={loginDemoUser}>Log In as Demo User</button>
+            <div className="margin-4px" >Don&apos;t have an account?</div>
+            <button className="margin-4px login-signup-buttons" onClick={() => navigate('/signup')}>Sign up</button>
           </form>
         </div>
         <div id="splash-page">

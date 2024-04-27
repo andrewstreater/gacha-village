@@ -30,6 +30,28 @@ button {
     justify-content: center;
 }
 
+.margin-4px{
+    margin: 4px;
+}
+
+.login-signup-buttons {
+    margin-top: 8px;
+    border: none;
+    padding: 4px;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+.login-signup-buttons:hover {
+    margin-top: 8px;
+    border: none;
+    padding: 4px;
+    padding-left: 6px;
+    padding-right: 6px;
+    background-color: #2356c4;
+    color: white;
+}
+
 @media (min-width: 900px) {
     .all-item-tiles-container {
       width: 900px;
