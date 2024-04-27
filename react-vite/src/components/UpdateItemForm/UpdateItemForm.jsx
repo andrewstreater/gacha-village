@@ -147,7 +147,7 @@ function UpdateItemForm () {
 
   return (
     <>
-      <div>
+      <div className="flex-center-child">
         <div id='update-item-main'></div>
           <div className='create-item-form-card'>
             <h1 id='create-item-title'>Update your item.</h1>

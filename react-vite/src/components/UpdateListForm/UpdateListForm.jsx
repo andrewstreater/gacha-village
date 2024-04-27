@@ -42,7 +42,7 @@ function UpdateListForm () {
 
   return (
     <>
-      <div>
+      <div className="flex-center-child">
         <div className='create-list-form-card'>
           <h1 id='create-list-title'>Update your list</h1>
           <form id='list-form' onSubmit={handleSubmit} encType='multipart/form-data'>
