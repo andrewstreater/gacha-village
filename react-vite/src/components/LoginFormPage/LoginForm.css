@@ -1,7 +1,44 @@
+#landing-page{
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: 100%;
+}
+
 #login-form-page{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: fit-content;
+    background-color: #ffc518;
+    height: 100vh;
+    width: auto;
+    flex-grow: 1;
+}
+
+#login-page-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#splash-letterMark{
+    width: 100px;
+    height: auto;
+}
+
+#splash-wordMark{
+    width: 300px;
+    height: auto;
+}
+
+#splash-page{
+    height: 100vh;
+    width: 100vh;
+}
+
+#splash-image{
+    height: 100%;
+    width: auto;
 }

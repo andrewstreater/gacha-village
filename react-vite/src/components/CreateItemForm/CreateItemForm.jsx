@@ -1,7 +1,7 @@
 import { fetchCreateItem } from '../../redux/items';
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import rightArrow from '../../../icons/Arrow_right@2x.png'
 import "./CreateItemForm.css"
 
@@ -46,29 +46,30 @@ function CreateItemForm () {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setHasSubmitted(true)
-    let date = new Date(releaseDate)
+    // let date = new Date(releaseDate)
 
-    let month = ''
-    if (date.getMonth() < 9) {
-      month = '0' + (date.getMonth() + 1)
-    } else {
-      month = (date.getMonth() + 1)
-    }
+    // let month = ''
+    // if (date.getMonth() < 9) {
+    //   month = '0' + (date.getMonth() + 1)
+    // } else {
+    //   month = (date.getMonth() + 1)
+    // }
 
-    let day = ''
-    if (date.getDate() < 9) {
-        day = '0' + (date.getDate() + 1)
-    } else {
-        day = (date.getMonth())
-    }
-    let fReleaseDate = (month + '/' + day + '/' + date.getFullYear());
+    // let day = ''
+    // if (date.getDate() < 9) {
+    //     day = '0' + (date.getDate() + 1)
+    // } else {
+    //     day = (date.getMonth())
+    // }
+    // let fReleaseDate = (month + '/' + day + '/' + date.getFullYear());
 
     const formData = new FormData()
     formData.append("title", title)
     formData.append("brand", brand)
     formData.append("series", series)
     formData.append("model", model)
-    formData.append("release_date", fReleaseDate)
+    // formData.append("release_date", fReleaseDate)
+    formData.append("release_date", "01/01/2024")
     formData.append("edition", edition)
     formData.append("condition", condition)
     formData.append("description", description)
@@ -84,8 +85,12 @@ function CreateItemForm () {
       navigate(`/items/${serverResponse.item_id}/images`)
     }
   }
-
-  if (!sessionUser) return <Navigate to="/" replace={true} />
+  useEffect(() => {
+    if (!sessionUser) {
+      navigate('/')
+      // <Navigate to="/" replace={true} />
+    }
+  }, [sessionUser])
 
   return (
     <>
@@ -115,9 +120,9 @@ function CreateItemForm () {
             <input type='text' name='createItemModel' placeholder='Name' onChange={(e) => setModel(e.target.value)} />
 
             {/* Release Date */}
-            <label style={{ background: 'none' }} htmlFor='createReleaseDate'>Release Date*</label>
+            {/* <label style={{ background: 'none' }} htmlFor='createReleaseDate'>Release Date*</label>
             {hasSubmitted && errors.releaseDate && <p className="error">{errors.releaseDate}</p>}
-            <input type='date' id='createReleaseDate' name='createReleaseDate' placeholder='Release Date' onChange={(e) => setReleaseDate(e.target.value)} />
+            <input type='date' id='createReleaseDate' name='createReleaseDate' placeholder='Release Date' onChange={(e) => setReleaseDate(e.target.value)} /> */}
 
             {/* Edition */}
             <label style={{ background: 'none' }} htmlFor='createItemEdition'>Edition</label>

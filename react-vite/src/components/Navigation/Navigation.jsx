@@ -1,5 +1,6 @@
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 import gvlettermark from '../../../public/favicon.png'
@@ -9,7 +10,12 @@ function Navigation() {
   const navigate = useNavigate()
   const sessionUser = useSelector((store) => store.session.user);
 
-  if (!sessionUser) return <Navigate to='/login' replace={true} />;
+  useEffect(() => {
+    if (!sessionUser) {
+      navigate('/')
+      // <Navigate to="/" replace={true} />
+    }
+  }, [sessionUser])
 
   return (
     <div className="navigation-bar">
