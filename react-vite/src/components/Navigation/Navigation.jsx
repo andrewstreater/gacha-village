@@ -20,9 +20,11 @@ function Navigation() {
         <div className="top-nav-buttons">
           {sessionUser ? (<>
           <div className='nav-button' onClick={() => navigate('/items/current')}>My Items</div>
+          <div className='nav-button' onClick={() => navigate('/trades/current')}>My Trades</div>
           <div className='nav-button' onClick={() => navigate('/lists/current')}>My Lists</div>
           <div className='nav-button' onClick={() => navigate('/items/new')}>Post an item</div>
           <div className='nav-button' onClick={() => navigate('/lists/new')}>Create new list</div>
+
           </>):(<>
           </>)}
 
