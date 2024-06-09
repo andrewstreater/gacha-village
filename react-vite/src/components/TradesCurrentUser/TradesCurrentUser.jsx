@@ -20,7 +20,7 @@ function TradesCurrentUser () {
         {!trades ? (<>
             <h2>No trades found</h2>
         </>) : (<>
-            <TradeList trades={trades}/>
+            <TradeList trades={trades} />
         </>)}
         </>
     )

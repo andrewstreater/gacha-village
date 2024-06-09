@@ -1,0 +1,43 @@
+.item-image-icon {
+    height: 40px;
+    border-radius: 20px;
+}
+
+.trade-list-tile{
+    display: grid;
+    width: 600px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.tile-grid-top{
+    grid-row: 1;
+    grid-column: 1/4;
+    background-color: #ffc518;
+}
+
+.trade-tile-text{
+    align-self: center;
+}
+
+.row-two {
+    grid-row: 2;
+}
+
+.open{
+    grid-row: 1;
+    grid-column: 4;
+}
+
+.closed-rejected{
+    grid-row: 1;
+    grid-column: 4;
+}
+.closed-accepted{
+    grid-row: 1;
+    grid-column: 4;
+}
+
+.trade-list-tile:hover{
+    background-color: rgb(227, 227, 227);
+}
