@@ -97,8 +97,8 @@ function SignupFormPage() {
             </label>
             {errors.confirmPassword && <p className="error">{errors.confirmPassword}</p>}
             <button className="margin-4px login-signup-buttons" type="submit">Sign Up</button>
-            <div className="margin-4px" >Go back to login</div>
-            <button className="margin-4px login-signup-buttons" onClick={() => navigate('/login')}>Log in</button>
+            <div className="margin-4px back-to-login" onClick={() => navigate('/login')}>Go back to login</div>
+            {/* <button className="margin-4px login-signup-buttons" onClick={() => navigate('/login')}>Log in</button> */}
           </form>
           </div>
         </div>
