@@ -41,3 +41,30 @@
 .trade-list-tile:hover{
     background-color: rgb(227, 227, 227);
 }
+
+.status-dot {
+    height: 8px;
+    width: 8px;
+    border-radius: 4px;
+    margin-right: 4px;
+}
+
+.open {
+    background-color: blue;
+}
+
+.pending {
+    background-color: yellow;
+}
+
+.accepted {
+    background-color: rgb(0, 214, 0);
+}
+
+.closed-rejected{
+    background-color: red;
+}
+
+.closed-accepted{
+    background-color: grey;
+}

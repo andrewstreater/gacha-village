@@ -15,27 +15,52 @@ function TradeDetails() {
     let userMadeOffer
 
     useEffect(() => {
-        dispatch(fetchGetItems())
+        // dispatch(fetchGetItems())
         dispatch(fetchGetTradeDetails(tradeId))
     }, [dispatch, tradeId])
 
-    // if (allItems[tradeDetails.Buyer.id].ownerId == sessionUser.id){
-    //     userMadeOffer = true
-    // }
-    // if (allItems[tradeDetails.Seller.id].ownerId == sessionUser.id) {
-    //     userMadeOffer = false
-    // }
+    // console.log('TRADE DETAILS userMadeOffer: ', userMadeOffer)
+    // console.log('TRADE DETAILS tradeDetails: ', tradeDetails)
 
-    console.log('TRADE DETAILS userMadeOffer: ', userMadeOffer)
+    if (!tradeDetails) {
+        return <div>Loading...</div>
+    }
+
+    const { Buyer, Seller, status } = tradeDetails;
+
+    if (!Buyer || !Seller) {
+        return <div>Error: Missing trade details</div>
+    }
+
+    console.log('TRADE DETAILS Buyer: ', Buyer)
+    console.log('TRADE DETAILS Seller: ', Seller)
 
     return (
         <>
         <h1>Trade Details</h1>
-        <div>{tradeDetails.Buyer.username}</div>
-        <div>{tradeDetails.Buyer.username}</div>
-        <div>{tradeDetails.Buyer.Item.title}</div>
-        <div>{tradeDetails.Seller.username}</div>
-        <div>{tradeDetails.Seller.Item.title}</div>
+        {/* Buyer Info */}
+        <div>{tradeDetails && tradeDetails.Buyer.username}</div>
+        <div> offered:</div>
+        <div>{tradeDetails && tradeDetails.Buyer.Item.title}</div>
+        <img src={Buyer.Item.previewImage[0].imageUrl} className="trade-details-item-image" alt={`${Buyer.Item.title} image`}></img>
+
+        {/* Seller Info */}
+        <div>{tradeDetails && tradeDetails.Seller.username}</div>
+        <div>{tradeDetails && tradeDetails.Seller.Item.title}</div>
+        <img src={Seller.Item.previewImage[0].imageUrl} className="trade-details-item-image" alt={`${Seller.Item.title} image`}></img>
+
+        {tradeDetails && tradeDetails.status == 'open' ? (<>
+        <div>open</div>
+        </>) : tradeDetails && tradeDetails.status == 'pending' ? (<>
+        <div>pending</div>
+        </>) : tradeDetails && tradeDetails.status == 'accepted' ? (<>
+        <div>accepted</div>
+        </>) : tradeDetails && tradeDetails.status == 'closed-rejected' ? (<>
+        <div>rejected</div>
+        </>) : tradeDetails && tradeDetails.status == 'closed-accepted' ? (<>
+        <div>completed</div>
+        </>)
+        : <div>no status</div>}
         </>
     )
 }

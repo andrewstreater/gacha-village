@@ -60,7 +60,7 @@ def get_trade(trade_id):
         sellerId = sellerItem['ownerId']
         seller = User.query.get(sellerId).to_dict()
         sellerItemImages = Image.query.filter(Image.imageable_id == sellerItemId).all()
-        sellerItemPreview = [image.to_dict() for image in buyerItemImages if image.preview]
+        sellerItemPreview = [image.to_dict() for image in sellerItemImages if image.preview]
         sellerItems = {**sellerItem, 'previewImage': sellerItemPreview}
 
         trade_data['Buyer'] = {**buyer, 'Item': buyerItems}
