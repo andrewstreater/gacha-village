@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
-import gvlettermark from '../../../public/favicon.png'
-import gvwordmark from '../../../public/gacha-village-wordmark-white.png'
+import gvlettermark from '/favicon.png'
+import gvwordmark from '/gacha-village-wordmark-white.png'
 
 function Navigation() {
   const navigate = useNavigate()
