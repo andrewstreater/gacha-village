@@ -1,4 +1,4 @@
-from flask.cli import AppGroup
+çfrom flask.cli import AppGroup
 from .users import seed_users, undo_users
 from .items import seed_items, undo_items
 from .trades import seed_trades, undo_trades

@@ -7,7 +7,7 @@ from datetime import date
 def seed_items():
     item1 = Item(
         owner_id=1,
-        title='HIRONO - Parasite',
+        title='Parasite (Hirono)',
         condition='New',
         brand='POP MART',
         series='Reshape',
@@ -20,7 +20,7 @@ def seed_items():
 
     item2 = Item(
         owner_id=2,
-        title='HIRONO - Voyage',
+        title='Voyage',
         condition='New',
         brand='POP MART',
         series='Reshape',
@@ -33,7 +33,7 @@ def seed_items():
 
     item3 = Item(
         owner_id=1,
-        title='HIRONO - Fading',
+        title='Fading (Hirono)',
         condition='New',
         brand='POP MART',
         series='Reshape',
@@ -46,7 +46,7 @@ def seed_items():
 
     item4 = Item(
         owner_id=2,
-        title='HIRONO - Costume',
+        title='Costume',
         condition='New',
         brand='POP MART',
         series='Reshape',
@@ -59,7 +59,7 @@ def seed_items():
 
     item5 = Item(
         owner_id=1,
-        title='HIRONO - Woodcarving',
+        title='Woodcarving (Hirono)',
         condition='Open Box',
         brand='POP MART',
         series='Reshape',
@@ -72,7 +72,7 @@ def seed_items():
 
     item6 = Item(
         owner_id=2,
-        title='HIRONO - Paradise Lost',
+        title='Paradise Lost',
         condition='Open Box',
         brand='POP MART',
         series='Reshape',
@@ -85,7 +85,7 @@ def seed_items():
 
     item7 = Item(
         owner_id=1,
-        title='HIRONO - Paradise Lost',
+        title='Paradise Lost (Hirono)',
         condition='Open Box',
         brand='POP MART',
         series='Reshape',
@@ -98,7 +98,7 @@ def seed_items():
 
     item8 = Item(
         owner_id=2,
-        title='HIRONO - Burst',
+        title='Burst',
         condition='Open Box',
         brand='POP MART',
         series='Reshape',
