@@ -1,52 +1,96 @@
-.item-image-icon {
+.item-image-icon1 {
     height: 40px;
     border-radius: 20px;
+    grid-row-start: 2;
+    grid-column-start: 3;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-left: 55px;
 }
 
-.trade-list-tile{
+.for{
+    grid-row-start: 2;
+    grid-column-start: 4;
+    align-self: center;
+    margin-left: 55px;
+}
+
+.item-image-icon2 {
+    height: 40px;
+    border-radius: 20px;
+    grid-row-start: 2;
+    grid-column-start: 5;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-left: 55px;
+}
+
+/*Trades*/
+
+.trade-list-tile-grid-container{
     display: grid;
-    width: 600px;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    width: 800px;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 40px 80px;
+    border-radius: 8px;
+    margin-top: 4px;
+    margin-bottom: 4px;
 }
 
-.tile-grid-top{
-    grid-row: 1;
-    grid-column: 1/4;
-    background-color: #ffc518;
-}
 
 .trade-tile-text{
+    grid-row-start: 2;
+    grid-column-start: 2;
     align-self: center;
+}
+
+.first-row{
+    background-color: rgb(168, 168, 168);
+    padding: 4px;
+    color: white;
+}
+
+.first-row-fill {
+    grid-row: 1;
+    grid-column: 2/6;
 }
 
 .row-two {
     grid-row: 2;
 }
 
-.open{
-    grid-row: 1;
-    grid-column: 4;
-}
-
-.closed-rejected{
-    grid-row: 1;
-    grid-column: 4;
-}
-.closed-accepted{
-    grid-row: 1;
-    grid-column: 4;
-}
-
-.trade-list-tile:hover{
+.trade-list-tile-grid-container:hover{
+    cursor: pointer;
     background-color: rgb(227, 227, 227);
+    animation: item-hover 0.25s forwards;
+}
+
+@keyframes item-hover {
+    0% {
+        background-color: white;
+        color: black;
+    }
+
+    100% {
+        background-color: #c7c7c7;
+        color: white;
+    }
+}
+
+.trade-id-number{
+    /*align-self: center;*/
 }
 
 .status-dot {
     height: 8px;
     width: 8px;
     border-radius: 4px;
-    margin-right: 4px;
+    margin-right: 8px;
+}
+
+.status-tile {
+    grid-row-start: 1;
+    grid-column-start: 6;
 }
 
 .open {

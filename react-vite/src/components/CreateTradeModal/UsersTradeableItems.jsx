@@ -1,37 +1,34 @@
-import { fetchCreateTrade } from "../../redux/trades"
-import "./UsersTradeableItems.css"
+
+// import {fetchCreateTrade} from "../../redux/trades.js";
+import "./UsersTradeableItems.css";
+import { useDispatch, useSelector } from "react-redux"
+import {useNavigate} from "react-router-dom";
 
 function UsersTradeableItems ({items, itemId}) {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const sessionUser = useSelector((store) => store.session.user);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
+    const submitTrade = async (buyerItemId, sellerItemId) => {
+        
+        const response = await fetch(`/api/trades/new`,{
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                "buyerItemId": buyerItemId, 
+                "sellerItemId": sellerItemId})
+        });
 
-        const formData = new FormData()
-        formData.append("buyerItemId", name)
-        formData.append("sellerItemId", isPrivate)
-
-        const serverResponse = await dispatch(
-          fetchCreateList(formData)
-        )
-        if (serverResponse) {
-          setErrors(serverResponse)
-        } else {
-          navigate('/')
+        if (response.ok) {
+            navigate('/trades/current')
         }
-      }
-
-    // const handleSubmit = (usersItemId) => {
-    //     {
-    //         "buyerItemId": 3,
-    //         "sellerItemId": 4
-    //     }
-    // }
+    }
 
     return (
         items.map(item => {
             return(
-                <div key={item.itemId}
-                onClick={handleSubmit(item.itemId)}>
+                <div key={item.itemId} className="user-tradeable-item-tile"
+                onClick={() => submitTrade(item.itemId, itemId)}>
                     {item.title}
                 </div>
             )

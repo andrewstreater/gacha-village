@@ -36,32 +36,34 @@ function TradeDetails() {
     console.log('TRADE DETAILS Seller: ', Seller)
 
     return (
-        <>
+        <div id="trade-details-page">
         <h1>Trade Details</h1>
-        {/* Buyer Info */}
-        <div>{tradeDetails && tradeDetails.Buyer.username}</div>
-        <div> offered:</div>
-        <div>{tradeDetails && tradeDetails.Buyer.Item.title}</div>
-        <img src={Buyer.Item.previewImage[0].imageUrl} className="trade-details-item-image" alt={`${Buyer.Item.title} image`}></img>
-
-        {/* Seller Info */}
-        <div>{tradeDetails && tradeDetails.Seller.username}</div>
-        <div>{tradeDetails && tradeDetails.Seller.Item.title}</div>
-        <img src={Seller.Item.previewImage[0].imageUrl} className="trade-details-item-image" alt={`${Seller.Item.title} image`}></img>
-
-        {tradeDetails && tradeDetails.status == 'open' ? (<>
-        <div>open</div>
-        </>) : tradeDetails && tradeDetails.status == 'pending' ? (<>
-        <div>pending</div>
-        </>) : tradeDetails && tradeDetails.status == 'accepted' ? (<>
-        <div>accepted</div>
-        </>) : tradeDetails && tradeDetails.status == 'closed-rejected' ? (<>
-        <div>rejected</div>
-        </>) : tradeDetails && tradeDetails.status == 'closed-accepted' ? (<>
-        <div>completed</div>
-        </>)
-        : <div>no status</div>}
-        </>
+            <div className="trade-details-container">
+                {/* Buyer Info */}
+                <div>{tradeDetails && tradeDetails.Buyer.username}</div>
+                <div> offered:</div>
+                <div>{tradeDetails && tradeDetails.Buyer.Item.title}</div>
+                <img src={Buyer.Item.previewImage[0].imageUrl} className="trade-details-item-image" alt={`${Buyer.Item.title} image`}></img>
+        
+                {/* Seller Info */}
+                <div>{tradeDetails && tradeDetails.Seller.username}</div>
+                <div>{tradeDetails && tradeDetails.Seller.Item.title}</div>
+                <img src={Seller.Item.previewImage[0].imageUrl} className="trade-details-item-image" alt={`${Seller.Item.title} image`}></img>
+        
+                {tradeDetails && tradeDetails.status == 'open' ? (<>
+                <div>open</div>
+                </>) : tradeDetails && tradeDetails.status == 'pending' ? (<>
+                <div>pending</div>
+                </>) : tradeDetails && tradeDetails.status == 'accepted' ? (<>
+                <div>accepted</div>
+                </>) : tradeDetails && tradeDetails.status == 'closed-rejected' ? (<>
+                <div>rejected</div>
+                </>) : tradeDetails && tradeDetails.status == 'closed-accepted' ? (<>
+                <div>completed</div>
+                </>)
+                : <div>no status</div>}
+            </div>
+        </div>
     )
 }
 

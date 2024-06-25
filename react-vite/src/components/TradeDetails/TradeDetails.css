@@ -1,3 +1,17 @@
+
+#trade-details-page {
+    display: flex;
+    flex-direction: column;
+    width: 900px;
+    align-self: center;
+}
+
+.trade-details-container{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
 .trade-details-item-image {
     height: 80px;
 }

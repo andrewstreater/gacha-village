@@ -20,17 +20,20 @@ function TradeList ({trades}) {
     // console.log('From TradeList:', allItems)
 
     return (
-        <div className="">
+        <div>
+            <div className="trades-list">
             <h2>Trades</h2>
-            {!trades.currentUserTrades ? (<>
-                <p>You haven&apos;t received any trade offers yet</p>
-            </>) : (<>
-                {trades && allItems && trades.currentUserTrades.map(trade => {
-                    return(
-                        <TradeListTile key={trade.tradeId} trade={trade} allItems={allItems} currentUserId={sessionUser.id}/>
-                    )
-                })}
-            </>)}
+                {!trades.currentUserTrades ? (<>
+                    <p>You haven&apos;t received any trade offers yet</p>
+                </>) : (<>
+                    {trades && allItems && trades.currentUserTrades.map(trade => {
+                        return (
+                            <TradeListTile key={trade.tradeId} trade={trade} allItems={allItems}
+                                           currentUserId={sessionUser.id}/>
+                        )
+                    })}
+                </>)}
+            </div>
         </div>
     )
 }

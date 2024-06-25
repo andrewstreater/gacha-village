@@ -29,29 +29,36 @@ function ItemTile ({ item, itemId, listId, listOwnerId }) {
     }
 
     const handleDelete = async (e) => {
+        e.stopPropagation()
         e.preventDefault()
         await dispatch(fetchDeleteItem(itemId)).then(navigate('/items'))
     }
 
     const removeFromList = async (e) => {
+        e.stopPropagation()
         e.preventDefault()
         await dispatch(fetchRemoveFromList(listId, itemId)).then(navigate('/items'))
     }
 
-    const handleTrade = (e) => {
-        e.preventDefault()
-        alert('Trade feature coming soon!');
+    const openItemDetails = (e) => {
+        e.stopPropagation();
+        navigate(`/items/${itemId}`);
     };
+    
+    const navToUpdateItem = (e) => {
+        e.stopPropagation();
+        navigate(`/items/${itemId}/update`)
+    }
 
     return (
         <>
-            <div className="item-tile">
-            <img className="item-tile-image"src={imageUrl} onClick={() => navigate(`/items/${itemId}`)}></img>
+            <div className="item-tile" onClick={openItemDetails}>
+            <img className="item-tile-image" src={imageUrl}></img>
             {currentItemsPage ? (
                 <>
                     <div className="item-tiles-details">
-                        <div className="item-tile-title" onClick={() => navigate(`/items/${itemId}`)}>{item.title}</div>
-                        <img className="item-tile-edit-button" src={editIcon} onClick={() => navigate(`/items/${itemId}/update`)}></img>
+                        <div className="item-tile-title">{item.title}</div>
+                        <img className="item-tile-edit-button" src={editIcon} onClick={navToUpdateItem}></img>
                         <img className="item-tile-delete-button" src={deleteIcon} onClick={handleDelete}></img>
                     </div>
                 </>
@@ -66,7 +73,7 @@ function ItemTile ({ item, itemId, listId, listOwnerId }) {
             ) : (
                 <>
                     <div className="item-tiles-details">
-                        <div className="item-tile-title" onClick={() => navigate(`/items/${itemId}`)}>{item.title}</div>
+                        <div className="item-tile-title" >{item.title}</div>
                         {/* <img className="item-tile-trade-button" onClick={handleTrade} src={tradeIcon} alt="Trade" /> */}
                         <OpenModalButton
                         imgSrc={tradeIcon}

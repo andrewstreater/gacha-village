@@ -27,6 +27,13 @@
 
 .item-detail-key {
     font-weight: bolder;
+    color: white;
+    background-color: #c7c7c7;
+    padding-left: 8px;
+}
+
+.item-detail-value {
+    padding-left: 8px;
 }
 
 .item-details-page-details{
@@ -41,4 +48,18 @@
 .item-details-trade-button {
     grid-column: 2;
     grid-row: 3;
+}
+
+.trade-and-add-to-list-buttons {
+    border-top: solid;
+    border-width: 1px;
+    margin-top: 4px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.padding-left-8{
+    padding-left: 8px;
 }

@@ -5,12 +5,24 @@
     justify-content: space-between;
     margin-top: 8px;
     border-radius: 8px;
-    height: 30px;
+    height: 34px;
 }
 
 .list-tile:hover {
-    background-color: rgb(227, 227, 227);
-    color: white;
+    cursor: pointer;
+    animation: item-hover 0.25s forwards;
+}
+
+@keyframes item-hover {
+    0% {
+        background-color: white;
+        color: black;
+    }
+
+    100% {
+        background-color: #c7c7c7;
+        color: white;
+    }
 }
 
 .status-tile {
@@ -29,15 +41,16 @@
 }
 
 .update-list-button{
-    background-color: #2356c4;
+    background-color: rgb(168, 168, 168);
     color: white;
     border-radius: 8px;
     margin-left: 4px;
+    padding: 4px;
 }
 
 .delete-list-button {
-    background-color: red;
-    color: white;
-    border-radius: 8px;
-    margin-left: 5px;
+    height: 28px;
+    align-self: center;
+    margin-left: 8px;
+    margin-right: 8px;
 }

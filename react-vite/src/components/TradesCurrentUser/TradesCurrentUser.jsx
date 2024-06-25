@@ -15,14 +15,13 @@ function TradesCurrentUser () {
     }, [dispatch])
 
     return (
-        <>
-        <h1>Current User&apos;s Trades</h1>
-        {!trades ? (<>
-            <h2>No trades found</h2>
-        </>) : (<>
-            <TradeList trades={trades} />
-        </>)}
-        </>
+        <div className={`trades-current-user`}>
+            {!trades ? (<>
+                <h2>No trades found</h2>
+            </>) : (<>
+                <TradeList trades={trades} />
+            </>)}
+        </div>
     )
 }
 

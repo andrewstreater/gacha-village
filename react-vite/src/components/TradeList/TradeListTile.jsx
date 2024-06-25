@@ -18,63 +18,40 @@ function TradeListTile ({trade, allItems, currentUserId}) {
         return null;
     }
 
-    if (buyerItem.ownerId == currentUserId) {
-        return (
-            <div className="trade-list-tile" onClick={() => navigate(`/trades/${trade.tradeId}`)}>
-                <div> Trade# {trade.tradeId}</div>
-                <div className="status-tile">
-                    <div className={`status-dot ${trade.status}`}></div>
-                    <div>
-                        {trade && trade.status == 'open' ? (<>
-                        <div>open</div>
-                        </>) : trade.status == 'pending' ? (<>
-                        <div>pending</div>
-                        </>) : trade.status == 'accepted' ? (<>
-                        <div>accepted</div>
-                        </>) : trade.status == 'closed-rejected' ? (<>
-                        <div>rejected</div>
-                        </>) : trade.status == 'closed-accepted' ? (<>
-                        <div>completed</div>
-                        </>)
-                        : <div>no status</div>}
-                    </div>
-                </div>
-                <div className="row-two trade-tile-text" >You offered: </div>
-                <img className="item-image-icon row-two" src={allItems[trade.buyerItemId].previewImage.imageUrl}></img>
-                <div className="row-two trade-tile-text">for</div>
-                <img className="item-image-icon row-two" src={allItems[trade.sellerItemId].previewImage.imageUrl}></img>
-            </div>
-        )
-    }
-    if (sellerItem.ownerId == currentUserId) {
-        return (
-            <div className="trade-list-tile" onClick={() => navigate(`/trades/${trade.tradeId}`)}>
-                <div> Trade# {trade.tradeId}</div>
-                <div className="status-tile">
-                <div className={`status-dot ${trade.status}`}></div>
-                    <div>
-                        {trade && trade.status == 'open' ? (<>
-                        <div>open</div>
-                        </>) : trade.status == 'pending' ? (<>
-                        <div>pending</div>
-                        </>) : trade.status == 'accepted' ? (<>
-                        <div>accepted</div>
-                        </>) : trade.status == 'closed-rejected' ? (<>
-                        <div>rejected</div>
-                        </>) : trade.status == 'closed-accepted' ? (<>
-                        <div>completed</div>
-                        </>)
-                        : <div>no status</div>}
-                    </div>
-                </div>
-                <div className="row-two trade-tile-text" >You were offered: </div>
-                <img className="item-image-icon row-two" src={allItems[trade.buyerItemId].previewImage.imageUrl}></img>
-                <div className="row-two trade-tile-text">for</div>
-                <img className="item-image-icon row-two" src={allItems[trade.sellerItemId].previewImage.imageUrl}></img>
-            </div>
-        )
-    }
 
+    return (
+        <div className="trade-list-tile-grid-container" onClick={() => navigate(`/trades/${trade.tradeId}`)}>
+            <div className="trade-id-number first-row"> Trade ID #: {trade.tradeId}</div>
+            <div className="first-row-fill first-row"></div>
+            <div className="status-tile first-row">
+                <div className={`status-dot ${trade.status}`}></div>
+                <div>
+                    {trade && trade.status == 'open' ? (<>
+                        <div>open</div>
+                    </>) : trade.status == 'pending' ? (<>
+                        <div>pending</div>
+                    </>) : trade.status == 'accepted' ? (<>
+                        <div>accepted</div>
+                    </>) : trade.status == 'closed-rejected' ? (<>
+                        <div>rejected</div>
+                    </>) : trade.status == 'closed-accepted' ? (<>
+                            <div>completed</div>
+                        </>)
+                        : <div>no status</div>}
+                </div>
+            </div>
+            <div className="trade-tile-text">
+                {buyerItem.ownerId == currentUserId ? (<>
+                    You offered
+                </>) : (<>
+                    You were offered
+                </>)}
+            </div>
+            <img className="item-image-icon1" src={allItems[trade.buyerItemId].previewImage.imageUrl}></img>
+            <div className="for">for</div>
+            <img className="item-image-icon2 row-two" src={allItems[trade.sellerItemId].previewImage.imageUrl}></img>
+        </div>
+    )
 }
 
 export default TradeListTile
