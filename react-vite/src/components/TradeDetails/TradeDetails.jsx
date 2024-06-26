@@ -34,34 +34,89 @@ function TradeDetails() {
 
     console.log('TRADE DETAILS Buyer: ', Buyer)
     console.log('TRADE DETAILS Seller: ', Seller)
+    
+    const acceptTrade = (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        return alert("You accepted the trade")
+    }
+    
+    const rejectTrade = (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        return alert("You rejected the trade")
+    }
+
+    const cancelTrade = (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        return alert("You canceled the trade")
+    }
 
     return (
         <div id="trade-details-page">
-        <h1>Trade Details</h1>
+        <h1 className='trade-details-h1'>Trade Details</h1>
             <div className="trade-details-container">
-                {/* Buyer Info */}
-                <div>{tradeDetails && tradeDetails.Buyer.username}</div>
-                <div> offered:</div>
-                <div>{tradeDetails && tradeDetails.Buyer.Item.title}</div>
-                <img src={Buyer.Item.previewImage[0].imageUrl} className="trade-details-item-image" alt={`${Buyer.Item.title} image`}></img>
-        
-                {/* Seller Info */}
-                <div>{tradeDetails && tradeDetails.Seller.username}</div>
-                <div>{tradeDetails && tradeDetails.Seller.Item.title}</div>
-                <img src={Seller.Item.previewImage[0].imageUrl} className="trade-details-item-image" alt={`${Seller.Item.title} image`}></img>
-        
-                {tradeDetails && tradeDetails.status == 'open' ? (<>
-                <div>open</div>
-                </>) : tradeDetails && tradeDetails.status == 'pending' ? (<>
-                <div>pending</div>
-                </>) : tradeDetails && tradeDetails.status == 'accepted' ? (<>
-                <div>accepted</div>
-                </>) : tradeDetails && tradeDetails.status == 'closed-rejected' ? (<>
-                <div>rejected</div>
-                </>) : tradeDetails && tradeDetails.status == 'closed-accepted' ? (<>
-                <div>completed</div>
-                </>)
-                : <div>no status</div>}
+                <div>Trade ID #: {tradeId}</div>
+                {/* User's Item Info */}
+                {Buyer.id == sessionUser.id ? (
+                    <>
+                        <div className='your-item-text'>Your item:</div>
+                        <div className='user-item-title'>Title: {tradeDetails && tradeDetails.Buyer.Item.title}</div>
+                        <img src={Buyer.Item.previewImage[0].imageUrl}
+                             className="user-item-image trade-details-item-image"
+                             alt={`${Buyer.Item.title} image`}></img>
+                        <button className='cancel-button' onClick={cancelTrade}>Cancel</button>
+                    </>
+                ) : (
+                    <>
+                        <div className='your-item-text'>Your item:</div>
+                        <div className='user-item-title'>Title: {tradeDetails && tradeDetails.Seller.Item.title}</div>
+                        <img src={Seller.Item.previewImage[0].imageUrl}
+                             className="user-item-image trade-details-item-image"
+                             alt={`${Seller.Item.title} image`}></img>
+                    </>
+                )}
+
+                {/* Contra Party Item Info */}
+                {Seller.id == sessionUser.id ? (
+                    <>
+                        <div className='contra-party-user-name'>{tradeDetails && tradeDetails.Buyer.username}'s item:
+                        </div>
+                        <div
+                            className='contra-party-item-name'>Title: {tradeDetails && tradeDetails.Buyer.Item.title}</div>
+                        <img src={Buyer.Item.previewImage[0].imageUrl}
+                             className="contra-party-item-image trade-details-item-image"
+                             alt={`${Buyer.Item.title} image`}></img>
+                    </>
+                ) : (
+                    <>
+                        <div className='contra-party-user-name'>{tradeDetails && tradeDetails.Seller.username}'s item:
+                        </div>
+                        <div
+                            className='contra-party-item-name'>Title: {tradeDetails && tradeDetails.Seller.Item.title}</div>
+                        <img src={Seller.Item.previewImage[0].imageUrl}
+                             className="contra-party-item-image trade-details-item-image"
+                             alt={`${Seller.Item.title} image`}></img>
+                    </>
+                )}
+
+                <div className='trade-details-status'> Status:
+                    {tradeDetails && tradeDetails.status == 'open' ? (<>
+                        <div>open</div>
+                    </>) : tradeDetails && tradeDetails.status == 'pending' ? (<>
+                        <div>pending</div>
+                    </>) : tradeDetails && tradeDetails.status == 'accepted' ? (<>
+                        <div>accepted</div>
+                    </>) : tradeDetails && tradeDetails.status == 'closed-rejected' ? (<>
+                        <div>rejected</div>
+                    </>) : tradeDetails && tradeDetails.status == 'closed-accepted' ? (<>
+                            <div>completed</div>
+                        </>)
+                        : <div>no status</div>}
+                </div>
+                <button className='accept-button' onClick={acceptTrade}>Accept</button>
+                <button className='reject-button' onClick={rejectTrade}>Reject</button>
             </div>
         </div>
     )

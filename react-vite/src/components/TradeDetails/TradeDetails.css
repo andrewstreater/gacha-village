@@ -2,16 +2,70 @@
 #trade-details-page {
     display: flex;
     flex-direction: column;
-    width: 900px;
-    align-self: center;
+    align-items: center;
 }
 
 .trade-details-container{
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    width: 784px;
 }
 
 .trade-details-item-image {
     height: 80px;
+}
+
+.trade-details-h1 {
+    justify-self: left;
+}
+
+.trade-details-status{
+    grid-row-start: 1;
+    grid-column-start: 6;
+}
+
+.your-item-text {
+    grid-row-start: 2;
+    grid-column-start: 1;
+}
+
+.user-item-title {
+    grid-row-start: 3;
+    grid-column-start: 1;
+}
+
+.user-item-image{
+    grid-row-start: 4;
+    grid-column-start: 1;
+}
+
+.contra-party-user-name {
+    grid-row-start: 1;
+    grid-column-start: 3;
+}
+
+.contra-party-item-name{
+    grid-row-start: 2;
+    grid-column-start: 3;
+}
+
+.contra-party-item-image{
+    grid-row-start: 4;
+    grid-column-start: 3;
+}
+
+.accept-button {
+    grid-row-start: 2;
+    grid-column-start: 6;
+}
+
+.reject-button {
+    grid-row-start: 3;
+    grid-column-start: 6;
+}
+
+.cancel-button{
+    grid-row-start: 4;
+    grid-column-start: 6;
 }
