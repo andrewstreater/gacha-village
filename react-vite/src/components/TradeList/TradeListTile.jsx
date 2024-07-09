@@ -32,9 +32,9 @@ function TradeListTile ({trade, allItems, currentUserId}) {
                         <div>pending</div>
                     </>) : trade.status == 'accepted' ? (<>
                         <div>accepted</div>
-                    </>) : trade.status == 'closed-rejected' ? (<>
+                    </>) : trade.status == 'rejected' ? (<>
                         <div>rejected</div>
-                    </>) : trade.status == 'closed-accepted' ? (<>
+                    </>) : trade.status == 'completed' ? (<>
                             <div>completed</div>
                         </>)
                         : <div>no status</div>}

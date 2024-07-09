@@ -89,6 +89,8 @@ function TradeDetails() {
                         <img src={Buyer.Item.previewImage[0].imageUrl}
                              className="contra-party-item-image trade-details-item-image"
                              alt={`${Buyer.Item.title} image`}></img>
+                        <button className='accept-button' onClick={acceptTrade}>Accept</button>
+                        <button className='reject-button' onClick={rejectTrade}>Reject</button>
                     </>
                 ) : (
                     <>
@@ -109,15 +111,13 @@ function TradeDetails() {
                         <div>pending</div>
                     </>) : tradeDetails && tradeDetails.status == 'accepted' ? (<>
                         <div>accepted</div>
-                    </>) : tradeDetails && tradeDetails.status == 'closed-rejected' ? (<>
+                    </>) : tradeDetails && tradeDetails.status == 'rejected' ? (<>
                         <div>rejected</div>
-                    </>) : tradeDetails && tradeDetails.status == 'closed-accepted' ? (<>
+                    </>) : tradeDetails && tradeDetails.status == 'completed' ? (<>
                             <div>completed</div>
                         </>)
                         : <div>no status</div>}
                 </div>
-                <button className='accept-button' onClick={acceptTrade}>Accept</button>
-                <button className='reject-button' onClick={rejectTrade}>Reject</button>
             </div>
         </div>
     )

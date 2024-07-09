@@ -105,10 +105,10 @@
     background-color: rgb(0, 214, 0);
 }
 
-.closed-rejected{
+.rejected{
     background-color: red;
 }
 
-.closed-accepted{
+.completed{
     background-color: grey;
 }
