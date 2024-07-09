@@ -5,8 +5,9 @@ import { useEffect } from "react"
 import UsersTradeableItems from "./UsersTradeableItems"
 import "./CreateTradeModal.css"
 
-function CreateTradeModal ({ itemId }) {
+function CreateTradeModal ({ itemId, itemOwnerId }) {
     const currentUserItems = useSelector(state => state.items.currentUserItems);
+    const sessionUser = useSelector((store) => store.session.user);
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -14,6 +15,12 @@ function CreateTradeModal ({ itemId }) {
     }, [dispatch])
 
     const itemArray = Object.values(currentUserItems)
+    
+    if (itemOwnerId == sessionUser.id) {
+        return(
+            <div>You cannot trade with yourself</div>
+        )
+    }
 
     return (
         <>

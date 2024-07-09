@@ -119,3 +119,7 @@
     cursor: pointer;
     transition: 100ms;
 }
+
+.quarter-opacity {
+    opacity: 0.25;
+}

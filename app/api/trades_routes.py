@@ -98,7 +98,7 @@ def create_trade():
         if trade_data["sellerItemId"] == buyerItemId and trade_data["buyerItemId"] == sellerItemId and not trade_data['status'] == 'closed-rejected':
             response = jsonify({"error": "This trade already exists"})
             response.status_code = 403
-            return response
+            return response            
 
     new_trade = Trade(
         buyer_item_id = buyerItemId,

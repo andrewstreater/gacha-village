@@ -1,9 +1,11 @@
 import { fetchGetTradeDetails } from "../../redux/trades"
 import { fetchGetItems } from "../../redux/items"
+import {fetchDeleteTrade} from "../../redux/trades";
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import "./TradeDetails.css"
+import {fetchDeleteList} from "../../redux/lists.js";
 
 function TradeDetails() {
     const tradeDetails = useSelector(state => state.trades.tradeDetails);
@@ -13,17 +15,15 @@ function TradeDetails() {
     const navigate = useNavigate()
     const { tradeId } = useParams()
     let userMadeOffer
+    
 
     useEffect(() => {
         // dispatch(fetchGetItems())
         dispatch(fetchGetTradeDetails(tradeId))
     }, [dispatch, tradeId])
-
-    // console.log('TRADE DETAILS userMadeOffer: ', userMadeOffer)
-    // console.log('TRADE DETAILS tradeDetails: ', tradeDetails)
-
+    
     if (!tradeDetails) {
-        return <div>Loading...</div>
+        return (<div>Loading...</div>)
     }
 
     const { Buyer, Seller, status } = tradeDetails;
@@ -32,9 +32,9 @@ function TradeDetails() {
         return <div>Error: Missing trade details</div>
     }
 
-    console.log('TRADE DETAILS Buyer: ', Buyer)
-    console.log('TRADE DETAILS Seller: ', Seller)
-    
+    // console.log('TRADE DETAILS Buyer: ', Buyer)
+    // console.log('TRADE DETAILS Seller: ', Seller)
+    //
     const acceptTrade = (e) => {
         e.preventDefault()
         e.stopPropagation()
@@ -47,10 +47,11 @@ function TradeDetails() {
         return alert("You rejected the trade")
     }
 
-    const cancelTrade = (e) => {
+    const cancelTrade = async (e) => {
         e.preventDefault()
         e.stopPropagation()
-        return alert("You canceled the trade")
+
+        await dispatch(fetchDeleteTrade(tradeId)).then(navigate('/'))
     }
 
     return (
