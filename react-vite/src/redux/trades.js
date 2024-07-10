@@ -1,6 +1,7 @@
 const GET_CURRENT_USERS_TRADES = 'trades/getCurrentUsersTrades'
 const GET_TRADE_DETAILS = 'trades/getTradeDetails'
 // const CREATE_TRADE = 'trades/createTrade'
+const UPDATE_TRADE = 'trades/updateTrade'
 const DELETE_TRADE = 'trades/deleteTrade'
 
 const getCurrentUsersTrades = (currentUserTrades) => {
@@ -23,6 +24,13 @@ const getTradeDetails = (tradeDetails) => {
 //     newTrade
 //   }
 // }
+
+const updateTrade = (updatedTrade) => {
+    return {
+        type: UPDATE_TRADE,
+        updatedTrade
+    }
+}
 
 const deleteTrade = (trade) => {
     return {
@@ -77,13 +85,31 @@ export const fetchGetTradeDetails = (tradeId) => async (dispatch) => {
 //   }
 // }
 
+export const fetchUpdateTrade = (payload, tradeId) => async (dispatch) => {
+    const res = await fetch(`/api/trades/${tradeId}/update`, {
+        method: 'PUT',
+        body: payload
+    })
+
+    if (res.ok) {
+        const { resPost } = await res.json()
+        dispatch(updateTrade(resPost))
+        return resPost
+    } else if (res.status < 500) {
+        const errorMessages = await res.json()
+        return errorMessages
+    } else {
+        return { server: "Something went wrong. Please try again" }
+    }
+}
+
 export const fetchDeleteTrade = (tradeId) => async (dispatch) => {
     const res = await fetch(`/api/trades/${tradeId}/delete`, {
         method: 'DELETE'
     })
 
     if (res.ok) {
-        dispatch(deleteList())
+        dispatch(deleteTrade(tradeId))
         return res
     } else if (res.status < 500) {
         const errorMessages = await res.json()

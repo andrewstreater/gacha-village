@@ -1,11 +1,10 @@
-import { fetchGetTradeDetails } from "../../redux/trades"
+import { fetchGetTradeDetails, fetchUpdateTrade } from "../../redux/trades"
 import { fetchGetItems } from "../../redux/items"
 import {fetchDeleteTrade} from "../../redux/trades";
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import "./TradeDetails.css"
-import {fetchDeleteList} from "../../redux/lists.js";
 
 function TradeDetails() {
     const tradeDetails = useSelector(state => state.trades.tradeDetails);
