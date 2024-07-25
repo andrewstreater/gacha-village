@@ -88,7 +88,7 @@ export const fetchGetTradeDetails = (tradeId) => async (dispatch) => {
 export const fetchUpdateTrade = (payload, tradeId) => async (dispatch) => {
     const res = await fetch(`/api/trades/${tradeId}/update`, {
         method: 'PUT',
-        body: payload
+        body: JSON.stringify(payload)
     })
 
     if (res.ok) {
@@ -125,6 +125,8 @@ const tradesReducer = (state = {}, action) => {
         return { ...state, currentUserTrades: action.currentUserTrades}
     case GET_TRADE_DETAILS:
         return { ...state, tradeDetails: action.tradeDetails }
+    case UPDATE_TRADE:
+        return { ...state, tradeDetails: action.updatedTrade}
     default:
       return state
   }

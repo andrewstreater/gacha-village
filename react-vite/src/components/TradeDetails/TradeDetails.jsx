@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import "./TradeDetails.css"
+import OpenModalButton from "../OpenModalButton/index.js";
+import UpdateTradeModal from "./UpdateTradeModal.jsx";
 
 function TradeDetails() {
     const tradeDetails = useSelector(state => state.trades.tradeDetails);
@@ -86,10 +88,20 @@ function TradeDetails() {
                         <div
                             className='contra-party-item-name'>Title: {tradeDetails && tradeDetails.Buyer.Item.title}</div>
                         <img src={Buyer.Item.previewImage[0].imageUrl}
-                             className="contra-party-item-image trade-details-item-image"
+                             className="contra-party-item-image"
                              alt={`${Buyer.Item.title} image`}></img>
-                        <button className='accept-button' onClick={acceptTrade}>Accept</button>
-                        <button className='reject-button' onClick={rejectTrade}>Reject</button>
+                        <>
+                            <OpenModalButton
+                                buttonText='Accept'
+                                srcClass='accept-button'
+                                modalComponent={<UpdateTradeModal tradeId={tradeId} action='accept'/>}/>
+                        </>
+                        <>
+                            <OpenModalButton
+                                buttonText='Reject'
+                                srcClass='reject-button'
+                                modalComponent={<UpdateTradeModal tradeId={tradeId} action='reject'/>}/>
+                        </>
                     </>
                 ) : (
                     <>
@@ -98,7 +110,7 @@ function TradeDetails() {
                         <div
                             className='contra-party-item-name'>Title: {tradeDetails && tradeDetails.Seller.Item.title}</div>
                         <img src={Seller.Item.previewImage[0].imageUrl}
-                             className="contra-party-item-image trade-details-item-image"
+                             className="contra-party-item-image"
                              alt={`${Seller.Item.title} image`}></img>
                     </>
                 )}

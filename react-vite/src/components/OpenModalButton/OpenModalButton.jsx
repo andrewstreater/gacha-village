@@ -21,7 +21,7 @@ function OpenModalButton({
       <img src={imgSrc} className={srcClass} onClick={onClick} ></img>
     )
   }
-  return <button onClick={onClick}>{buttonText}</button>;
+  return <button className={srcClass} onClick={onClick}>{buttonText}</button>;
 }
 
 export default OpenModalButton;

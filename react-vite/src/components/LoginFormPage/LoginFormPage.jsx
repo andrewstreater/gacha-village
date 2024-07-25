@@ -65,7 +65,7 @@ function LoginFormPage() {
               <input
                 type="text"
                 placeholder="email"
-                className="margin-4px"
+                className="margin-4px login-input"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -76,7 +76,7 @@ function LoginFormPage() {
               <input
                 type="password"
                 placeholder="password"
-                className="margin-4px"
+                className="margin-4px login-input"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
