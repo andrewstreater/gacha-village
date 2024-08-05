@@ -10,17 +10,25 @@ function UsersTradeableItems ({items, itemId}) {
     const sessionUser = useSelector((store) => store.session.user);
 
     const submitTrade = async (buyerItemId, sellerItemId) => {
-        
+
         const response = await fetch(`/api/trades/new`,{
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                "buyerItemId": buyerItemId, 
+                "buyerItemId": buyerItemId,
                 "sellerItemId": sellerItemId})
         });
 
+
+
         if (response.ok) {
+
             navigate('/trades/current')
+        } else {
+            response.json().then(data => {
+                console.log(data)
+                alert(data['error'])
+            })
         }
     }
 

@@ -1,17 +1,19 @@
 import { fetchUpdateTrade } from "../../redux/trades.js";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import "./UpdateTradeModal.css"
 
 function UpdateTradeModal ({ tradeId, action }) {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const handleAccept = async (e) => {
         e.preventDefault()
         e.stopPropagation()
-        
+
         let payload = {}
-        
+
         if (action === 'accept') {
             payload = {
                 status: "accepted"
@@ -23,7 +25,7 @@ function UpdateTradeModal ({ tradeId, action }) {
                 status: "rejected"
             }
         }
-        
+
         const serverResponse = await dispatch(
             fetchUpdateTrade(payload, tradeId)
         )
@@ -40,7 +42,7 @@ function UpdateTradeModal ({ tradeId, action }) {
         e.stopPropagation()
         return alert("You rejected the trade")
     }
-    
+
 
     return (
         <>

@@ -88,6 +88,7 @@ export const fetchGetTradeDetails = (tradeId) => async (dispatch) => {
 export const fetchUpdateTrade = (payload, tradeId) => async (dispatch) => {
     const res = await fetch(`/api/trades/${tradeId}/update`, {
         method: 'PUT',
+        headers: {"Content-Type": "application/json"},
         body: JSON.stringify(payload)
     })
 
