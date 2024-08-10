@@ -15,12 +15,7 @@ function CreateTradeModal ({ itemId, itemOwnerId }) {
     }, [dispatch])
 
     const itemArray = Object.values(currentUserItems)
-    
-    if (itemOwnerId == sessionUser.id) {
-        return(
-            <div>You cannot trade with yourself</div>
-        )
-    }
+
 
     return (
         <>

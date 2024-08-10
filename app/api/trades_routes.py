@@ -77,6 +77,10 @@ def create_trade():
     buyerItem = Item.query.get(buyerItemId)
     sellerItem = Item.query.get(sellerItemId)
 
+    sellerItemDict = sellerItem.to_dict()
+
+    print("--------line 80:", sellerItemDict)
+
     # Error response if item does not exist
     if not buyerItem or not sellerItem:
         response = jsonify({"error": "Item couldn't be found"})
@@ -101,6 +105,10 @@ def create_trade():
             return response
 
     # Error response if buyer tries to trade with themselves
+    if sellerItemDict['ownerId'] == current_user.id:
+        response = jsonify({"error": "You cannot trade with yourself"})
+        response.status_code = 403
+        return response
 
 
     new_trade = Trade(
