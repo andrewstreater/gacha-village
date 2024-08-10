@@ -5,9 +5,8 @@ import { useEffect } from "react"
 import UsersTradeableItems from "./UsersTradeableItems"
 import "./CreateTradeModal.css"
 
-function CreateTradeModal ({ itemId, itemOwnerId }) {
+function CreateTradeModal ({ itemId }) {
     const currentUserItems = useSelector(state => state.items.currentUserItems);
-    const sessionUser = useSelector((store) => store.session.user);
     const dispatch = useDispatch()
 
     useEffect(() => {

@@ -1,5 +1,4 @@
-import { fetchGetTradeDetails, fetchUpdateTrade } from "../../redux/trades"
-import { fetchGetItems } from "../../redux/items"
+import { fetchGetTradeDetails } from "../../redux/trades"
 import {fetchDeleteTrade} from "../../redux/trades";
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
@@ -11,23 +10,19 @@ import UpdateTradeModal from "./UpdateTradeModal.jsx";
 function TradeDetails() {
     const tradeDetails = useSelector(state => state.trades.tradeDetails);
     const sessionUser = useSelector((store) => store.session.user);
-    const allItems = useSelector(state => state.items.allItems);
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { tradeId } = useParams()
-    let userMadeOffer
-    
 
     useEffect(() => {
-        // dispatch(fetchGetItems())
         dispatch(fetchGetTradeDetails(tradeId))
     }, [dispatch, tradeId])
-    
+
     if (!tradeDetails) {
         return (<div>Loading...</div>)
     }
 
-    const { Buyer, Seller, status } = tradeDetails;
+    const { Buyer, Seller } = tradeDetails;
 
     if (!Buyer || !Seller) {
         return <div>Error: Missing trade details</div>
@@ -36,17 +31,17 @@ function TradeDetails() {
     // console.log('TRADE DETAILS Buyer: ', Buyer)
     // console.log('TRADE DETAILS Seller: ', Seller)
     //
-    const acceptTrade = (e) => {
-        e.preventDefault()
-        e.stopPropagation()
-        return alert("You accepted the trade")
-    }
-    
-    const rejectTrade = (e) => {
-        e.preventDefault()
-        e.stopPropagation()
-        return alert("You rejected the trade")
-    }
+    // const acceptTrade = (e) => {
+    //     e.preventDefault()
+    //     e.stopPropagation()
+    //     return alert("You accepted the trade")
+    // }
+
+    // const rejectTrade = (e) => {
+    //     e.preventDefault()
+    //     e.stopPropagation()
+    //     return alert("You rejected the trade")
+    // }
 
     const cancelTrade = async (e) => {
         e.preventDefault()

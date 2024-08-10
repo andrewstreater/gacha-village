@@ -1,6 +1,5 @@
 import { fetchUpdateTrade } from "../../redux/trades.js";
-import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
+import {useDispatch} from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./UpdateTradeModal.css"
 
@@ -37,12 +36,11 @@ function UpdateTradeModal ({ tradeId, action }) {
         }
     }
 
-    const rejectTrade = (e) => {
-        e.preventDefault()
-        e.stopPropagation()
-        return alert("You rejected the trade")
-    }
-
+    // const rejectTrade = (e) => {
+    //     e.preventDefault()
+    //     e.stopPropagation()
+    //     return alert("You rejected the trade")
+    // }
 
     return (
         <>
