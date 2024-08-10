@@ -35,10 +35,14 @@ function UsersTradeableItems ({items, itemId}) {
     return (
         items.map(item => {
             return(
-                <div key={item.itemId} className="user-tradeable-item-tile"
-                onClick={() => submitTrade(item.itemId, itemId)}>
-                    {item.title}
-                </div>
+                <>
+                {item.is_tradable ? (
+                    <div key={item.itemId} className="user-tradeable-item-tile"
+                    onClick={() => submitTrade(item.itemId, itemId)}>
+                        {item.title}
+                    </div>
+                ) : (<></>)}
+                </>
             )
         })
     )
