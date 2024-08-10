@@ -20,3 +20,12 @@
     height: 100%;
     object-fit: cover;
 }
+
+.back-to-login {
+    text-decoration: underline;
+}
+
+.back-to-login:hover {
+    cursor: pointer;
+    color: #ffe69d;
+}

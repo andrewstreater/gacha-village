@@ -5,6 +5,7 @@ import { fetchDeleteItem } from "../../redux/items"
 import { fetchRemoveFromList } from "../../redux/lists"
 // import OpenModalMenuItem from "../Navigation/OpenModalMenuItem"
 import OpenModalButton from '../OpenModalButton'
+import CreateTradeModal from "../CreateTradeModal/CreateTradeModal"
 import AddToListModal from "./AddToListModal"
 import addIcon from '../../../icons/Add_square_light@2x.png'
 import tradeIcon from '../../../icons/Transger_light@2x.png'
@@ -19,8 +20,7 @@ function ItemTile ({ item, itemId, listId, listOwnerId }) {
     const currentUrl = window.location.pathname
     const currentItemsPage = currentUrl === "/items/current"
     const currentUserListPage = currentUrl.startsWith("/lists/") && (sessionUser.id === listOwnerId)
-
-    // console.log("-------------item tile line 21: ", currentUserListPage)
+    
     let imageUrl = "No Image"
 
     if (item.previewImage && item.previewImage.imageUrl.length) {
@@ -28,29 +28,41 @@ function ItemTile ({ item, itemId, listId, listOwnerId }) {
     }
 
     const handleDelete = async (e) => {
+        e.stopPropagation()
         e.preventDefault()
         await dispatch(fetchDeleteItem(itemId)).then(navigate('/items'))
     }
 
     const removeFromList = async (e) => {
+        e.stopPropagation()
         e.preventDefault()
         await dispatch(fetchRemoveFromList(listId, itemId)).then(navigate('/items'))
     }
 
-    const handleTrade = (e) => {
-        e.preventDefault()
-        alert('Trade feature coming soon!');
+    const openItemDetails = (e) => {
+        e.stopPropagation();
+        navigate(`/items/${itemId}`);
     };
+    
+    const navToUpdateItem = (e) => {
+        e.stopPropagation();
+        navigate(`/items/${itemId}/update`)
+    }
+    
+    const noTradeAlert = (e) => {
+        e.stopPropagation();
+        return alert("This item is not available to trade")
+    }
 
     return (
         <>
-            <div className="item-tile">
-            <img className="item-tile-image"src={imageUrl} onClick={() => navigate(`/items/${itemId}`)}></img>
+            <div className="item-tile" onClick={openItemDetails}>
+            <img className="item-tile-image" src={imageUrl}></img>
             {currentItemsPage ? (
                 <>
                     <div className="item-tiles-details">
-                        <div className="item-tile-title" onClick={() => navigate(`/items/${itemId}`)}>{item.title}</div>
-                        <img className="item-tile-edit-button" src={editIcon} onClick={() => navigate(`/items/${itemId}/update`)}></img>
+                        <div className="item-tile-title">{item.title}</div>
+                        <img className="item-tile-edit-button" src={editIcon} onClick={navToUpdateItem}></img>
                         <img className="item-tile-delete-button" src={deleteIcon} onClick={handleDelete}></img>
                     </div>
                 </>
@@ -58,15 +70,36 @@ function ItemTile ({ item, itemId, listId, listOwnerId }) {
                 <>
                     <div className="item-tiles-details">
                         <div className="item-tile-title" onClick={() => navigate(`/items/${itemId}`)}>{item.title}</div>
-                        <img className="item-tile-trade-button" src={tradeIcon} alt="Trade" />
-                        <img className="item-tile-delete-button" src={deleteIcon} onClick={removeFromList}></img>
+                        {/*{item.is_tradeable ? (*/}
+                        {/*    <>*/}
+                        {/*        <img className="item-tile-trade-button" src={tradeIcon} alt="Trade"/>*/}
+                        {/*    </>*/}
+                        {/*) : (*/}
+                        {/*    <>*/}
+                        {/*        <img className="item-tile-trade-button no-trade" src={tradeIcon} alt="Trade"/>*/}
+                        {/*    </>*/}
+                        {/*)}*/}
+                        <img className="item-tile-delete-button" src={deleteIcon} alt="Remove from list" onClick={removeFromList}></img>
                     </div>
                 </>
             ) : (
                 <>
                     <div className="item-tiles-details">
-                        <div className="item-tile-title" onClick={() => navigate(`/items/${itemId}`)}>{item.title}</div>
-                        <img className="item-tile-trade-button" onClick={handleTrade} src={tradeIcon} alt="Trade" />
+                        <div className="item-tile-title" >{item.title}</div>
+                        {/* <img className="item-tile-trade-button" onClick={handleTrade} src={tradeIcon} alt="Trade" /> */}
+                        {item.is_tradable? (
+                            <>
+                                <OpenModalButton
+                                imgSrc={tradeIcon}
+                                srcClass="item-tile-trade-button"
+                                modalComponent={<CreateTradeModal itemId={itemId} itemOwnerId={item.owner_id}/>}/>
+                            </>
+                        ) : (
+                            <>
+                                <img src={tradeIcon} className='quarter-opacity item-tile-trade-button' alt="not tradable" onClick={noTradeAlert} />
+                            </>
+                        )}
+                        
                         {/* <img className="item-tile-add-button" src={addIcon} alt="Add to list"></img> */}
                         <OpenModalButton
                         imgSrc={addIcon}

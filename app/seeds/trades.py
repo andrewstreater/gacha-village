@@ -7,15 +7,15 @@ def seed_trades():
     trade1 = Trade(
         buyer_item_id=1, seller_item_id=2, status='open')
     trade2 = Trade(
-        buyer_item_id=3, seller_item_id=4, status='closed-rejected')
+        buyer_item_id=3, seller_item_id=4, status='rejected')
     trade3 = Trade(
         buyer_item_id=6, seller_item_id=5, status='accepted')
     trade4 = Trade(
         buyer_item_id=8, seller_item_id=7, status='pending')
     trade5 = Trade(
-        buyer_item_id=9, seller_item_id=10, status='closed-accepted')
+        buyer_item_id=9, seller_item_id=10, status='completed')
     trade6 = Trade(
-        buyer_item_id=12, seller_item_id=11, status='closed-accepted')
+        buyer_item_id=12, seller_item_id=11, status='completed')
 
     db.session.add(trade1)
     db.session.add(trade2)

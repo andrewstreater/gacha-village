@@ -10,7 +10,8 @@ function OpenModalButton({
 }) {
   const { setModalContent, setOnModalClose } = useModal();
 
-  const onClick = () => {
+  const onClick = (e) => {
+    e.stopPropagation()
     if (onModalClose) setOnModalClose(onModalClose);
     setModalContent(modalComponent);
     if (typeof onButtonClick === "function") onButtonClick();
@@ -20,7 +21,7 @@ function OpenModalButton({
       <img src={imgSrc} className={srcClass} onClick={onClick} ></img>
     )
   }
-  return <button onClick={onClick}>{buttonText}</button>;
+  return <button className={srcClass} onClick={onClick}>{buttonText}</button>;
 }
 
 export default OpenModalButton;

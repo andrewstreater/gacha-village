@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
-import gvlettermark from '../../../public/favicon.png'
-import gvwordmark from '../../../public/gacha-village-wordmark-white.png'
+import gvlettermark from '/favicon.png'
+import gvwordmark from '/gacha-village-wordmark-white.png'
 
 function Navigation() {
   const navigate = useNavigate()
@@ -20,9 +20,11 @@ function Navigation() {
         <div className="top-nav-buttons">
           {sessionUser ? (<>
           <div className='nav-button' onClick={() => navigate('/items/current')}>My Items</div>
+          <div className='nav-button' onClick={() => navigate('/trades/current')}>My Trades</div>
           <div className='nav-button' onClick={() => navigate('/lists/current')}>My Lists</div>
           <div className='nav-button' onClick={() => navigate('/items/new')}>Post an item</div>
           <div className='nav-button' onClick={() => navigate('/lists/new')}>Create new list</div>
+
           </>):(<>
           </>)}
 

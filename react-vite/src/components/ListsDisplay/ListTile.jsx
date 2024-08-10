@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux"
 import { fetchDeleteList, fetchAddToList } from "../../redux/lists"
 import { useModal } from "../../context/Modal";
 import "./ListTile.css"
+import deleteIcon from '../../../icons/Remove_light@2x.png'
 
 function ListTile ({ list, listId, itemId }) {
     const dispatch = useDispatch()
@@ -14,16 +15,19 @@ function ListTile ({ list, listId, itemId }) {
     const { closeModal } = useModal();
 
     const handleDelete = async (e) => {
+        e.stopPropagation()
         e.preventDefault()
         closeModal()
         await dispatch(fetchDeleteList(listId)).then(navigate('/'))
     }
     const addToList = async (e) => {
+        e.stopPropagation()
         e.preventDefault()
         closeModal()
         await dispatch(fetchAddToList(listId, itemId)).then(navigate(`/lists/${listId}`))
     }
     const handleEditList = async (e) => {
+        e.stopPropagation()
         e.stopPropagation()
         navigate(`/lists/${listId}/update`)
     }
@@ -41,8 +45,8 @@ function ListTile ({ list, listId, itemId }) {
             {currentListsPage ? (
                 <>
                 <div className="update-delete-list-buttons">
-                <button className="update-list-button" onClick={handleEditList}> Edit List Details</button>
-                <button className="delete-list-button" onClick={handleDelete}> Delete List</button>
+                    <div className="update-list-button" onClick={handleEditList}> Edit List Details</div>
+                    <img alt='delete' src={deleteIcon} onClick={handleDelete} className="delete-list-button"></img>
                 </div>
                 </>
             ): (

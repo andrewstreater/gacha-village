@@ -1,0 +1,8 @@
+.trades-list {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    align-items: center;
+    /*width: 900px;*/
+}
+

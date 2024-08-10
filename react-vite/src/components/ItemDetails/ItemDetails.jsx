@@ -3,6 +3,11 @@ import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import "./ItemDetails.css"
+import tradeIcon from "../../../icons/Transger_light@2x.png";
+import CreateTradeModal from "../CreateTradeModal/index.js";
+import OpenModalButton from "../OpenModalButton/index.js";
+import addIcon from "../../../icons/Add_square_light@2x.png";
+import AddToListModal from "../ItemTileDisplay/AddToListModal.jsx";
 
 function ItemDetails () {
     const item = useSelector(state => state.items.itemDetails);
@@ -69,14 +74,25 @@ function ItemDetails () {
                         </>
                     )
                 })}
-                <div className="item-details-trade-button">
-                {item && item.is_tradable ? (
-                    <button onClick={handleTrade}>Trade</button>
-                ) : (
-                    <div>*this item is not available for trade</div>
-                )}
-                </div>
-                </div>
+                    <div className='trade-and-add-to-list-buttons'>
+                        <div className="item-details-trade-button">
+                        {item && item.is_tradable ? (
+                            // <button onClick={handleTrade}>Trade</button>
+                            <OpenModalButton
+                                imgSrc={tradeIcon}
+                                srcClass="item-tile-trade-button"
+                                modalComponent={<CreateTradeModal itemId={itemId}/>}/>
+                        ) : (
+                            <div className="padding-left-8">*this item is not available for trade</div>
+                        )}
+                        </div>
+                            <OpenModalButton
+                                imgSrc={addIcon}
+                                srcClass='item-tile-add-button'
+                                modalComponent={<AddToListModal itemId={itemId}/>}
+                            />
+                        </div>
+                    </div>
             </div>
         </div>
         </>
