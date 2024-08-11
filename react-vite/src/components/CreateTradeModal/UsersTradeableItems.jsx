@@ -1,14 +1,9 @@
-
-// import {fetchCreateTrade} from "../../redux/trades.js";
 import "./UsersTradeableItems.css";
-import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function UsersTradeableItems ({items, itemId}) {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
-    const sessionUser = useSelector((store) => store.session.user);
     const [errors, setErrors] = useState({})
 
     const submitTrade = async (buyerItemId, sellerItemId) => {

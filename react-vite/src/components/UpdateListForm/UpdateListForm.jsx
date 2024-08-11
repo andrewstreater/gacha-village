@@ -13,15 +13,14 @@ function UpdateListForm () {
   const [isPrivate, setIsPrivate] = useState('')
   const [errors, setErrors] = useState({})
 
-  if (!sessionUser) return <Navigate to="/" replace={true} />
-
   useEffect(() => {
     dispatch(fetchGetListDetails(listId)).then(list => {
-        setName(list.List.name)
-        setIsPrivate(list.List.private)
+      setName(list.List.name)
+      setIsPrivate(list.List.private)
     })
   }, [dispatch, listId])
 
+  if (!sessionUser) return <Navigate to="/" replace={true} />
 
   const handleSubmit = async (e) => {
     e.preventDefault()
