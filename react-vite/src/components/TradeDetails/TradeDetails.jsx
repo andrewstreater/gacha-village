@@ -78,7 +78,7 @@ function TradeDetails() {
                 {/* Contra Party Item Info */}
                 {Seller.id == sessionUser.id ? (
                     <>
-                        <div className='contra-party-user-name'>{tradeDetails && tradeDetails.Buyer.username}'s item:
+                        <div className='contra-party-user-name'>{tradeDetails && tradeDetails.Buyer.username}&apos;s item:
                         </div>
                         <div
                             className='contra-party-item-name'>Title: {tradeDetails && tradeDetails.Buyer.Item.title}</div>
